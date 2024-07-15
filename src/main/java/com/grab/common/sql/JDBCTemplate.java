@@ -20,7 +20,7 @@ public class JDBCTemplate {
 			Class.forName(prop.getProperty("driver"));
 			String url = prop.getProperty("url");
 			String user = prop.getProperty("username");
-			String pw = prop.getProperty("userpw");
+			String pw = prop.getProperty("userpw"); 
 			
 			conn = DriverManager.getConnection(url, user, pw);
 		} catch(Exception e) {
