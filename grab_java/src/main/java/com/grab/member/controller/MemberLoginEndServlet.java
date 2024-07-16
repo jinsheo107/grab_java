@@ -1,6 +1,7 @@
 package com.grab.member.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.grab.hopital.vo.Hospital;
+import com.grab.hospital.vo.Department;
+import com.grab.hospital.vo.Hospital;
 import com.grab.member.service.MemberService;
 import com.grab.member.vo.Member;
 

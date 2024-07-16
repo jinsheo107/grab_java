@@ -1,12 +1,15 @@
 package com.grab.member.dao;
 
+import static com.grab.common.sql.JDBCTemplate.close;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
-import static com.grab.common.sql.JDBCTemplate.close;
-
-import com.grab.hopital.vo.Hospital;
+import com.grab.hospital.vo.Department;
+import com.grab.hospital.vo.Hospital;
 import com.grab.member.vo.Member;
 
 public class MemberDao {
@@ -63,6 +66,17 @@ public class MemberDao {
 						rs.getTimestamp("hospital_login").toLocalDateTime()
 						);
 			}
+			
+			String departmetSql = "SELECT * FROM `hospital_department` WHERE `hospital_no` = ?";
+			
+			pstmt = conn.prepareStatement(departmetSql);
+			pstmt.setInt(1, no);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				new Department();
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -72,4 +86,6 @@ public class MemberDao {
 		
 		return result;
 	}
+	
+	
 }

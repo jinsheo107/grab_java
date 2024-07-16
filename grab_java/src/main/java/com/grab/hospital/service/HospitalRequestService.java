@@ -1,11 +1,11 @@
-package com.grab.hopital.service;
+package com.grab.hospital.service;
 
 import static com.grab.common.sql.JDBCTemplate.getConnection;
 import static com.grab.common.sql.JDBCTemplate.close;
 
 import java.sql.Connection;
 
-import com.grab.hopital.dao.HospitalRequestDao;
+import com.grab.hospital.dao.HospitalRequestDao;
 
 public class HospitalRequestService {
 	public int createRequest(String re, String rt) {

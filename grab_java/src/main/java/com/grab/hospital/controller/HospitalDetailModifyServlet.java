@@ -1,4 +1,4 @@
-package com.grab.hopital.controller;
+package com.grab.hospital.controller;
 
 import java.io.IOException;
 

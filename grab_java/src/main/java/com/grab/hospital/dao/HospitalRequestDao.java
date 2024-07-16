@@ -1,4 +1,4 @@
-package com.grab.hopital.dao;
+package com.grab.hospital.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

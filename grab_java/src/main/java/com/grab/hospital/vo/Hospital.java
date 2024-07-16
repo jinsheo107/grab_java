@@ -1,4 +1,4 @@
-package com.grab.hopital.vo;
+package com.grab.hospital.vo;
 
 import java.time.LocalDateTime;
 

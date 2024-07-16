@@ -1,4 +1,4 @@
-package com.grab.hopital.controller;
+package com.grab.hospital.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.grab.hopital.service.HospitalDetailModifyService;
-import com.grab.hopital.vo.Hospital;
+import com.grab.hospital.service.HospitalDetailModifyService;
+import com.grab.hospital.vo.Hospital;
 
 @WebServlet("/hospital/hospital_detail_essentail_modify")
 public class HospitalDetailModifyEndServlet extends HttpServlet {

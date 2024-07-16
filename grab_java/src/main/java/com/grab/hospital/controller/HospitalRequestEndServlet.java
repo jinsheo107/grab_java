@@ -1,4 +1,4 @@
-package com.grab.hopital.controller;
+package com.grab.hospital.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.grab.hopital.service.HospitalRequestService;
+import com.grab.hospital.service.HospitalRequestService;
 
 @WebServlet(name="HospitalRequestEnd", urlPatterns = "/hospital/requestEnd")
 public class HospitalRequestEndServlet extends HttpServlet {

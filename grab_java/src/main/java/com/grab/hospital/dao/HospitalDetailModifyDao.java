@@ -1,11 +1,11 @@
-package com.grab.hopital.dao;
+package com.grab.hospital.dao;
 
 import static com.grab.common.sql.JDBCTemplate.close;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import com.grab.hopital.vo.Hospital;
+import com.grab.hospital.vo.Hospital;
 
 public class HospitalDetailModifyDao {
 	public int essentail_modify(String hn, String dn, String ha, Connection conn, Hospital h) {

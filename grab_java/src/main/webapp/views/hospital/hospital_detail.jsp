@@ -19,17 +19,20 @@
 </head>
 <body>
 	<%@ include file="../include/hospital_nav.jsp" %>
-	
+	<%@ page import="com.grab.hospital.vo.Hospital" %>
 	<section class="about-section about__spad">
     <div class="container">
       <div class="row">
         <div class="col-lg-10">
           <div class="about__wrapper">
-            <h3>가남이비인후과</h3>
-            <%@ import="com.grab.hospital.vo.Hospital, java.util.*" %>
+            <h3><%= %></h3>
+            <%@ page import="com.grab.hospital.vo.Department, java.util.*" %>
             <%
-            	
+            	List<Department> list = (List<Department>)request.getAttribute("resultList");
+            	for(int i = 0; i < list.size(); i++) {
             %>
+            
+            <%} %>
             <div class="type__div">이비인후과</div>
             <div class="type__div">이비인후과</div>
             <div class="type__div">이비인후과</div>
