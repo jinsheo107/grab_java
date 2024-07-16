@@ -36,7 +36,7 @@
               <div>주소</div>
             </div>
             <div class="col-lg-4">
-              <a href="/hospital/hospital_request" class="request-btn">정보 정정 요청</a>
+              <a href="/hospital/hospital_request" class="request-btn" style="position: relative; left: 180px;">정보 정정 요청</a>
             </div>
           </div>
         </div>
@@ -127,7 +127,9 @@
             <h3>주소</h3>
           </div>
           <div>
-            <div id="map" style="width:500px;height:400px; background-color: red;"></div>
+            <div class="hompage_url__item" id="map" style="padding: 200px 100px">
+            	
+          	</div>	
           </div>
         </div>
         <div class="col-lg-6">
@@ -194,5 +196,15 @@
   <script src="../../resources/js/common/jquery.slicknav.js"></script>
   <script src="../../resources/js/common/owl.carousel.min.js"></script>
   <script src="../../resources/js/common/main.js"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4f36ed28a98f155fac9a64b707114d9c"></script>
+	<script>
+		var container = document.getElementById('map');
+		var options = {
+			center: new kakao.maps.LatLng(33.450701, 126.570667),
+			level: 3
+		};
+
+		var map = new kakao.maps.Map(container, options);
+	</script>
 </body>
 </html>
