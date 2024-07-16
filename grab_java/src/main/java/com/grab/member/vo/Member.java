@@ -5,7 +5,7 @@ public class Member {
 	private String member_id;
 	private String member_pw;
 	private String member_email;
-	private String member_type;
+	private int member_type;
 	
 	
 	public Member() {
@@ -13,7 +13,7 @@ public class Member {
 	}
 
 
-	public Member(int member_no, String member_id, String member_pw, String member_email, String member_type) {
+	public Member(int member_no, String member_id, String member_pw, String member_email, int member_type) {
 		super();
 		this.member_no = member_no;
 		this.member_id = member_id;
@@ -63,12 +63,12 @@ public class Member {
 	}
 
 
-	public String getMember_type() {
+	public int getMember_type() {
 		return member_type;
 	}
 
 
-	public void setMember_type(String member_type) {
+	public void setMember_type(int member_type) {
 		this.member_type = member_type;
 	}
 

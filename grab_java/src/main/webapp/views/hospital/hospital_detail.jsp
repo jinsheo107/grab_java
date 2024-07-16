@@ -36,7 +36,7 @@
               <div>주소</div>
             </div>
             <div class="col-lg-4">
-              <a href="#" class="request-btn">정보 정정 요청</a>
+              <a href="/hospital/hospital_request" class="request-btn">정보 정정 요청</a>
             </div>
           </div>
         </div>
@@ -186,6 +186,8 @@
       </div>
     </div>
   </section>
+  
+  <%@ include file="../include/footer.jsp" %>
 	
 	<script src="../../resources/js/common/jquery-3.7.1.js"></script>
   <script src="../../resources/js/common/bootstrap.min.js"></script>

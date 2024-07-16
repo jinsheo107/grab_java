@@ -165,6 +165,8 @@
     </div>
   </section>
   
+  <%@ include file="views/include/footer.jsp" %>
+  
   <script src="resources/js/common/jquery-3.7.1.js"></script>
   <script src="resources/js/common/bootstrap.min.js"></script>
   <script src="resources/js/common/jquery.slicknav.js"></script>
