@@ -1,4 +1,4 @@
-package com.grab.hopital.vo;
+package com.grab.member.vo;
 
 public class Hospital {
 	
