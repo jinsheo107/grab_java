@@ -27,9 +27,9 @@
           <div class="essentail__div">
             <h3>정보수정요청</h3>
             <!-- <hr> -->
-            <form action="#" name="modify_hospital_essential_detail" method="post">
+            <form action="/hospital/requestEnd" name="modify_hospital_essential_detail" method="post">
               <div class="request__btn">
-                <input type="submit" value="제출하기" class="searchBtn">
+                <input type="button" value="제출하기" class="searchBtn" onclick="requestHospitalForm();">
                 <input type="reset" value="다시쓰기" class="searchBtn">
               </div>
               <div class="request__element">
@@ -38,15 +38,15 @@
                   <hr>
                 </div>
                 <div>
-                  <select name="request_element" id="request_element">
+                  <select name="request__element" id="request_element">
                     <option value="0">선택하기</option>
-                    <option value="0">병원명</option>
-                    <option value="0">의사수</option>
-                    <option value="0">주소</option>
-                    <option value="0">진료시간</option>
-                    <option value="0">진료정보</option>
-                    <option value="0">연락처</option>
-                    <option value="0">가격표</option>
+                    <option value="1">병원명</option>
+                    <option value="2">의사수</option>
+                    <option value="3">주소</option>
+                    <option value="4">진료시간</option>
+                    <option value="5">진료정보</option>
+                    <option value="6">연락처</option>
+                    <option value="7">가격표</option>
                   </select>
                 </div>
               </div>
@@ -56,7 +56,7 @@
                   <hr>
                 </div>
                 <div>
-                  <textarea name="" id="" placeholder="내용을 입력하세요!"></textarea>
+                  <textarea name="request__textarea" id="" placeholder="내용을 입력하세요!"></textarea>
                 </div>
               </div>
               
@@ -75,5 +75,20 @@
   <script src="../../resources/js/common/jquery.slicknav.js"></script>
   <script src="../../resources/js/common/owl.carousel.min.js"></script>
   <script src="../../resources/js/common/main.js"></script>
+  <script>
+  	function requestHospitalForm() {
+  		const form = document.modify_hospital_essential_detail;
+  		
+  		if(form.request__element.value == '0') {
+  			alert("요소를 선택해주세요!");
+  			form.request__element.focus();
+  		} else if(!form.request__textarea.value) {
+  			alert("내용을 입력해주세요!");
+  			form.request__textarea.focus();
+  		} else {
+  			form.submit();
+  		}
+  	}
+  </script>
 </body>
 </html>
