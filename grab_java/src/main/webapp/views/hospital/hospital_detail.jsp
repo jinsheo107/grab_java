@@ -25,17 +25,15 @@
       <div class="row">
         <div class="col-lg-10">
           <div class="about__wrapper">
-            <h3><%= %></h3>
+          <% Hospital h = (Hospital)request.getAttribute("hospital"); %>
+            <h3><%= h.getHospital_name()%></h3>
             <%@ page import="com.grab.hospital.vo.Department, java.util.*" %>
             <%
             	List<Department> list = (List<Department>)request.getAttribute("resultList");
             	for(int i = 0; i < list.size(); i++) {
             %>
-            
+            	<div class="type__div"><%=list.get(i).getType_content() %></div>
             <%} %>
-            <div class="type__div">이비인후과</div>
-            <div class="type__div">이비인후과</div>
-            <div class="type__div">이비인후과</div>
           </div>
           <div class="row">
             <div class="about__addr col-lg-8">

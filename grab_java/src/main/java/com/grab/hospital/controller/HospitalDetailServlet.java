@@ -9,11 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.grab.hospital.service.HospitalSettingDepartmentService;
 import com.grab.hospital.vo.Department;
-import com.grab.member.service.MemberService;
-import com.grab.member.vo.Member;
+import com.grab.hospital.vo.Hospital;
 
 @WebServlet("/hospital/hospital_detail")
 public class HospitalDetailServlet extends HttpServlet {
@@ -24,12 +24,15 @@ public class HospitalDetailServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
 		
-		Member m = (Member)request.getAttribute("member");
-		
-		List<Department> d = new HospitalSettingDepartmentService().settingDepartment(m.getMember_no());
-		
-		request.setAttribute("resultList", d);
+		if(session != null) {
+			Hospital h = (Hospital)session.getAttribute("hospital");
+			
+			List<Department> d = new HospitalSettingDepartmentService().settingDepartment(h.getHospital_no());
+			request.setAttribute("resultList", d);			
+			request.setAttribute("hospital", h);
+		}
 		
 		RequestDispatcher view = request.getRequestDispatcher("/views/hospital/hospital_detail.jsp");
 		view.forward(request, response);
