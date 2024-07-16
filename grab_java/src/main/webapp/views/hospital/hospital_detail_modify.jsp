@@ -27,28 +27,28 @@
           <div class="essentail__div">
             <h3>필수정보</h3>
             <hr>
-            <form action="#" name="modify_hospital_essential_detail" method="post">
+            <form action="/hospital/hospital_detail_essentail_modify" name="modify_hospital_essential_detail" method="post">
               <div class="essentail__btn">
-                <input type="submit" value="수정하기" class="searchBtn">
+                <input type="button" value="수정하기" class="searchBtn" onclick="essentialModify();">
                 <input type="reset" value="다시쓰기" class="searchBtn">
               </div>
               <table>
                 <tr>
                   <th>병원명</th>
-                  <td><input type="text" placeholder=""></td>
+                  <td><input type="text" placeholder="" name="hospital_name"></td>
                 </tr>
                 <tr>
                   <th>의사수</th>
-                  <td><input type="text" placeholder=""></td>
+                  <td><input type="text" placeholder="" name="doctor_num"></td>
                 </tr>
                 <tr>
                   <th>우편번호</th>
                   <td><input type="text" id="sample6_postcode" placeholder=""></td>
-                  <td><input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="modifyBtn"></td>
+                  <td><input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="modifyBtn" name="addrBtn"></td>
                 </tr>
                 <tr>
                   <th>주소</th>
-                  <td><input type="text" id="sample6_address" placeholder=""></td>
+                  <td><input type="text" id="sample6_address" placeholder="" name="hospital_addr"></td>
                 </tr>
                 <tr>
                   <th></th>
@@ -62,9 +62,9 @@
           <div class="select__div">
             <h3>선택정보</h3>
             <hr>
-            <form action="#" name="modify_hospital_select_detail" method="post">
+            <form action="/hospital/hospital_detail_select_modify" name="modify_hospital_select_detail" method="post">
               <div class="essentail__btn">
-                <input type="submit" value="수정하기" class="searchBtn">
+                <input type="button" value="수정하기" class="searchBtn" onclick="">
                 <input type="reset" value="다시쓰기" class="searchBtn">
               </div>
               <table class="select__table">
@@ -193,6 +193,25 @@
         }
       }).open();
     }
+  </script>
+  <script>
+  	function essentialModify() {
+  		const form = document.modify_hospital_essential_detail;
+  		
+  		if(!form.hospital_name.value) {
+  			alert("병원명을 입력하세요!");
+				form.hospital_name.focus();
+  		} else if (!form.doctor_num.value) {
+  			alert("의사수를 입력하세요!");
+				form.doctor_num.focus();
+  		} else if (!form.hospital_addr.value) {
+  			alert("주소를 입력하세요!");
+  			form.addrBtn.focus();
+  		} else {
+  			form.submit();
+  		}
+  		
+  	}
   </script>
 </body>
 </html>

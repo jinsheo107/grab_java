@@ -2,26 +2,25 @@ package com.grab.hopital.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import static com.grab.common.sql.JDBCTemplate.close;
 
-public class HospitalRequestDao {
-	public int createRequest(String re, String rt, Connection conn) {
+public class HospitalDetailModifyDao {
+	public int essentail_modify(String hn, String dn, String ha, Connection conn) {
 		int result = 0;
 		
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		
 		try {
-			String sql = "INSERT INTO `amendment_request` (hospital_no, member_no, request_element, request_content)"
-					+"VALUES (?,?,?,?)";
+			String sql = "UPDATE `hospital` "
+					+"SET hospital_name = ?, hospital_addr = ?, "
+					+"hospital_doctor_num = ? WHERE hospital_no = ?";
 			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, 1);
-			pstmt.setInt(2, 2);
-			pstmt.setString(3, re);
-			pstmt.setString(4, rt);
+			pstmt.setString(1, hn);
+			pstmt.setString(2, ha);
+			pstmt.setString(3, dn);
+			pstmt.setString(4, "1");
 			
 			result = pstmt.executeUpdate();
 			
