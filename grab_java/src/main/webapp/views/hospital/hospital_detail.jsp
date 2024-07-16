@@ -26,6 +26,10 @@
         <div class="col-lg-10">
           <div class="about__wrapper">
             <h3>가남이비인후과</h3>
+            <%@ import="com.grab.hospital.vo.Hospital, java.util.*" %>
+            <%
+            	
+            %>
             <div class="type__div">이비인후과</div>
             <div class="type__div">이비인후과</div>
             <div class="type__div">이비인후과</div>

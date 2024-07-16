@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import static com.grab.common.sql.JDBCTemplate.close;
+
+import com.grab.hopital.vo.Hospital;
 import com.grab.member.vo.Member;
 
 public class MemberDao {
@@ -14,7 +17,7 @@ public class MemberDao {
 		ResultSet rs = null;
 
 		try {
-			String sql = "SELECT * FROM `member` WHERE `member_id` = ? AND `user_pw` = ?";
+			String sql = "SELECT * FROM `member` WHERE `member_id` = ? AND `member_pw` = ?";
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -31,6 +34,42 @@ public class MemberDao {
 			e.printStackTrace();
 		}
 
+		return result;
+	}
+	
+	public Hospital loginHospital(int no, Connection conn) {
+		Hospital result = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT * FROM `hospital` WHERE `hospital_no` = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = new Hospital(
+						rs.getInt("hospital_no"), rs.getString("hospital_registration"),
+						rs.getString("hospital_license"), rs.getString("hospital_name"),
+						rs.getString("hospital_phone"), rs.getString("hospital_number"),
+						rs.getString("hospital_addr"), rs.getInt("hospital_doctor_num"), 
+						rs.getString("hospital_homepage"), rs.getInt("hospital_mapping"),
+						rs.getString("hospital_time"), rs.getInt("hospital_price"),
+						rs.getString("hospital_whether"), rs.getInt("hospital_view"),
+						rs.getTimestamp("hospital_login").toLocalDateTime()
+						);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
 		return result;
 	}
 }

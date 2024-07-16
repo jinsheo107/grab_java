@@ -21,10 +21,23 @@
 			<div>
 				<nav class="header__menu notoSansMedium">
 					<ul>
+						<%
+							Member m = (Member)session.getAttribute("member");
+							if(m == null) {
+						%>
+						<li><a href="#">커뮤니티</a></li>
+						<li><a href="/member/login">로그인</a></li>
+						<%} else if(m.getMember_type() == 2) {%>
+						<li><a href="#">커뮤니티</a></li>
+						<li><a href="#">마이페이지</a></li>
+						<%} else if(m.getMember_type() == 3) {%>
 						<li><a href="#">커뮤니티</a></li>
 						<li><a href="/hospital/hospital_detail">병원상세정보</a></li>
 						<li><a href="/hospital/hospital_detail_modify">병원정보수정</a></li>
 						<li><a href="#">마이페이지</a></li>
+						<%} else {%>
+						<li><a href="#">커뮤니티</a></li>
+						<%} %>
 					</ul>
 				</nav>
 			</div>

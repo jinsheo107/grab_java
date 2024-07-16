@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.grab.hopital.vo.Hospital;
 import com.grab.member.service.MemberService;
 import com.grab.member.vo.Member;
 
@@ -21,8 +22,8 @@ public class MemberLoginEndServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = "jinseo107";
-		String pw = "1234";
+		String id = request.getParameter("user_id");
+		String pw = request.getParameter("user_pw");
 		
 		Member m = new MemberService().loginMember(id, pw);
 		
@@ -33,11 +34,20 @@ public class MemberLoginEndServlet extends HttpServlet {
 				session.setAttribute("member", m);
 				session.setMaxInactiveInterval(60 * 60 * 12);
 			}
-			
-			response.sendRedirect("/");
-		} else {
-			
 		}
+		
+		if(m.getMember_type() == 3) {
+			Hospital h = new MemberService().loginHospital(m.getMember_no());
+			
+			HttpSession session = request.getSession(true);
+			
+			if(session.isNew() || session.getAttribute("hospital") == null) {
+				session.setAttribute("hospital", h);
+				session.setMaxInactiveInterval(60 * 60 * 12);
+			}
+		}
+		
+		response.sendRedirect("/");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

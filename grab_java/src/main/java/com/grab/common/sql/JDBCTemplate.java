@@ -17,12 +17,12 @@ public class JDBCTemplate {
 			// JDBCTemplate을 기준으로 driver.properties의 위치를 찾겠다!
 			String path = JDBCTemplate.class.getResource("driver.properties").getPath();
 			prop.load(new FileReader(path));
+			
 			Class.forName(prop.getProperty("driver"));
 			String url = prop.getProperty("url");
 			String user = prop.getProperty("username");
 			String pw = prop.getProperty("userpw");
-			
-			conn = DriverManager.getConnection(url, user, pw);
+			conn = DriverManager.getConnection(url,user,pw);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
