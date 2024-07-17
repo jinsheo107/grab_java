@@ -10,7 +10,7 @@ import java.util.List;
 
 import com.grab.hospital.vo.Department;
 
-public class HospitalSettingDepartmentDao {
+public class HospitalGetDao {
 	public List<Department> settingDepartment(int no, Connection conn) {
 		List<Department> result = new ArrayList<Department>();
 		

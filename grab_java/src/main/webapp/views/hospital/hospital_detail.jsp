@@ -51,7 +51,17 @@
 					</div>
 					<div class="row">
 						<div class="about__addr col-lg-8">
-							<div>별점</div>
+						<%@ page import="com.grab.hospital.vo.Review" %>
+						<% 
+							List<Review> reviews = (List<Review>)request.getAttribute("reviewList");
+							double score = 0.0;
+							for(int i = 0; i < reviews.size(); i++) {
+								score += reviews.get(i).getReview_score();
+							}
+							
+							double avg = Math.round(score / reviews.size() * 10) / 10.0;
+						%>
+							<div><span style="color: #FBE114">★</span><%= avg %><span>&nbsp(<%= reviews.size() %>)</span></div>
 							<div><%=h.getHospital_addr()%></div>
 						</div>
 						<!-- <div class="col-lg-4">
