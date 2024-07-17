@@ -1323,6 +1323,27 @@ div.register__text div.searchComment {
   display: inline-block;
 }
 
+/* -------------------------------------- */
+/* 진서형 */
+/* detail */
+/* -------------------------------------- */
+.detail__price {
+  display: flex;
+  background: #ffffff;
+  -webkit-box-shadow: 0px 0px 10px rgba(18, 8, 81, 0.15);
+  box-shadow: 0px 0px 10px rgba(18, 8, 81, 0.15);
+  padding: 10px;
+  text-align: center;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+  width: 40%;
+  /* height: 80px; */
+  align-items: center;
+  justify-content: center;
+}
+
+
 /*----------------------------------------*/
 /* 진서형 */
 /* modify

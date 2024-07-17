@@ -26,6 +26,10 @@
 	href="../../resources/css/common/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="../../resources/css/common/style.css"
 	type="text/css">
+	
+<style>
+
+</style>
 </head>
 <body>
 	<%@ include file="../include/hospital_nav.jsp"%>
@@ -61,9 +65,10 @@
 							
 							double avg = Math.round(score / reviews.size() * 10) / 10.0;
 						%>
-							<div><span style="color: #FBE114">★</span><%= avg %><span>&nbsp(<%= reviews.size() %>)</span></div>
+							<div><span style="color: #FBE114; font-size: 20px">★</span><%= avg %><span>&nbsp(<%= reviews.size() %>)</span></div>
 							<div><%=h.getHospital_addr()%></div>
 						</div>
+						
 						<!-- <div class="col-lg-4">
 							<a href="/hospital/hospital_request" class="request-btn"
 								style="position: relative; left: 180px;">정보 정정 요청</a>
@@ -116,8 +121,34 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div style="display: flex; justify-content: center;">
+			<div class="detail__price" style="justify-content: center; text-align: center;">
+				<table class="col-lg-12">
+					<colgroup>
+						<col width="50%">
+						<col width="50%">
+					</colgroup>
+					<thead>
+						<tr>
+							<th style="padding: 10px"><h5>진료항목</h5></th>
+							<th style="padding: 10px"><h5>가격</h5></th>
+						</tr>
+					</thead>
+					<tbody>
+						<%@ page import="com.grab.hospital.vo.HospitalPrice" %>
+						<% 
+							List<HospitalPrice> hospitaPrices = (List<HospitalPrice>)request.getAttribute("priceList"); 
+							for(int i = 0; i < hospitaPrices.size(); i++) {
+						%>
+								<tr>
+									<td style="padding: 10px"><%=hospitaPrices.get(i).getType() %></td>
+									<td style="padding: 10px"><%=hospitaPrices.get(i).getPrice() %></td>
+								</tr>
+						<%}%>
+					</tbody>
+				</table>
 				
+			</div>
 			</div>
 		</div>
 	</section>
@@ -210,7 +241,36 @@
 					</table>
 				</div>
 			</div>
-			<div class="row"></div>
+			<div class="row">
+				<table class="col-lg-12">
+					<colgroup>
+						<col width="10%">
+						<col width="50%">
+						<col width="20%">
+						<col width="20%">
+					</colgroup>
+					<thead>
+						<tr>
+							<th style="padding: 10px"><h5>별점</h5></th>
+							<th style="padding: 10px"><h5>리뷰</h5></th>
+							<th style="padding: 10px"><h5>작성자</h5></th>
+							<th style="padding: 10px"><h5>작성일</h5></th>
+						</tr>
+					</thead>
+					<tbody>
+						<% 
+							for(int i = 0; i < reviews.size(); i++) {
+						%>
+								<tr>
+									<td style="padding: 10px"><%=reviews.get(i).getReview_score() %></td>
+									<td style="padding: 10px"><%=reviews.get(i).getReview_content() %></td>
+									<td style="padding: 10px"><%=reviews.get(i).getMember_no() %></td>
+									<td style="padding: 10px"><%=reviews.get(i).getReview_create_date() %></td>
+								</tr>
+						<%}%>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</section>
 
