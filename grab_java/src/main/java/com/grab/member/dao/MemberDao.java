@@ -56,14 +56,11 @@ public class MemberDao {
 			
 			if(rs.next()) {
 				result = new Hospital(
-						rs.getInt("hospital_no"), rs.getString("hospital_registration"),
-						rs.getString("hospital_license"), rs.getString("hospital_name"),
-						rs.getString("hospital_phone"), rs.getString("hospital_number"),
+						rs.getInt("hospital_no"), rs.getString("hospital_name"),
+						rs.getString("hospital_phone"), 
 						rs.getString("hospital_addr"), rs.getInt("hospital_doctor_num"), 
-						rs.getString("hospital_homepage"), rs.getInt("hospital_mapping"),
-						rs.getString("hospital_time"), rs.getInt("hospital_price"),
-						rs.getString("hospital_whether"), rs.getInt("hospital_view"),
-						rs.getTimestamp("hospital_login").toLocalDateTime()
+						rs.getString("hospital_homepage"), rs.getString("hospital_whether"), 
+						rs.getInt("hospital_view"), rs.getTimestamp("hospital_login").toLocalDateTime()
 						);
 			}
 			
