@@ -15,6 +15,7 @@ import com.grab.hospital.service.HospitalGetService;
 import com.grab.hospital.service.ReviewService;
 import com.grab.hospital.vo.Department;
 import com.grab.hospital.vo.Hospital;
+import com.grab.hospital.vo.HospitalPrice;
 import com.grab.hospital.vo.Review;
 
 @WebServlet("/hospital/hospital_detail")
@@ -31,12 +32,15 @@ public class HospitalDetailServlet extends HttpServlet {
 		if(session != null) {
 			Hospital h = (Hospital)session.getAttribute("hospital");
 			
-			List<Department> d = new HospitalGetService().settingDepartment(h.getHospital_no());
+			List<Department> d = new HospitalGetService().getDepartment(h.getHospital_no());
 			request.setAttribute("resultList", d);			
 			request.setAttribute("hospital", h);
 			
 			List<Review> reviewList = new ReviewService().getReview(h.getHospital_no());
 			request.setAttribute("reviewList", reviewList);
+			
+			List<HospitalPrice> priceList = new HospitalGetService().getPrice(h.getHospital_no());
+			request.setAttribute("priceList", priceList);
 		}
 		
 		RequestDispatcher view = request.getRequestDispatcher("/views/hospital/hospital_detail.jsp");

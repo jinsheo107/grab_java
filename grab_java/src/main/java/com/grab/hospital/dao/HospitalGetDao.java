@@ -8,10 +8,13 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.mariadb.jdbc.export.Prepare;
+
 import com.grab.hospital.vo.Department;
+import com.grab.hospital.vo.HospitalPrice;
 
 public class HospitalGetDao {
-	public List<Department> settingDepartment(int no, Connection conn) {
+	public List<Department> getDepartment(int no, Connection conn) {
 		List<Department> result = new ArrayList<Department>();
 		
 		PreparedStatement pstmt = null;
@@ -33,8 +36,38 @@ public class HospitalGetDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			close(pstmt);
 			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public List<HospitalPrice> getPrice(int no, Connection conn) {
+		List<HospitalPrice> result = new ArrayList<HospitalPrice>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String priceSql = "SELECT * FROM `hospital_price` WHERE `hospital_no` = ?";
+			
+			pstmt = conn.prepareStatement(priceSql);
+			pstmt.setInt(1, no);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				HospitalPrice resultVo = new HospitalPrice(rs.getInt("price_no"), rs.getInt("hospital_no"),
+						rs.getString("type"), rs.getInt("price"));
+				
+				result.add(resultVo);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
 		}
 		
 		return result;
