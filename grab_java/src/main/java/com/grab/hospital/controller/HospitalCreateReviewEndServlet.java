@@ -71,15 +71,20 @@ public class HospitalCreateReviewEndServlet extends HttpServlet {
 			for(int r : result) {
 				count++;
 				if(r == 0) {
+					System.out.println("fail");
 					out.println("<script>alert('제출에 실패했습니다. 다시 시도해주세요.'); location.href='" + request.getContextPath() + "/hospital/hospital_detail';</script>");
+					out.close();
 					break;
+					
 				} else {
 					if(count == result.length) {
-						out.println("<script>alert('요청사항을 제출하였습니다!'); location.href='" + request.getContextPath() + "/hospital/hospital_detail';</script>");						
+						System.out.println("success");
+						out.println("<script>alert('요청사항을 제출하였습니다!'); location.href='" + request.getContextPath() + "/hospital/hospital_detail';</script>");
+						out.close();
 					}
 				}
 				
-				out.close();
+				
 			}
 
 		}

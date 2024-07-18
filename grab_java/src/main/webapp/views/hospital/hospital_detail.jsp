@@ -169,19 +169,70 @@
 	<!-- About Section End -->
 
 	<!-- Feature Section Begin -->
-	<section class="feature-section about__spad">
+<%-- 	<section class="feature-section about__spad">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-12 notice__div">
-					<div class="homeUrl-title notice__title">
-						<a href="#">
-							<h3>공지사항</h3>
-						</a>
-					</div>
+				<div class="homeUrl-title notice__title">
+					<a href="#"><h3>공지사항</h3></a>
 				</div>
+			<div class="review__table">
+				<table class="col-lg-12" style="padding: 20px 180px">
+					<thead>
+						<colgroup>
+							<col width="10%">
+							<col width="50%">
+							<col width="20%">
+							<col width="20%">
+						</colgroup>
+						<% List<Review> selectedReviewList = (List<Review>)request.getAttribute("selectedReviewList"); %>
+						<tr>
+							<th style="padding: 10px;"><h5>번호</h5></th>
+							<th style="padding: 10px"><h5>공지사항</h5></th>
+							<th style="padding: 10px"><h5>작성일</h5></th>
+							<th style="padding: 10px"><h5>조회수</h5></th>
+						</tr>
+					</thead>
+	 				<tbody> 					
+	 					<%@ page import="com.grab.hospital.vo.HospitalNotice" %>
+						<% 
+							List<HospitalNotice> hospitalNotices = (List<HospitalNotice>)request.getAttribute("hospitalNotices"); 
+							for(int i = hospitalNotices.size() - 1; i >= 0; i--) {
+						%>
+						<tr>
+							<td style="padding: 10px"><%= i + 1%></td>
+							<td style="padding: 10px"><%= hospitalNotices.get(i).getNotice_title()%></td>
+							<td style="padding: 10px"><%= hospitalNotices.get(i).getNotice_reg_date().getYear() %>-<%= hospitalNotices.get(i).getNotice_reg_date().getMonthValue() %>-<%= hospitalNotices.get(i).getNotice_reg_date().getDayOfMonth() %></td>
+							<td style="padding: 10px"><%= hospitalNotices.get(i).getNotice_view()%></td>
+						</tr>
+						<%}%>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="4" style="width: 100%;">
+								<% Review paging = (Review)request.getAttribute("paging"); %>
+								<% if(paging !=null){ %>
+								<div class="pagination">
+									<% if(paging.isPrev()){ %>
+								    <a href="/hospital/hospital_detail?nowPage=<%=(paging.getPageBarStart()-1)%>">&laquo;</a>
+								    <%} %>
+								    <% for(int i = paging.getPageBarStart(); i <= paging.getPageBarEnd(); i++){ %>
+								    <a href="/hospital/hospital_detail?nowPage=<%=i%>" <%=paging.getNowPage() == i ? "class='active'" : "" %>>
+								        <%=i %>
+								    </a>
+								    <%} %>
+								    <%if(paging.isNext()){ %>
+								    <a href="/hospital/hospital_detail?nowPage=<%=(paging.getPageBarEnd()+1)%>">&raquo;</a>
+								    <%} %>
+								</div>
+								<%} %>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
 			</div>
 		</div>
-	</section>
+	</div>
+</section> --%>
 	<!-- Services Section End -->
 
 	<!-- Team Section Begin -->
@@ -282,6 +333,8 @@
 	</section>
 
 	<!-- 리뷰 Begin -->
+	<% Map<String, Integer> map = (Map<String, Integer>) request.getAttribute("keyword"); %>
+	
 	<section class="team-section spad">
 		<div class="container">
 			<div class="row">
@@ -300,29 +353,25 @@
 						<col width="90%">
 					</colgroup>
 						<tr>
-							<th style="width: 5em;">친절
-							</td>
-							<td><progress value="20" max="100"></progress></td>
+							<th style="width: 5em;">친절</th>
+							<td><progress value="<%= map.get("1")%>" max="<%= reviews.size() %>"></progress></td>
+						</tr>
+						<% %>
+						<tr>
+							<th>위생</th>
+							<td><progress value="<%= map.get("2")%>" max="<%= reviews.size() %>"></progress></td>
 						</tr>
 						<tr>
-							<th>위생
-							</td>
-							<td><progress value="20" max="100"></progress></td>
+							<th>시설</th>
+							<td><progress value="<%= map.get("3")%>" max="<%= reviews.size() %>"></progress></td>
 						</tr>
 						<tr>
-							<th>시설
-							</td>
-							<td><progress value="20" max="100"></progress></td>
+							<th>꼼꼼함</th>
+							<td><progress value="<%= map.get("4")%>" max="<%= reviews.size() %>"></progress></td>
 						</tr>
 						<tr>
-							<th>꼼꼼함
-							</td>
-							<td><progress value="20" max="100"></progress></td>
-						</tr>
-						<tr>
-							<th>대기
-							</td>
-							<td><progress value="20" max="100"></progress></td>
+							<th>대기</th>
+							<td><progress value="<%= map.get("5")%>" max="<%= reviews.size() %>"></progress></td>
 						</tr>
 					</table>
 				</div>
@@ -362,19 +411,19 @@
 						<tfoot>
 							<tr>
 								<td colspan="4" style="width: 100%;">
-									<% Review paging = (Review)request.getAttribute("paging"); %>
-									<% if(paging !=null){ %>
+									<% Review reviewPaging = (Review)request.getAttribute("reviewPaging"); %>
+									<% if(reviewPaging !=null){ %>
 									<div class="pagination">
-									    <% if(paging.isPrev()){ %>
-									    <a href="/hospital/hospital_detail?nowPage=<%=(paging.getPageBarStart()-1)%>">&laquo;</a>
+									    <% if(reviewPaging.isPrev()){ %>
+									    <a href="/hospital/hospital_detail?nowPage=<%=(reviewPaging.getPageBarStart()-1)%>">&laquo;</a>
 									    <%} %>
-									    <% for(int i = paging.getPageBarStart(); i <= paging.getPageBarEnd(); i++){ %>
-									    <a href="/hospital/hospital_detail?nowPage=<%=i%>" <%=paging.getNowPage() == i ? "class='active'" : "" %>>
+									    <% for(int i = reviewPaging.getPageBarStart(); i <= reviewPaging.getPageBarEnd(); i++){ %>
+									    <a href="/hospital/hospital_detail?nowPage=<%=i%>" <%=reviewPaging.getNowPage() == i ? "class='active'" : "" %>>
 									        <%=i %>
 									    </a>
 									    <%} %>
-									    <%if(paging.isNext()){ %>
-									    <a href="/hospital/hospital_detail?nowPage=<%=(paging.getPageBarEnd()+1)%>">&raquo;</a>
+									    <%if(reviewPaging.isNext()){ %>
+									    <a href="/hospital/hospital_detail?nowPage=<%=(reviewPaging.getPageBarEnd()+1)%>">&raquo;</a>
 									    <%} %>
 									</div>
 									<%} %>

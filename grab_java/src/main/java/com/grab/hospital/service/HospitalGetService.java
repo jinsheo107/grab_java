@@ -5,10 +5,13 @@ import static com.grab.common.sql.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
 import com.grab.hospital.dao.HospitalGetDao;
 import com.grab.hospital.vo.Department;
+import com.grab.hospital.vo.HospitalNotice;
 import com.grab.hospital.vo.HospitalPrice;
+import com.grab.hospital.vo.Review;
 
 public class HospitalGetService {
 
@@ -25,6 +28,26 @@ public class HospitalGetService {
 		Connection conn = getConnection();
 		
 		List<HospitalPrice> result = new HospitalGetDao().getPrice(no, conn);
+		close(conn);
+		
+		return result;
+	}
+	
+	public Map<String, Integer> getKeyword(List<Review> reviews) {
+		Connection conn = getConnection();
+		
+		Map<String, Integer> map = new HospitalGetDao().getKeyword(reviews, conn);
+		
+		close(conn);
+		
+		return map;
+	}
+	
+	public List<HospitalNotice> getNotice(int no) {
+		Connection conn = getConnection();
+		
+		List<HospitalNotice> result = new HospitalGetDao().getNotice(no, conn);
+		
 		close(conn);
 		
 		return result;

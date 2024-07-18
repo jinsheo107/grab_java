@@ -2,6 +2,7 @@ package com.grab.hospital.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,6 +18,7 @@ import com.grab.hospital.service.HospitalGetService;
 import com.grab.hospital.service.ReviewService;
 import com.grab.hospital.vo.Department;
 import com.grab.hospital.vo.Hospital;
+import com.grab.hospital.vo.HospitalNotice;
 import com.grab.hospital.vo.HospitalPrice;
 import com.grab.hospital.vo.Review;
 
@@ -44,27 +46,26 @@ public class HospitalDetailServlet extends HttpServlet {
 			List<HospitalPrice> priceList = new HospitalGetService().getPrice(h.getHospital_no());
 			request.setAttribute("priceList", priceList);
 			
-			Review option = new Review();
+			Map<String, Integer> map = new HospitalGetService().getKeyword(reviewList);
+			request.setAttribute("keyword", map);
+			
+			List<HospitalNotice> hospitalNoticeList = new HospitalGetService().getNotice(h.getHospital_no());
+			request.setAttribute("hospitalNotices", hospitalNoticeList);
+			
+			Review reveiwOption = new Review();
 			
 			String nowPage = request.getParameter("nowPage");
 			if(nowPage != null) {
-				option.setNowPage(Integer.parseInt(nowPage));
+				reveiwOption.setNowPage(Integer.parseInt(nowPage));
 			}
 			
-			option.setTotalData(reviewList.size());
+			reveiwOption.setTotalData(reviewList.size());
 			
-			List<Review> selectedReviewList = new ReviewService().selectReviewList(option);
+			List<Review> selectedReviewList = new ReviewService().selectReviewList(reveiwOption);
 			
-			request.setAttribute("paging", option);
+			request.setAttribute("reviewPaging", reveiwOption);
 			request.setAttribute("selectedReviewList", selectedReviewList);
 			
-			JSONObject o = new JSONObject();
-			o.put("paging", option);
-			o.put("selectedReviewList", selectedReviewList);
-			o.put("reviews", reviewList);
-			
-			response.setContentType("application/json; charset=utf-8");
-			response.getWriter().print(o);
 		}
 		
 		RequestDispatcher view = request.getRequestDispatcher("/views/hospital/hospital_detail.jsp");

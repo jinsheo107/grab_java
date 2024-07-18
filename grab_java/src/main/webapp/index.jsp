@@ -32,8 +32,8 @@
               <h3 class="notoSansBold">찾으시는 병원을 검색해 보세요!</h3>
             </div>
             <div class="register__form">
-              <form action="#">
-                <input type="text" placeholder="병원 검색하기">
+              <form action="/hospital/search">
+                <input type="text" placeholder="병원 검색하기" name="search_text">
                 <button type="submit" class="notoSansMedium site-btn">검색</button>
               </form>
             </div>
@@ -173,6 +173,7 @@
   <script src="resources/js/common/jquery.slicknav.js"></script>
   <script src="resources/js/common/owl.carousel.min.js"></script>
   <script src="resources/js/common/main.js"></script>
+  
 </body>
 
 </html>
