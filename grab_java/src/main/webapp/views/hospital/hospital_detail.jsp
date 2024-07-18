@@ -27,6 +27,23 @@
 <link rel="stylesheet" href="../../resources/css/common/style.css"
 	type="text/css">
 	
+	<style>
+        .pagination {
+            display: inline-box;
+            list-style-type: none;
+            justify-content: center;
+        }
+        .pagination a {
+            margin: 0 5px;
+            text-decoration: none;
+            color: black;
+        }
+        .pagination a.active {
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+	
   <style>
     .review__table {
       padding: 20px 25px;
@@ -316,38 +333,66 @@
 			</div>
 			<div>
 			<div class="review__table">
-				<table class="col-lg-12" style="padding: 20px 180px">
-					<colgroup>
-						<col width="10%">
-						<col width="50%">
-						<col width="20%">
-						<col width="20%">
-					</colgroup>
-					<thead>
-						<tr>
-							<th style="padding: 10px;"><h5 style="text-decoration: underline #f8dd11 3px;">별점</h5></th>
-							<th style="padding: 10px"><h5 style="text-decoration: underline #f8dd11 3px;">리뷰</h5></th>
-							<th style="padding: 10px"><h5 style="text-decoration: underline #f8dd11 3px;">작성자</h5></th>
-							<th style="padding: 10px"><h5 style="text-decoration: underline #f8dd11 3px;">작성일</h5></th>
-						</tr>
-					</thead>
-					<tbody>
-						<% 
-							for(int i = 0; i < reviews.size(); i++) {
+					<table class="col-lg-12" style="padding: 20px 180px">
+						<thead>
+						<colgroup>
+							<col width="10%">
+							<col width="50%">
+							<col width="20%">
+							<col width="20%">
+						</colgroup>
+						<%
+							List<Review> selectedReviewList = (List<Review>)request.getAttribute("selectedReviewList");
 						%>
-								<tr>
-									<td style="padding: 10px"><%=reviews.get(i).getReview_score() %></td>
-									<td style="padding: 10px"><%=reviews.get(i).getReview_content() %></td>
-									<td style="padding: 10px"><%=reviews.get(i).getMember_no() %></td>
-									<td style="padding: 10px"><%=reviews.get(i).getReg_date().getYear() %>-<%=reviews.get(i).getReg_date().getMonthValue() %>-<%=reviews.get(i).getReg_date().getDayOfMonth() %></td>
-								</tr>
-						<%}%>
-					</tbody>
-				</table>
-			</div>
+							<tr>
+								<th style="padding: 10px;"><h5 style="text-decoration: underline #f8dd11 3px;">별점</h5></th>
+								<th style="padding: 10px"><h5 style="text-decoration: underline #f8dd11 3px;">리뷰</h5></th>
+								<th style="padding: 10px"><h5 style="text-decoration: underline #f8dd11 3px;">작성자</h5></th>
+								<th style="padding: 10px"><h5 style="text-decoration: underline #f8dd11 3px;">작성일</h5></th>
+							</tr>
+						</thead>
+	 					<tbody>
+							<% 
+								for(int i = 0; i < selectedReviewList.size(); i++) {
+							%>
+									<tr>
+										<td style="padding: 10px"><%=reviews.get(i).getReview_score() %></td>
+										<td style="padding: 10px"><%=reviews.get(i).getReview_content() %></td>
+										<td style="padding: 10px"><%=reviews.get(i).getMember_no() %></td>
+										<td style="padding: 10px"><%=reviews.get(i).getReg_date().getYear() %>-<%=reviews.get(i).getReg_date().getMonthValue() %>-<%=reviews.get(i).getReg_date().getDayOfMonth() %></td>
+									</tr>
+							<%}%>
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="4" style="width: 100%;">
+									<% Review paging = (Review)request.getAttribute("paging"); %>
+									<% if(paging !=null){ %>
+									<div class="pagination">
+									    <% if(paging.isPrev()){ %>
+									    <a href="/hospital/hospital_detail?nowPage=<%=(paging.getPageBarStart()-1)%>">&laquo;</a>
+									    <%} %>
+									    <% for(int i = paging.getPageBarStart(); i <= paging.getPageBarEnd(); i++){ %>
+									    <a href="/hospital/hospital_detail?nowPage=<%=i%>" <%=paging.getNowPage() == i ? "class='active'" : "" %>>
+									        <%=i %>
+									    </a>
+									    <%} %>
+									    <%if(paging.isNext()){ %>
+									    <a href="/hospital/hospital_detail?nowPage=<%=(paging.getPageBarEnd()+1)%>">&raquo;</a>
+									    <%} %>
+									</div>
+									<%} %>
+								</td>
+							</tr>
+						</tfoot>
+					</table>
+					</div>
+					
 			</div>
 		</div>
 	</section>
+	
+	
 
 	<%@ include file="../include/footer.jsp"%>
 
@@ -359,13 +404,59 @@
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4f36ed28a98f155fac9a64b707114d9c"></script>
 	<script>
-		var container = document.getElementById('map');
-		var options = {
-			center : new kakao.maps.LatLng(33.450701, 126.570667),
-			level : 3
-		};
+    var container = document.getElementById('map');
+    var options = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667),
+        level: 3
+    };
 
-		var map = new kakao.maps.Map(container, options);
-	</script>
+    var map = new kakao.maps.Map(container, options);
+
+    // Prevent default action for review pagination links
+    $(document).ready(function() {
+        $('.pagination a').click(function(event) {
+            event.preventDefault();
+            var page = $(this).attr('href').split('nowPage=')[1];
+            updateReviews(page);
+        });
+    });
+
+    function updateReviews(page) {
+        $.ajax({
+            url: '/hospital/hospital_detail',
+            type: 'GET',
+            data: { nowPage: page },
+            dataType: 'json',
+            success: function(data) {
+                // Clear existing reviews
+                $('.review__table tbody').empty();
+
+                // Populate with new reviews
+                $.each(data.reviews, function(index, review) {
+                    var reviewRow = '<tr>' +
+                        '<td style="padding: 10px">' + review.review_score + '</td>' +
+                        '<td style="padding: 10px">' + review.review_content + '</td>' +
+                        '<td style="padding: 10px">' + review.member_no + '</td>' +
+                        '<td style="padding: 10px">' + review.reg_date.year + '-' + review.reg_date.monthValue + '-' + review.reg_date.dayOfMonth + '</td>' +
+                        '</tr>';
+                    $('.review__table tbody').append(reviewRow);
+                });
+
+                // Update pagination
+                $('.pagination').empty();
+                if (data.paging.isPrev) {
+                    $('.pagination').append('<a href="/hospital/hospital_detail?nowPage=' + (data.paging.pageBarStart - 1) + '">&laquo;</a>');
+                }
+                for (var i = data.paging.pageBarStart; i <= data.paging.pageBarEnd; i++) {
+                    var activeClass = (data.paging.nowPage == i) ? 'class="active"' : '';
+                    $('.pagination').append('<a href="/hospital/hospital_detail?nowPage=' + i + '" ' + activeClass + '>' + i + '</a>');
+                }
+                if (data.paging.isNext) {
+                    $('.pagination').append('<a href="/hospital/hospital_detail?nowPage=' + (data.paging.pageBarEnd + 1) + '">&raquo;</a>');
+                }
+            }
+        });
+    }
+</script>
 </body>
 </html>

@@ -29,5 +29,15 @@ public class ReviewService {
 		return result;
 	}
 	
+	public List<Review> selectReviewList (Review option) {
+		Connection conn = getConnection();
+		
+		List<Review> result = new ReviewDao().selectedReviewList(option, conn);
+		
+		close(conn);
+		
+		return result;
+	}
+	
 	
 }

@@ -107,4 +107,36 @@ public class ReviewDao {
 		
 		return result;
 	}
+	
+	public List<Review> selectedReviewList (Review option, Connection conn) {
+		List<Review> result = new ArrayList<Review>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT * FROM `review` LIMIT " 
+					+ option.getLimitPageNo() + ", " + option.getNumPerPage();
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Review resultVo = new Review(rs.getInt("review_no"), rs.getInt("hospital_no"),
+						rs.getInt("member_no"), rs.getInt("review_score"), rs.getString("review_content"),
+						rs.getString("org_img_name"), rs.getString("new_img_name"),
+						rs.getTimestamp("reg_date").toLocalDateTime(), rs.getTimestamp("mod_date").toLocalDateTime());
+				
+				result.add(resultVo);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }

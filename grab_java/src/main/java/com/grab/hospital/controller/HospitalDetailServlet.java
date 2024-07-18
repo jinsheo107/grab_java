@@ -1,7 +1,10 @@
 package com.grab.hospital.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -41,6 +44,31 @@ public class HospitalDetailServlet extends HttpServlet {
 			
 			List<HospitalPrice> priceList = new HospitalGetService().getPrice(h.getHospital_no());
 			request.setAttribute("priceList", priceList);
+			
+			Review option = new Review();
+			
+			String nowPage = request.getParameter("nowPage");
+			if(nowPage != null) {
+				option.setNowPage(Integer.parseInt(nowPage));
+			}
+			
+			option.setTotalData(reviewList.size());
+			
+			List<Review> selectedReviewList = new ReviewService().selectReviewList(option);
+			
+			request.setAttribute("paging", option);
+			request.setAttribute("selectedReviewList", selectedReviewList);
+			
+			Map<String, Object> responseData = new HashMap<>();
+	        responseData.put("reviews", selectedReviewList);
+	        responseData.put("paging", option);
+
+	        // JSON 응답 설정
+	        response.setContentType("application/json");
+	        response.setCharacterEncoding("UTF-8");
+	        PrintWriter out = response.getWriter();
+	        out.print(new Gson().toJson(responseData));
+	        out.flush();
 		}
 		
 		RequestDispatcher view = request.getRequestDispatcher("/views/hospital/hospital_detail.jsp");

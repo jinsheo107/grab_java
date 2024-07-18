@@ -2,7 +2,9 @@ package com.grab.hospital.vo;
 
 import java.time.LocalDateTime;
 
-public class Review {
+import com.grab.common.Paging10;
+
+public class Review extends Paging10 {
 	public int review_no;
 	public int hospital_no;
 	public int member_no;
