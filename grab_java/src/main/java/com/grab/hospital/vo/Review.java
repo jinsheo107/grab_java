@@ -10,8 +10,8 @@ public class Review {
 	public String review_content;
 	public String org_img_name;
 	public String new_img_name;
-	public LocalDateTime review_create_date;
-	public LocalDateTime reivew_modification_date;
+	public LocalDateTime reg_date;
+	public LocalDateTime mod_date;
 	
 	
 	public Review() {
@@ -21,8 +21,8 @@ public class Review {
 
 
 	public Review(int review_no, int hospital_no, int member_no, int review_score, String review_content,
-			String org_img_name, String new_img_name, LocalDateTime review_create_date,
-			LocalDateTime reivew_modification_date) {
+			String org_img_name, String new_img_name, LocalDateTime reg_date,
+			LocalDateTime mod_date) {
 		super();
 		this.review_no = review_no;
 		this.hospital_no = hospital_no;
@@ -31,8 +31,8 @@ public class Review {
 		this.review_content = review_content;
 		this.org_img_name = org_img_name;
 		this.new_img_name = new_img_name;
-		this.review_create_date = review_create_date;
-		this.reivew_modification_date = reivew_modification_date;
+		this.reg_date = reg_date;
+		this.mod_date = mod_date;
 	}
 
 
@@ -106,23 +106,23 @@ public class Review {
 	}
 
 
-	public LocalDateTime getReview_create_date() {
-		return review_create_date;
+	public LocalDateTime getReg_date() {
+		return reg_date;
 	}
 
 
-	public void setReview_create_date(LocalDateTime review_create_date) {
-		this.review_create_date = review_create_date;
+	public void setReg_date(LocalDateTime reg_date) {
+		this.reg_date = reg_date;
 	}
 
 
-	public LocalDateTime getReivew_modification_date() {
-		return reivew_modification_date;
+	public LocalDateTime getMod_date() {
+		return mod_date;
 	}
 
 
-	public void setReivew_modification_date(LocalDateTime reivew_modification_date) {
-		this.reivew_modification_date = reivew_modification_date;
+	public void setMod_date(LocalDateTime mod_date) {
+		this.mod_date = mod_date;
 	}
 
 
@@ -130,8 +130,8 @@ public class Review {
 	public String toString() {
 		return "Review [review_no=" + review_no + ", hospital_no=" + hospital_no + ", member_no=" + member_no
 				+ ", review_score=" + review_score + ", review_content=" + review_content + ", org_img_name="
-				+ org_img_name + ", new_img_name=" + new_img_name + ", review_create_date=" + review_create_date
-				+ ", reivew_modification_date=" + reivew_modification_date + "]";
+				+ org_img_name + ", new_img_name=" + new_img_name + ", reg_date=" + reg_date
+				+ ", mod_date=" + mod_date + "]";
 	}
 	
 }

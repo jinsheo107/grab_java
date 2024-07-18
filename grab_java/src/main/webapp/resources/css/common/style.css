@@ -1528,15 +1528,14 @@ input[type='file'] {
 .about__table {
   display: flex;
   justify-content: center;
-  background-color: #f8dd114d;
+  background-color: #f5f5f5;
   border-radius: 20px;
   padding: 20px 0px;
 }
 
-.about__table progress {
+.review__table progress {
   width: 35em;
   margin: 2px;
-  /* height: 2em; */
 }
 
 .about__table td {
@@ -1544,7 +1543,6 @@ input[type='file'] {
 }
 
 .about__table th {
-  /* text-align: center; */
   justify-content: center;
 }
 
@@ -1556,17 +1554,18 @@ input[type='file'] {
 progress {
   width: 200px;
   height: 30px;
-  -webkit-appearance: none;
-  appearance: none;
+  -webkit-appearance: none;  
 }
 
 progress::-webkit-progress-bar {
+	border: 2px solid #e7e7e7;
   background-color: rgb(255, 255, 255);
   border-radius: 20px;
 }
 
 progress::-webkit-progress-value {
   border-radius: 20px;
+  background-color: #f8dd11;
 }
 
 .notice__title a {
@@ -1618,10 +1617,9 @@ progress::-webkit-progress-value {
   font-weight: 700;
   border-radius: 50px;
   text-decoration: none;
-  float: right;
   position: relative;
-  bottom: 60px;
-  right: 200px;
+  float: inline-end;
+  bottom: 20px;
 }
 
 .create__review a {

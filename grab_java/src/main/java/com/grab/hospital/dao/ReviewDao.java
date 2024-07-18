@@ -17,7 +17,6 @@ import com.grab.hospital.vo.Review;
 public class ReviewDao {
 	public int[] createReview(int star, int[] arr, String content, String orName, String reName, Connection conn) {
 		int[] result = new int[arr.length];
-		int pstmtResult = 0;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -26,7 +25,7 @@ public class ReviewDao {
 			commit(conn);
 			
 			String createReviewSql = "INSERT INTO `review` (hospital_no, member_no, review_score, review_content, "
-					+" org_review_certification_image, new_review_certification_image) VALUE (?,?,?,?,?,?)";
+					+" org_img_name, new_img_name) VALUE (?,?,?,?,?,?)";
 			
 			pstmt = conn.prepareStatement(createReviewSql, Statement.RETURN_GENERATED_KEYS);
 			pstmt.setInt(1, 1);
@@ -36,7 +35,7 @@ public class ReviewDao {
 			pstmt.setString(5, orName);
 			pstmt.setString(6, reName);
 			
-			pstmtResult = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 			
 			
 			rs = pstmt.getGeneratedKeys();
@@ -46,7 +45,6 @@ public class ReviewDao {
 //			// primaryKey 값 출력
 //			System.out.println("check: " + autoInsertedKey);
 			
-			 // 생성된 review 테이블의 no 값 가져오기
 			try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     long reviewNo = generatedKeys.getLong(1);
@@ -93,8 +91,8 @@ public class ReviewDao {
 			while(rs.next()) {
 				Review r = new Review(rs.getInt("review_no"), rs.getInt("hospital_no"),
 						rs.getInt("member_no"), rs.getInt("review_score"), rs.getString("review_content"),
-						rs.getString("org_review_certification_image"), rs.getString("new_review_certification_image"),
-						rs.getTimestamp("review_create_date").toLocalDateTime(), rs.getTimestamp("review_modification_date").toLocalDateTime());
+						rs.getString("org_img_name"), rs.getString("new_img_name"),
+						rs.getTimestamp("reg_date").toLocalDateTime(), rs.getTimestamp("mod_date").toLocalDateTime());
 				
 				result.add(r);
 			}

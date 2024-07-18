@@ -27,9 +27,80 @@
 <link rel="stylesheet" href="../../resources/css/common/style.css"
 	type="text/css">
 	
-<style>
+  <style>
+    .review__table {
+      padding: 20px 25px;
+      
+      display: flex;
+  		background: #ffffff;
+  		-webkit-box-shadow: 0px 0px 10px rgba(18, 8, 81, 0.15);
+  		box-shadow: 0px 0px 10px rgba(18, 8, 81, 0.15);
+  		padding: 10px;
+  		text-align: center;
+  		-webkit-transition: all 0.3s;
+  		-o-transition: all 0.3s;
+  		transition: all 0.3s;
+  		width: 100%;
+  		/* height: 80px; */
+  		align-items: center;
+  		justify-content: center;
+    }
+    
+    .review__table table {
+      width: 100%;
+      margin: 2px;
+      /* height: 2em; */
+      background-color: white;
+      border-radius: 20px;
+    }
 
-</style>
+    .review__table th, .review__table td {
+      text-align: center;
+      justify-content: center;
+      /* background-color: white; */
+      padding: 10px 0px;
+    }
+    
+    .progress__table {
+      padding: 20px 25px;
+      
+      display: flex;
+  		background: white;
+  		-webkit-box-shadow: 0px 0px 10px rgba(18, 8, 81, 0.15);
+  		box-shadow: 0px 0px 10px rgba(18, 8, 81, 0.15);
+  		padding: 10px;
+  		text-align: center;
+  		-webkit-transition: all 0.3s;
+  		-o-transition: all 0.3s;
+  		transition: all 0.3s;
+  		width: 100%;
+  		align-items: center;
+  		justify-content: center;
+  		margin-bottom: 30px;
+    }
+    
+    .progress__table progress {
+      width: 100%;
+      margin: 2px;
+      background-color: white;
+      border-radius: 20px;
+    }
+    
+    .progress__table table {
+      width: 90%;
+      margin: 2px;
+      background-color: white;
+      border-radius: 20px;
+    }
+
+    .progress__table th, .progress__table td {
+      text-align: center;
+      justify-content: center;
+      /* background-color: white; */
+      padding: 10px 0px;
+    }
+
+  </style>
 </head>
 <body>
 	<%@ include file="../include/hospital_nav.jsp"%>
@@ -183,7 +254,7 @@
               <h3>홈페이지</h3>
             </div>
             <div class="hompage_url__item">
-              <p><%= h.getHospital_homepage() %></p>
+              <a href=<%= h.getHospital_homepage() %>><p><%= h.getHospital_homepage() %></p></a>
             </div>
             <div class="homeUrl-title normal-title">
               <h3>전화번호</h3>
@@ -207,12 +278,14 @@
 					</div>
 				</div>
 			</div>
-			<div class="create__review">
-				<a href="/hospital/create_review">리뷰작성</a>
-			</div>
-			<div class="table__margin">
-				<div class="about__table">
+				<a class="create__review" href="/hospital/create_review">리뷰작성</a>
+			<div>
+				<div class="progress__table">
 					<table>
+					<colgroup>
+						<col width="10%">
+						<col width="90%">
+					</colgroup>
 						<tr>
 							<th style="width: 5em;">친절
 							</td>
@@ -241,8 +314,9 @@
 					</table>
 				</div>
 			</div>
-			<div class="row">
-				<table class="col-lg-12">
+			<div>
+			<div class="review__table">
+				<table class="col-lg-12" style="padding: 20px 180px">
 					<colgroup>
 						<col width="10%">
 						<col width="50%">
@@ -251,10 +325,10 @@
 					</colgroup>
 					<thead>
 						<tr>
-							<th style="padding: 10px"><h5>별점</h5></th>
-							<th style="padding: 10px"><h5>리뷰</h5></th>
-							<th style="padding: 10px"><h5>작성자</h5></th>
-							<th style="padding: 10px"><h5>작성일</h5></th>
+							<th style="padding: 10px;"><h5 style="text-decoration: underline #f8dd11 3px;">별점</h5></th>
+							<th style="padding: 10px"><h5 style="text-decoration: underline #f8dd11 3px;">리뷰</h5></th>
+							<th style="padding: 10px"><h5 style="text-decoration: underline #f8dd11 3px;">작성자</h5></th>
+							<th style="padding: 10px"><h5 style="text-decoration: underline #f8dd11 3px;">작성일</h5></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -265,11 +339,12 @@
 									<td style="padding: 10px"><%=reviews.get(i).getReview_score() %></td>
 									<td style="padding: 10px"><%=reviews.get(i).getReview_content() %></td>
 									<td style="padding: 10px"><%=reviews.get(i).getMember_no() %></td>
-									<td style="padding: 10px"><%=reviews.get(i).getReview_create_date() %></td>
+									<td style="padding: 10px"><%=reviews.get(i).getReg_date().getYear() %>-<%=reviews.get(i).getReg_date().getMonthValue() %>-<%=reviews.get(i).getReg_date().getDayOfMonth() %></td>
 								</tr>
 						<%}%>
 					</tbody>
 				</table>
+			</div>
 			</div>
 		</div>
 	</section>
