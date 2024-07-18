@@ -251,12 +251,8 @@
 					</div>
 					<div></div>
 					<div>
-						<div class="hompage_url__item">
-							<%=h.getHospital_addr()%>
-						</div>
-						<div class="hompage_url__item" id="map"
-							style="padding: 158px 100px"></div>
-
+						<div class="hompage_url__item"> <%=h.getHospital_addr()%> </div>
+						<div class="hompage_url__item" id="map" style="padding: 158px 100px"></div>
 					</div>
 				</div>
 				<div class="col-lg-6">
@@ -401,8 +397,7 @@
 	<script src="../../resources/js/common/jquery.slicknav.js"></script>
 	<script src="../../resources/js/common/owl.carousel.min.js"></script>
 	<script src="../../resources/js/common/main.js"></script>
-	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4f36ed28a98f155fac9a64b707114d9c"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4f36ed28a98f155fac9a64b707114d9c"></script>
 	<script>
     var container = document.getElementById('map');
     var options = {
@@ -411,52 +406,6 @@
     };
 
     var map = new kakao.maps.Map(container, options);
-
-    // Prevent default action for review pagination links
-    $(document).ready(function() {
-        $('.pagination a').click(function(event) {
-            event.preventDefault();
-            var page = $(this).attr('href').split('nowPage=')[1];
-            updateReviews(page);
-        });
-    });
-
-    function updateReviews(page) {
-        $.ajax({
-            url: '/hospital/hospital_detail',
-            type: 'GET',
-            data: { nowPage: page },
-            dataType: 'json',
-            success: function(data) {
-                // Clear existing reviews
-                $('.review__table tbody').empty();
-
-                // Populate with new reviews
-                $.each(data.reviews, function(index, review) {
-                    var reviewRow = '<tr>' +
-                        '<td style="padding: 10px">' + review.review_score + '</td>' +
-                        '<td style="padding: 10px">' + review.review_content + '</td>' +
-                        '<td style="padding: 10px">' + review.member_no + '</td>' +
-                        '<td style="padding: 10px">' + review.reg_date.year + '-' + review.reg_date.monthValue + '-' + review.reg_date.dayOfMonth + '</td>' +
-                        '</tr>';
-                    $('.review__table tbody').append(reviewRow);
-                });
-
-                // Update pagination
-                $('.pagination').empty();
-                if (data.paging.isPrev) {
-                    $('.pagination').append('<a href="/hospital/hospital_detail?nowPage=' + (data.paging.pageBarStart - 1) + '">&laquo;</a>');
-                }
-                for (var i = data.paging.pageBarStart; i <= data.paging.pageBarEnd; i++) {
-                    var activeClass = (data.paging.nowPage == i) ? 'class="active"' : '';
-                    $('.pagination').append('<a href="/hospital/hospital_detail?nowPage=' + i + '" ' + activeClass + '>' + i + '</a>');
-                }
-                if (data.paging.isNext) {
-                    $('.pagination').append('<a href="/hospital/hospital_detail?nowPage=' + (data.paging.pageBarEnd + 1) + '">&raquo;</a>');
-                }
-            }
-        });
-    }
 </script>
 </body>
 </html>

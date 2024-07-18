@@ -16,6 +16,25 @@
   <link rel="stylesheet" href="../../resources/css/common/owl.carousel.min.css" type="text/css">
   <link rel="stylesheet" href="../../resources/css/common/slicknav.min.css" type="text/css">
   <link rel="stylesheet" href="../../resources/css/common/style.css" type="text/css">
+  
+  <style>
+  	.form__label--file {
+		  display: inline-block;
+		  font-size: 14px;
+		  color: #333;
+		  font-weight: 700;
+		  text-transform: uppercase;
+		  display: inline-block;
+		  padding: 4px 15px 4px;
+		  background: #f8dd11;
+		  border: none;
+		  border-radius: 50px;
+		  text-align: center;
+		  height: 35px;
+		  width: 120px;
+		  margin: 5px;
+		}
+  </style>
 </head>
 <body>
 	<%@ include file="../include/hospital_nav.jsp" %>
@@ -24,47 +43,12 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-          <div class="essentail__div">
-            <h3>필수정보</h3>
-            <hr>
-            <form action="/hospital/hospital_detail_essentail_modify" name="modify_hospital_essential_detail" method="post">
-              <div class="essentail__btn">
-                <input type="button" value="수정하기" class="searchBtn" onclick="essentialModify();">
-                <input type="reset" value="다시쓰기" class="searchBtn">
-              </div>
-              <table>
-                <tr>
-                  <th>병원명</th>
-                  <td><input type="text" placeholder="" name="hospital_name"></td>
-                </tr>
-                <tr>
-                  <th>의사수</th>
-                  <td><input type="text" placeholder="" name="doctor_num"></td>
-                </tr>
-                <tr>
-                  <th>우편번호</th>
-                  <td><input type="text" id="sample6_postcode" placeholder=""></td>
-                  <td><input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="modifyBtn" name="addrBtn"></td>
-                </tr>
-                <tr>
-                  <th>주소</th>
-                  <td><input type="text" id="sample6_address" placeholder="" name="hospital_addr"></td>
-                </tr>
-                <tr>
-                  <th></th>
-                  <td><input type="text" id="sample6_detailAddress" placeholder=""></td>
-                  <td><input type="hidden" id="sample6_extraAddress" placeholder=""></td>
-                </tr>
-              </table>
-            </form>
-          </div>
-          <br><br>
           <div class="select__div">
-            <h3>선택정보</h3>
+            <h3>병원 정보 변경</h3>
             <hr>
             <form action="/hospital/hospital_detail_select_modify" name="modify_hospital_select_detail" method="post">
               <div class="essentail__btn">
-                <input type="button" value="수정하기" class="searchBtn" onclick="">
+                <input type="button" value="수정하기" class="searchBtn" onclick="selectModify();">
                 <input type="reset" value="다시쓰기" class="searchBtn">
               </div>
               <table class="select__table">
@@ -80,54 +64,52 @@
                       </tr>
                       <tr>
                         <th>월요일</th>
-                        <td><input type="time"></td>
-                        <td><input type="time"></td>
-                        <td><input type="checkbox"></td>
+                        <td><input type="time" name="mon_time"></td>
+                        <td><input type="time" name="mon_lunch_time"></td>
+                        <td><input type="checkbox" name="mon_rest"></td>
                       </tr>
                       <tr>
                         <th>화요일</th>
-                        <td><input type="time"></td>
-                        <td><input type="time"></td>
-                        <td><input type="checkbox"></td>
-                      </tr>
-                      <tr>
+                        <td><input type="time" name="tue_time"></td>
+                        <td><input type="time" name="tue_lunch_time"></td>
+                        <td><input type="checkbox" name="tue_rest"></td>
+                      </tr><tr>
                         <th>수요일</th>
-                        <td><input type="time"></td>
-                        <td><input type="time"></td>
-                        <td><input type="checkbox"></td>
-                      </tr>
-                      <tr>
+                        <td><input type="time" name="wed_time"></td>
+                        <td><input type="time" name="wed_lunch_time"></td>
+                        <td><input type="checkbox" name="wed_rest"></td>
+                      </tr><tr>
                         <th>목요일</th>
-                        <td><input type="time"></td>
-                        <td><input type="time"></td>
-                        <td><input type="checkbox"></td>
-                      </tr>
-                      <tr>
+                        <td><input type="time" name="thur_time"></td>
+                        <td><input type="time" name="thur_lunch_time"></td>
+                        <td><input type="checkbox" name="thur_rest"></td>
+                      </tr><tr>
                         <th>금요일</th>
-                        <td><input type="time"></td>
-                        <td><input type="time"></td>
-                        <td><input type="checkbox"></td>
-                      </tr>
-                      <tr>
+                        <td><input type="time" name="fri_time"></td>
+                        <td><input type="time" name="fri_lunch_time"></td>
+                        <td><input type="checkbox" name="fri_rest"></td>
+                      </tr><tr>
                         <th>토요일</th>
-                        <td><input type="time"></td>
-                        <td><input type="time"></td>
-                        <td><input type="checkbox"></td>
-                      </tr>
-                      <tr>
+                        <td><input type="time" name="sat_time"></td>
+                        <td><input type="time" name="sat_lunch_time"></td>
+                        <td><input type="checkbox" name="sat_rest"></td>
+                      </tr><tr>
                         <th>일요일</th>
-                        <td><input type="time"></td>
-                        <td><input type="time"></td>
-                        <td><input type="checkbox"></td>
-                      </tr>
-                      <tr>
+                        <td><input type="time" name="sun_time"></td>
+                        <td><input type="time" name="sun_lunch_time"></td>
+                        <td><input type="checkbox" name="sun_rest"></td>
+                      </tr><tr>
                         <th>공휴일</th>
-                        <td><input type="time"></td>
-                        <td><input type="time"></td>
-                        <td><input type="checkbox"></td>
+                        <td><input type="time" name="hol_time"></td>
+                        <td><input type="time" name="hol_lunch_time"></td>
+                        <td><input type="checkbox" name="hol_rest"></td>
                       </tr>
                     </table>
                   </td>
+                </tr>
+                <tr>
+                  <th>의사수</th>
+                  <td><input type="text" placeholder="" name="doctor_num"></td>
                 </tr>
                 <tr>
                   <th>진료정보</th>
@@ -156,48 +138,10 @@
   <script src="../../resources/js/common/jquery.slicknav.js"></script>
   <script src="../../resources/js/common/owl.carousel.min.js"></script>
   <script src="../../resources/js/common/main.js"></script>
-  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
   <script>
-    function sample6_execDaumPostcode() {
-      new daum.Postcode({
-        oncomplete: function (data) {
-
-          var addr = '';
-          var extraAddr = '';
-
-          if (data.userSelectedType === 'R') {
-            addr = data.roadAddress;
-          } else {
-            addr = data.jibunAddress;
-          }
-
-          if (data.userSelectedType === 'R') {
-            if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
-              extraAddr += data.bname;
-            }
-            if (data.buildingName !== '' && data.apartment === 'Y') {
-              extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-            }
-            if (extraAddr !== '') {
-              extraAddr = ' (' + extraAddr + ')';
-            }
-            document.getElementById("sample6_extraAddress").value = extraAddr;
-
-          } else {
-            document.getElementById("sample6_extraAddress").value = '';
-          }
-
-          document.getElementById('sample6_postcode').value = data.zonecode;
-          document.getElementById("sample6_address").value = addr;
-          document.getElementById("sample6_detailAddress").focus();
-        }
-      }).open();
-    }
-  </script>
-  <script>
-  	function essentialModify() {
-  		const form = document.modify_hospital_essential_detail;
-  		
+  	function selectModify() {
+  		const form = document.modify_hospital_select_detail;
   		if(!form.hospital_name.value) {
   			alert("병원명을 입력하세요!");
 				form.hospital_name.focus();
@@ -207,8 +151,24 @@
   		} else if (!form.hospital_addr.value) {
   			alert("주소를 입력하세요!");
   			form.addrBtn.focus();
+  		} else if () { 
+  			alert("이미지를 추가해주세요!");
+  			form.addrBtn.focus();
   		} else {
-  			form.submit();
+  			if (form.review_file.value == "") {
+                form.submit();
+            } else {
+                const val = form.review_file.value;
+                const idx = val.lastIndexOf('.');
+                const type = val.substring(idx + 1, val.length);
+
+                if (type == 'jpg' || type == 'jpeg' || type == 'png') {
+                    form.submit();
+                } else {
+                    alert("이미지 파일만 선택할 수 있습니다!");
+                    form.review_file.value = '';
+                }
+            }
   		}
   		
   	}

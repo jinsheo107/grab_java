@@ -37,13 +37,7 @@ public class ReviewDao {
 			
 			pstmt.executeUpdate();
 			
-			
 			rs = pstmt.getGeneratedKeys();
-			
-			
-//			String autoInsertedKey = (rs.next()) ? rs.getString(1) : null;
-//			// primaryKey 값 출력
-//			System.out.println("check: " + autoInsertedKey);
 			
 			try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {

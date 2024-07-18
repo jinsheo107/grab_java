@@ -134,10 +134,9 @@
 											<hr>
 										</div>
 										<div class="form__input--file_wrap">
-											<input class="form__input--file" id="upload1" type="file"
-												name="review_file" accept=".png, .jpg, .jpeg"> <span
-												class="form__span--file">선택된 파일이 없습니다.</span> <label
-												class="form__label--file" for="upload1">파일선택</label>
+											<input class="form__input--file" id="upload1" type="file" name="review_file" accept=".png, .jpg, .jpeg"> 
+											<span class="form__span--file">선택된 파일이 없습니다.</span> 
+											<label class="form__label--file" for="upload1">파일선택</label>
 										</div>
 									</div>
 								</div>

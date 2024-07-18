@@ -6,9 +6,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 import com.grab.hospital.vo.Hospital;
+import com.grab.hospital.vo.HospitalModifyRequest;
 
 public class HospitalDetailModifyDao {
-	public int essentail_modify(String hn, String dn, String ha, Connection conn, Hospital h) {
+	public int select_modify(HospitalModifyRequest modifyRequest, Connection conn) {
 		int result = 0;
 		
 		PreparedStatement pstmt = null;
@@ -18,11 +19,7 @@ public class HospitalDetailModifyDao {
 					+"SET hospital_name = ?, hospital_addr = ?, "
 					+"hospital_doctor_num = ? WHERE hospital_no = ?";
 			
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, hn);
-			pstmt.setString(2, ha);
-			pstmt.setString(3, dn);
-			pstmt.setInt(4, h.getHospital_no());
+			
 			
 			result = pstmt.executeUpdate();
 			

@@ -1,10 +1,7 @@
 package com.grab.hospital.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONObject;
 
 import com.grab.hospital.service.HospitalGetService;
 import com.grab.hospital.service.ReviewService;
@@ -59,16 +58,13 @@ public class HospitalDetailServlet extends HttpServlet {
 			request.setAttribute("paging", option);
 			request.setAttribute("selectedReviewList", selectedReviewList);
 			
-			Map<String, Object> responseData = new HashMap<>();
-	        responseData.put("reviews", selectedReviewList);
-	        responseData.put("paging", option);
-
-	        // JSON 응답 설정
-	        response.setContentType("application/json");
-	        response.setCharacterEncoding("UTF-8");
-	        PrintWriter out = response.getWriter();
-	        out.print(new Gson().toJson(responseData));
-	        out.flush();
+			JSONObject o = new JSONObject();
+			o.put("paging", option);
+			o.put("selectedReviewList", selectedReviewList);
+			o.put("reviews", reviewList);
+			
+			response.setContentType("application/json; charset=utf-8");
+			response.getWriter().print(o);
 		}
 		
 		RequestDispatcher view = request.getRequestDispatcher("/views/hospital/hospital_detail.jsp");

@@ -6,13 +6,15 @@ import java.sql.Connection;
 
 import com.grab.hospital.dao.HospitalDetailModifyDao;
 import com.grab.hospital.vo.Hospital;
+import com.grab.hospital.vo.HospitalModifyRequest;
 
 public class HospitalDetailModifyService {
-	public int essentail_modify(String hn, String dn, String ha, Hospital h) {
-		
-		Connection conn = getConnection();
-		int result = new HospitalDetailModifyDao().essentail_modify(hn, dn, ha, conn, h);
-		
-		return result;
-	}
+	/*
+	 * public int essentail_modify(HospitalModifyRequest modifyRequest) {
+	 * 
+	 * Connection conn = getConnection(); int result = new
+	 * HospitalDetailModifyDao().essentail_modify(modifyRequest, conn);
+	 * 
+	 * return result; }
+	 */
 }
