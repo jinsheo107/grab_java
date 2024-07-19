@@ -17,4 +17,8 @@ public class MemberService {
 		
 		return result;
 	}
+	
+	public int hospitalIdSearch(Member m) {
+		
+	}
 }

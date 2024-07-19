@@ -5,7 +5,7 @@ public class Hospital {
 	private String hospital_registration;
 	private String hospital_license;
 	private String hospital_name;
-	private String hospital_number;
+	private String hospital_phone;
 	private String hospital_addr;
 	private int hospital_doctor_num;
 	private String hospital_homepage;
@@ -22,14 +22,14 @@ public class Hospital {
 	}
 
 
-	public Hospital(String hospital_registration, String hospital_license, String hospital_name, String hospital_number,
+	public Hospital(String hospital_registration, String hospital_license, String hospital_name, String hospital_phone,
 			String hospital_addr, int hospital_doctor_num, String hospital_homepage, int hospital_mapping,
 			String hospital_time, String hospital_price, char hospital_whether, int hospital_view, int hospital_login) {
 		super();
 		this.hospital_registration = hospital_registration;
 		this.hospital_license = hospital_license;
 		this.hospital_name = hospital_name;
-		this.hospital_number = hospital_number;
+		this.hospital_phone = hospital_phone;
 		this.hospital_addr = hospital_addr;
 		this.hospital_doctor_num = hospital_doctor_num;
 		this.hospital_homepage = hospital_homepage;
@@ -72,13 +72,13 @@ public class Hospital {
 	}
 
 
-	public String getHospital_number() {
-		return hospital_number;
+	public String getHospital_phone() {
+		return hospital_phone;
 	}
 
 
-	public void setHospital_number(String hospital_number) {
-		this.hospital_number = hospital_number;
+	public void setHospital_phone(String hospital_phone) {
+		this.hospital_phone = hospital_phone;
 	}
 
 
@@ -175,12 +175,14 @@ public class Hospital {
 	@Override
 	public String toString() {
 		return "hospital [hospital_registration=" + hospital_registration + ", hospital_license=" + hospital_license
-				+ ", hospital_name=" + hospital_name + ", hospital_number=" + hospital_number + ", hospital_addr="
+				+ ", hospital_name=" + hospital_name + ", hospital_number=" + hospital_phone + ", hospital_addr="
 				+ hospital_addr + ", hospital_doctor_num=" + hospital_doctor_num + ", hospital_homepage="
 				+ hospital_homepage + ", hospital_mapping=" + hospital_mapping + ", hospital_time=" + hospital_time
 				+ ", hospital_price=" + hospital_price + ", hospital_whether=" + hospital_whether + ", hospital_view="
 				+ hospital_view + ", hospital_login=" + hospital_login + "]";
 	}
-	
+
 	
 }
+
+
