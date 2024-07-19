@@ -34,7 +34,7 @@
             <div class="register__form">
               <form action="#">
                 <input type="text" placeholder="병원 검색하기">
-                <button type="submit" class="notoSansMedium site-btn">검색</button>
+                <button type="submit" class="notoSansMedium site-btn">검색a</button>
               </form>
             </div>
           </div>
