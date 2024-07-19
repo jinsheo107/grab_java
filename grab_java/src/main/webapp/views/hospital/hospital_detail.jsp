@@ -169,10 +169,10 @@
 	<!-- About Section End -->
 
 	<!-- Feature Section Begin -->
-<%-- 	<section class="feature-section about__spad">
+	<section class="feature-section about__spad">
 		<div class="container">
-			<div class="row">
-				<div class="homeUrl-title notice__title">
+			<div class="row" style="justify-content: center;">
+				<div class="homeUrl-title notice__title col-lg-2">
 					<a href="#"><h3>공지사항</h3></a>
 				</div>
 			<div class="review__table">
@@ -206,33 +206,11 @@
 						</tr>
 						<%}%>
 					</tbody>
-					<tfoot>
-						<tr>
-							<td colspan="4" style="width: 100%;">
-								<% Review paging = (Review)request.getAttribute("paging"); %>
-								<% if(paging !=null){ %>
-								<div class="pagination">
-									<% if(paging.isPrev()){ %>
-								    <a href="/hospital/hospital_detail?nowPage=<%=(paging.getPageBarStart()-1)%>">&laquo;</a>
-								    <%} %>
-								    <% for(int i = paging.getPageBarStart(); i <= paging.getPageBarEnd(); i++){ %>
-								    <a href="/hospital/hospital_detail?nowPage=<%=i%>" <%=paging.getNowPage() == i ? "class='active'" : "" %>>
-								        <%=i %>
-								    </a>
-								    <%} %>
-								    <%if(paging.isNext()){ %>
-								    <a href="/hospital/hospital_detail?nowPage=<%=(paging.getPageBarEnd()+1)%>">&raquo;</a>
-								    <%} %>
-								</div>
-								<%} %>
-							</td>
-						</tr>
-					</tfoot>
 				</table>
 			</div>
 		</div>
 	</div>
-</section> --%>
+</section>
 	<!-- Services Section End -->
 
 	<!-- Team Section Begin -->
@@ -302,7 +280,7 @@
 					</div>
 					<div></div>
 					<div>
-						<div class="hompage_url__item"> <%=h.getHospital_addr()%> </div>
+						<div class="hompage_url__item" id="addr"> <%=h.getHospital_addr()%> </div>
 						<div class="hompage_url__item" id="map" style="padding: 158px 100px"></div>
 					</div>
 				</div>
@@ -377,65 +355,28 @@
 				</div>
 			</div>
 			<div>
-			<div class="review__table">
-					<table class="col-lg-12" style="padding: 20px 180px">
-						<thead>
-						<colgroup>
-							<col width="10%">
-							<col width="50%">
-							<col width="20%">
-							<col width="20%">
-						</colgroup>
-						<%
-							List<Review> selectedReviewList = (List<Review>)request.getAttribute("selectedReviewList");
-						%>
-							<tr>
-								<th style="padding: 10px;"><h5 style="text-decoration: underline #f8dd11 3px;">별점</h5></th>
-								<th style="padding: 10px"><h5 style="text-decoration: underline #f8dd11 3px;">리뷰</h5></th>
-								<th style="padding: 10px"><h5 style="text-decoration: underline #f8dd11 3px;">작성자</h5></th>
-								<th style="padding: 10px"><h5 style="text-decoration: underline #f8dd11 3px;">작성일</h5></th>
-							</tr>
-						</thead>
-	 					<tbody>
-							<% 
-								for(int i = 0; i < selectedReviewList.size(); i++) {
-							%>
-									<tr>
-										<td style="padding: 10px"><%=reviews.get(i).getReview_score() %></td>
-										<td style="padding: 10px"><%=reviews.get(i).getReview_content() %></td>
-										<td style="padding: 10px"><%=reviews.get(i).getMember_no() %></td>
-										<td style="padding: 10px"><%=reviews.get(i).getReg_date().getYear() %>-<%=reviews.get(i).getReg_date().getMonthValue() %>-<%=reviews.get(i).getReg_date().getDayOfMonth() %></td>
-									</tr>
-							<%}%>
-						</tbody>
-						<tfoot>
-							<tr>
-								<td colspan="4" style="width: 100%;">
-									<% Review reviewPaging = (Review)request.getAttribute("reviewPaging"); %>
-									<% if(reviewPaging !=null){ %>
-									<div class="pagination">
-									    <% if(reviewPaging.isPrev()){ %>
-									    <a href="/hospital/hospital_detail?nowPage=<%=(reviewPaging.getPageBarStart()-1)%>">&laquo;</a>
-									    <%} %>
-									    <% for(int i = reviewPaging.getPageBarStart(); i <= reviewPaging.getPageBarEnd(); i++){ %>
-									    <a href="/hospital/hospital_detail?nowPage=<%=i%>" <%=reviewPaging.getNowPage() == i ? "class='active'" : "" %>>
-									        <%=i %>
-									    </a>
-									    <%} %>
-									    <%if(reviewPaging.isNext()){ %>
-									    <a href="/hospital/hospital_detail?nowPage=<%=(reviewPaging.getPageBarEnd()+1)%>">&raquo;</a>
-									    <%} %>
-									</div>
-									<%} %>
-								</td>
-							</tr>
-						</tfoot>
-					</table>
-					</div>
-					
-			</div>
-		</div>
-	</section>
+		</section>
+		
+		
+			<section class="team-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="homeUrl-title normal-title">
+                        <h3>리뷰</h3>
+                    </div>
+                </div>
+            </div>
+            <a class="create__review" href="/hospital/create_review">리뷰작성</a>
+            <div id="reviewContainer">
+                <!-- Ajax로 리뷰 데이터를 로드할 영역 -->
+            </div>
+            <div class="pagination" id="pagination">
+                <!-- Ajax로 페이징 버튼을 로드할 영역 -->
+            </div>
+        </div>
+    </section>
+	
 	
 	
 
@@ -447,14 +388,106 @@
 	<script src="../../resources/js/common/owl.carousel.min.js"></script>
 	<script src="../../resources/js/common/main.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4f36ed28a98f155fac9a64b707114d9c"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services"></script>
+	
 	<script>
-    var container = document.getElementById('map');
-    var options = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667),
-        level: 3
-    };
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	    mapOption = {
+	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+	        level: 3 // 지도의 확대 레벨
+	    };  
+	
+		// 지도를 생성합니다    
+		var map = new kakao.maps.Map(mapContainer, mapOption); 
+		
+		// 주소-좌표 변환 객체를 생성합니다
+		var geocoder = new kakao.maps.services.Geocoder();
+		
+		var addr = document.getElementById("addr").innerText;
+		console.log(addr);
+		
+		// 주소로 좌표를 검색합니다
+		geocoder.addressSearch("서울특별시 관악구 관악로 1" , function(result, status) {
+		
+		    // 정상적으로 검색이 완료됐으면 
+		     if (status === kakao.maps.services.Status.OK) {
+		
+		        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+		
+		        // 결과값으로 받은 위치를 마커로 표시합니다
+		        var marker = new kakao.maps.Marker({
+		            map: map,
+		            position: coords
+		        });
+		
+		        // 인포윈도우로 장소에 대한 설명을 표시합니다
+		        var infowindow = new kakao.maps.InfoWindow({
+		            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+		        });
+		        infowindow.open(map, marker);
+		
+		        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+		        map.setCenter(coords);
+		    } 
+		});    
+	</script>
 
-    var map = new kakao.maps.Map(container, options);
-</script>
+	<script>
+        $(document).ready(function() {
+            loadReviews(1);
+
+            function loadReviews(page) {
+                $.ajax({
+                    url: '/hospital/get_reviews',
+                    type: 'GET',
+                    data: { nowPage: page },
+                    success: function(data) {
+                        renderReviews(data.reviews);
+                        renderPagination(data.pagination);
+                    }
+                });
+            }
+
+            function renderReviews(reviews) {
+                var reviewHtml = '<div class="review__table"><table class="col-lg-12" style="padding: 20px 180px"><thead><colgroup><col width="10%"><col width="50%"><col width="20%"><col width="20%"></colgroup><tr><th style="padding: 10px;"><h5 style="text-decoration: underline #f8dd11 3px;">별점</h5></th><th style="padding: 10px"><h5 style="text-decoration: underline #f8dd11 3px;">리뷰</h5></th><th style="padding: 10px"><h5 style="text-decoration: underline #f8dd11 3px;">작성자</h5></th><th style="padding: 10px"><h5 style="text-decoration: underline #f8dd11 3px;">작성일</h5></th></tr></thead><tbody>';
+
+                reviews.forEach(function(review) {
+                    reviewHtml += '<tr>';
+                    reviewHtml += '<td style="padding: 10px">' + review.review_score + '</td>';
+                    reviewHtml += '<td style="padding: 10px">' + review.review_content + '</td>';
+                    reviewHtml += '<td style="padding: 10px">' + review.member_no + '</td>';
+                    reviewHtml += '<td style="padding: 10px">' + review.reg_date + '</td>';
+                    reviewHtml += '</tr>';
+                });
+
+                reviewHtml += '</tbody></table></div>';
+                $('#reviewContainer').html(reviewHtml);
+            }
+
+            function renderPagination(pagination) {
+                var paginationHtml = '';
+
+                if (pagination.isPrev) {
+                    paginationHtml += '<a href="#" class="page-link" data-page="' + (pagination.pageBarStart - 1) + '">&laquo;</a>';
+                }
+
+                for (var i = pagination.pageBarStart; i <= pagination.pageBarEnd; i++) {
+                    paginationHtml += '<a href="#" class="page-link" data-page="' + i + '">' + i + '</a>';
+                }
+
+                if (pagination.isNext) {
+                    paginationHtml += '<a href="#" class="page-link" data-page="' + (pagination.pageBarEnd + 1) + '">&raquo;</a>';
+                }
+
+                $('#pagination').html(paginationHtml);
+
+                $('.page-link').click(function(e) {
+                    e.preventDefault();
+                    var page = $(this).data('page');
+                    loadReviews(page);
+                });
+            }
+        });
+    </script>
 </body>
 </html>

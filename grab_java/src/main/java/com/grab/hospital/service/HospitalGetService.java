@@ -9,6 +9,7 @@ import java.util.Map;
 
 import com.grab.hospital.dao.HospitalGetDao;
 import com.grab.hospital.vo.Department;
+import com.grab.hospital.vo.Hospital;
 import com.grab.hospital.vo.HospitalNotice;
 import com.grab.hospital.vo.HospitalPrice;
 import com.grab.hospital.vo.Review;
@@ -48,6 +49,25 @@ public class HospitalGetService {
 		
 		List<HospitalNotice> result = new HospitalGetDao().getNotice(no, conn);
 		
+		close(conn);
+		
+		return result;
+	}
+	
+	public int selectHospitalCount(String keyword) {
+		Connection conn = getConnection();
+		
+		int result = new HospitalGetDao().selectHospitalCount(keyword, conn);
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	public List<Hospital> selectHospitalList(String keyword, Hospital option) {
+		Connection conn = getConnection();
+		
+		List<Hospital> result = new HospitalGetDao().selectHospitalList(keyword, option, conn);
 		close(conn);
 		
 		return result;

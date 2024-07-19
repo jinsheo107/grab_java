@@ -2,7 +2,9 @@ package com.grab.hospital.vo;
 
 import java.time.LocalDateTime;
 
-public class Hospital {
+import com.grab.common.Paging20;
+
+public class Hospital extends Paging20{
 	private int hospital_no;
 	private String hospital_name;
 	private String hospital_phone;
@@ -16,7 +18,6 @@ public class Hospital {
 	
 	public Hospital() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 

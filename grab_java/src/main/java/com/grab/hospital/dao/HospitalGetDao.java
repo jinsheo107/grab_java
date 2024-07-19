@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.grab.hospital.vo.Department;
+import com.grab.hospital.vo.Hospital;
 import com.grab.hospital.vo.HospitalNotice;
 import com.grab.hospital.vo.HospitalPrice;
 import com.grab.hospital.vo.Review;
@@ -23,7 +24,7 @@ public class HospitalGetDao {
 		ResultSet rs = null;
 
 		try {
-			String departmetSql = "SELECT hospital_no, type_content FROM `hospital_department` hd JOIN `hospital_type` hy ON hd.type_no = hy.type_no WHERE hospital_no = ?";
+			String departmetSql = "SELECT h.hospital_no, h.hospital_name, ty.type_content FROM `hospital_department` de JOIN `hospital_type` ty ON de.type_no = ty.type_no JOIN `hospital` h ON h.hospital_no = de.hospital_no WHERE h.hospital_no = ?";
 
 			pstmt = conn.prepareStatement(departmetSql);
 			pstmt.setInt(1, no);
@@ -31,7 +32,7 @@ public class HospitalGetDao {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				Department resultVo = new Department(rs.getInt("hospital_no"), rs.getString("type_content"));
+				Department resultVo = new Department(rs.getInt("hospital_no"),rs.getString("hospital_name") ,rs.getString("type_content"));
 				result.add(resultVo);
 			}
 
@@ -135,6 +136,74 @@ public class HospitalGetDao {
 				
 				result.add(resultVo);
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int selectHospitalCount(String keyword, Connection conn) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT COUNT(*) cnt FROM `hospital`";
+			
+			if(keyword != "") {
+				sql = "SELECT COUNT(DISTINCT h.hospital_no) cnt FROM `hospital_department` de JOIN `hospital_type` ty ON de.type_no = ty.type_no JOIN `hospital` h ON h.hospital_no = de.hospital_no" 
+						+" WHERE h.hospital_name LIKE CONCAT('%', '"+ keyword +"', '%') OR ty.type_content LIKE CONCAT('%', '"+ keyword +"', '%')";
+			}
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt("cnt");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public List<Hospital> selectHospitalList(String keyword, Hospital option, Connection conn) {
+		List<Hospital> result = new ArrayList<Hospital>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT * FROM hospital";
+			if(keyword != null) {
+				sql = "SELECT h.*  FROM `hospital_department` de JOIN `hospital_type` ty ON de.type_no = ty.type_no JOIN `hospital` h ON h.hospital_no = de.hospital_no"
+						+ " WHERE h.hospital_name LIKE CONCAT('%', '" + keyword + "', '%') OR ty.type_content LIKE CONCAT('%', '" + keyword + "', '%') GROUP BY de.hospital_no";
+			}
+			
+			sql += " LIMIT " + option.getLimitPageNo() + ", " + option.getNumPerPage();
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Hospital resultVo = new Hospital(rs.getInt("hospital_no"), rs.getString("hospital_name"),
+						rs.getString("hospital_phone"), rs.getString("hospital_addr"), rs.getInt("hospital_doctor_num"),
+						rs.getString("hospital_homepage"), rs.getString("hospital_whether"),
+						rs.getInt("hospital_view"),rs.getTimestamp("hospital_login").toLocalDateTime());
+				
+				result.add(resultVo);
+			}
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

@@ -40,15 +40,19 @@ public class HospitalDetailServlet extends HttpServlet {
 			request.setAttribute("resultList", d);			
 			request.setAttribute("hospital", h);
 			
+			// 리뷰 리스트
 			List<Review> reviewList = new ReviewService().getReview(h.getHospital_no());
 			request.setAttribute("reviewList", reviewList);
 			
+			// 가격 리스트
 			List<HospitalPrice> priceList = new HospitalGetService().getPrice(h.getHospital_no());
 			request.setAttribute("priceList", priceList);
 			
+			// 리뷰의 총 키워드
 			Map<String, Integer> map = new HospitalGetService().getKeyword(reviewList);
 			request.setAttribute("keyword", map);
 			
+			// 병원공지 리스트
 			List<HospitalNotice> hospitalNoticeList = new HospitalGetService().getNotice(h.getHospital_no());
 			request.setAttribute("hospitalNotices", hospitalNoticeList);
 			
