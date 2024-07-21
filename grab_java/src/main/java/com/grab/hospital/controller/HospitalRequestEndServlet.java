@@ -3,41 +3,50 @@ package com.grab.hospital.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.grab.hospital.service.HospitalGetService;
 import com.grab.hospital.service.HospitalRequestService;
+import com.grab.hospital.vo.Hospital;
 
-@WebServlet(name="HospitalRequestEnd", urlPatterns = "/hospital/requestEnd")
+@WebServlet(name = "hospitalRequestEnd", urlPatterns = "/hospital/requestEnd")
 public class HospitalRequestEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 
-    public HospitalRequestEndServlet() {
-        super();
-    }
+	public HospitalRequestEndServlet() {
+		super();
+	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String memberNo_par = request.getParameter("member_no");
+		String hospitalNo_par = request.getParameter("hospital_no");
 		String requestSelected = request.getParameter("request__element");
 		String requestTextarea = request.getParameter("request__textarea");
 
-		int result = new HospitalRequestService().createRequest(requestSelected, requestTextarea);
-		
-		response.setContentType("text/html; charset=UTF-8");
-	    PrintWriter out = response.getWriter();
+		int member_no = Integer.parseInt(memberNo_par);
+		int hospital_no = Integer.parseInt(hospitalNo_par);
 
-	    if (result > 0) {
-	        out.println("<script>alert('요청사항을 제출하였습니다!'); location.href='" + request.getContextPath() + "/hospital/hospital_detail';</script>");
-	    } else {
-	        out.println("<script>alert('제출에 실패했습니다. 다시 시도해주세요.'); location.href='" + request.getContextPath() + "/hospital/hospital_detail';</script>");
-	    }
-	    out.close();
+		int result = new HospitalRequestService().createRequest(member_no, hospital_no, requestSelected, requestTextarea);
+
+		if (result > 0) {
+			request.setAttribute("alertMessage", "요청사항을 제출하였습니다!");
+		} else {
+			request.setAttribute("alertMessage", "제출에 실패했습니다. 다시 시도해주세요.");
+		}
+		request.setAttribute("hospital_no", hospital_no);
+
+		RequestDispatcher view = request.getRequestDispatcher("/hospital/hospital_detail");
+		view.forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

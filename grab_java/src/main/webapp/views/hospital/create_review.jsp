@@ -92,6 +92,7 @@
 </head>
 <body>
 	<%@ include file="../include/hospital_nav.jsp"%>
+	<% int hospital_no = (int)request.getAttribute("hospital_no");%>
 
 	<section class="feature-section about__spad"
 		style="background-color: white; margin-top: 50px;">
@@ -101,14 +102,12 @@
 					<div class="essentail__div">
 						<h3>리뷰작성</h3>
 						<!-- <hr> -->
-						<form action="/hospital/create_review_end" name="create_review"
-							method="post" enctype="multipart/form-data">
-							<input type="hidden" name="selectedKeywords"
-								id="selectedKeywords">
+						<form action="/hospital/create_review_end" name="create_review" method="post" enctype="multipart/form-data">
 							<div class="request__btn">
-								<input type="button" value="제출하기" class="searchBtn"
-									onclick="createReview();"> <input type="reset"
-									value="다시쓰기" class="searchBtn">
+								<input type="hidden" name="selectedKeywords" id="selectedKeywords">
+								<input type="hidden" name="hospital_no" value="<%= hospital_no%>">
+								<input type="button" value="제출하기" class="searchBtn" onclick="createReview();"> 
+								<input type="reset" value="다시쓰기" class="searchBtn">
 							</div>
 							<div class="request__element">
 								<div class="row">
@@ -199,6 +198,8 @@
 		            alert("별점을 입력하세요!");
 		        } else if (!reviewContent.value) {
 		            alert("리뷰 내용을 입력하세요!");
+		        } else if (reviewContent.value.length > 100) { 
+		        	alert("리뷰 내용은 300자 이하로 작성해야 합니다!");
 		        } else {
 		            if (form.review_file.value == "") {
 		                form.submit();

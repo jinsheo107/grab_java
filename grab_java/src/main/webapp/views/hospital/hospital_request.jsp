@@ -19,6 +19,8 @@
 </head>
 <body>
 	<%@ include file="../include/hospital_nav.jsp" %>
+	<% Member member = (Member)session.getAttribute("member"); %>
+	<% int hospital_no = (int)request.getAttribute("hospital_no"); %>
 	
 	<section class="feature-section about__spad" style="background-color: white; margin-top: 50px;">
     <div class="container">
@@ -27,8 +29,10 @@
           <div class="essentail__div">
             <h3>정보수정요청</h3>
             <!-- <hr> -->
-            <form action="/hospital/requestEnd" name="modify_hospital_essential_detail" method="post">
+            <form action="/hospital/requestEnd" name="modify_hospital_essential_detail" method="post" hi>
               <div class="request__btn">
+              	<input type="hidden" value="<%= member.getMember_no() %>" name="member_no">
+              	<input type="hidden" value="<%= hospital_no %>" name="hospital_no">
                 <input type="button" value="제출하기" class="searchBtn" onclick="requestHospitalForm();">
                 <input type="reset" value="다시쓰기" class="searchBtn">
               </div>
@@ -76,7 +80,7 @@
   <script src="../../resources/js/common/owl.carousel.min.js"></script>
   <script src="../../resources/js/common/main.js"></script>
   <script>
-  	function requestHospitalForm() {
+  	function requestHospitalForm(url) {
   		const form = document.modify_hospital_essential_detail;
   		
   		if(form.request__element.value == '0') {
@@ -88,6 +92,7 @@
   		} else {
   			form.submit();
   		}
+  		
   	}
   </script>
 </body>

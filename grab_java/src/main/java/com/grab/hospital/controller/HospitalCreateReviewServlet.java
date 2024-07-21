@@ -17,7 +17,13 @@ public class HospitalCreateReviewServlet extends HttpServlet {
         super();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		String hospital_no_par = request.getParameter("hospital_no");
+		
+		int hospital_no = Integer.parseInt(hospital_no_par);
+		
+		request.setAttribute("hospital_no", hospital_no);
+		
 		RequestDispatcher view = request.getRequestDispatcher("/views/hospital/create_review.jsp");
 		view.forward(request, response);
 	}

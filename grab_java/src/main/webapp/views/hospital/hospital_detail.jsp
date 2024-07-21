@@ -26,114 +26,126 @@
 	href="../../resources/css/common/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="../../resources/css/common/style.css"
 	type="text/css">
-	
-	<style>
-        .pagination {
-            display: inline-box;
-            list-style-type: none;
-            justify-content: center;
-        }
-        .pagination a {
-            margin: 0 5px;
-            text-decoration: none;
-            color: black;
-        }
-        .pagination a.active {
-            font-weight: bold;
-            color: red;
-        }
-    </style>
-	
-  <style>
-    .review__table {
-      padding: 20px 25px;
-      
-      display: flex;
-  		background: #ffffff;
-  		-webkit-box-shadow: 0px 0px 10px rgba(18, 8, 81, 0.15);
-  		box-shadow: 0px 0px 10px rgba(18, 8, 81, 0.15);
-  		padding: 10px;
-  		text-align: center;
-  		-webkit-transition: all 0.3s;
-  		-o-transition: all 0.3s;
-  		transition: all 0.3s;
-  		width: 100%;
-  		/* height: 80px; */
-  		align-items: center;
-  		justify-content: center;
-    }
-    
-    .review__table table {
-      width: 100%;
-      margin: 2px;
-      /* height: 2em; */
-      background-color: white;
-      border-radius: 20px;
-    }
 
-    .review__table th, .review__table td {
-      text-align: center;
-      justify-content: center;
-      /* background-color: white; */
-      padding: 10px 0px;
-    }
-    
-    .progress__table {
-      padding: 20px 25px;
-      
-      display: flex;
-  		background: white;
-  		-webkit-box-shadow: 0px 0px 10px rgba(18, 8, 81, 0.15);
-  		box-shadow: 0px 0px 10px rgba(18, 8, 81, 0.15);
-  		padding: 10px;
-  		text-align: center;
-  		-webkit-transition: all 0.3s;
-  		-o-transition: all 0.3s;
-  		transition: all 0.3s;
-  		width: 100%;
-  		align-items: center;
-  		justify-content: center;
-  		margin-bottom: 30px;
-    }
-    
-    .progress__table progress {
-      width: 100%;
-      margin: 2px;
-      background-color: white;
-      border-radius: 20px;
-    }
-    
-    .progress__table table {
-      width: 90%;
-      margin: 2px;
-      background-color: white;
-      border-radius: 20px;
-    }
+<style>
+.pagination {
+	display: inline-box;
+	list-style-type: none;
+	justify-content: center;
+}
 
-    .progress__table th, .progress__table td {
-      text-align: center;
-      justify-content: center;
-      /* background-color: white; */
-      padding: 10px 0px;
-    }
+.pagination a {
+	margin: 0 5px;
+	text-decoration: none;
+	color: black;
+}
 
-  </style>
+.pagination a.active {
+	font-weight: bold;
+	color: red;
+}
+</style>
+
+<style>
+.review__table {
+	padding: 20px 25px;
+	display: flex;
+	background: #ffffff;
+	-webkit-box-shadow: 0px 0px 10px rgba(18, 8, 81, 0.15);
+	box-shadow: 0px 0px 10px rgba(18, 8, 81, 0.15);
+	padding: 10px;
+	text-align: center;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+	width: 100%;
+	/* height: 80px; */
+	align-items: center;
+	justify-content: center;
+}
+
+.review__table table {
+	width: 100%;
+	margin: 2px;
+	/* height: 2em; */
+	background-color: white;
+	border-radius: 20px;
+}
+
+.review__table th, .review__table td {
+	text-align: center;
+	justify-content: center;
+	/* background-color: white; */
+	padding: 10px 0px;
+}
+
+.progress__table {
+	padding: 20px 25px;
+	display: flex;
+	background: white;
+	-webkit-box-shadow: 0px 0px 10px rgba(18, 8, 81, 0.15);
+	box-shadow: 0px 0px 10px rgba(18, 8, 81, 0.15);
+	padding: 10px;
+	text-align: center;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 30px;
+}
+
+.progress__table progress {
+	width: 100%;
+	margin: 2px;
+	background-color: white;
+	border-radius: 20px;
+}
+
+.progress__table table {
+	width: 90%;
+	margin: 2px;
+	background-color: white;
+	border-radius: 20px;
+}
+
+.progress__table th, .progress__table td {
+	text-align: center;
+	justify-content: center;
+	/* background-color: white; */
+	padding: 10px 0px;
+}
+</style>
 </head>
 <body>
 	<%@ include file="../include/hospital_nav.jsp"%>
 	<%@ page import="com.grab.hospital.vo.Hospital"%>
+
+	<%
+	Member member = (Member) session.getAttribute("member");
+	%>
+	<%
+	Map<String, Integer> map = (Map<String, Integer>) request.getAttribute("keyword");
+	%>
+	<%
+	Hospital hospital = (Hospital) request.getAttribute("hospital");
+	%>
+	<%
+	List<Department> list = (List<Department>) request.getAttribute("resultList");
+	%>
+	<%
+	List<Review> reviews = (List<Review>) request.getAttribute("reviewList");
+	%>
+
 	<section class="about-section about__spad">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-10">
 					<div class="about__wrapper">
-						<%
-						Hospital h = (Hospital) request.getAttribute("hospital");
-						%>
-						<h3><%=h.getHospital_name()%></h3>
+						<h3><%=hospital.getHospital_name()%></h3>
 						<%@ page import="com.grab.hospital.vo.Department, java.util.*"%>
 						<%
-						List<Department> list = (List<Department>) request.getAttribute("resultList");
 						for (int i = 0; i < list.size(); i++) {
 						%>
 						<div class="type__div"><%=list.get(i).getType_content()%></div>
@@ -143,24 +155,34 @@
 					</div>
 					<div class="row">
 						<div class="about__addr col-lg-8">
-						<%@ page import="com.grab.hospital.vo.Review" %>
-						<% 
-							List<Review> reviews = (List<Review>)request.getAttribute("reviewList");
+							<%@ page import="com.grab.hospital.vo.Review"%>
+							<%
 							double score = 0.0;
-							for(int i = 0; i < reviews.size(); i++) {
+							for (int i = 0; i < reviews.size(); i++) {
 								score += reviews.get(i).getReview_score();
 							}
-							
+
 							double avg = Math.round(score / reviews.size() * 10) / 10.0;
-						%>
-							<div><span style="color: #FBE114; font-size: 20px">★</span><%= avg %><span>&nbsp(<%= reviews.size() %>)</span></div>
-							<div><%=h.getHospital_addr()%></div>
+							%>
+							<div>
+								<span style="color: #FBE114; font-size: 20px">★</span><%=avg%><span>&nbsp(<%=reviews.size()%>)
+								</span>
+							</div>
+							<div><%=hospital.getHospital_addr()%></div>
 						</div>
-						
-						<!-- <div class="col-lg-4">
-							<a href="/hospital/hospital_request" class="request-btn"
-								style="position: relative; left: 180px;">정보 정정 요청</a>
-						</div> -->
+
+						<%
+						if (m != null && member.getMember_type() == 2) {
+						%>
+						<div class="col-lg-4">
+							<a
+								href="/hospital/hospital_request?hospital_no=<%=hospital.getHospital_no()%>"
+								class="request-btn" style="position: relative; left: 180px;">정보
+								정정 요청</a>
+						</div>
+						<%
+						}
+						%>
 					</div>
 				</div>
 			</div>
@@ -175,42 +197,46 @@
 				<div class="homeUrl-title notice__title col-lg-2">
 					<a href="#"><h3>공지사항</h3></a>
 				</div>
-			<div class="review__table">
-				<table class="col-lg-12" style="padding: 20px 180px">
-					<thead>
+				<div class="review__table">
+					<table class="col-lg-12" style="padding: 20px 180px">
+						<thead>
 						<colgroup>
 							<col width="10%">
 							<col width="50%">
 							<col width="20%">
 							<col width="20%">
 						</colgroup>
-						<% List<Review> selectedReviewList = (List<Review>)request.getAttribute("selectedReviewList"); %>
+						<%
+						List<Review> selectedReviewList = (List<Review>) request.getAttribute("selectedReviewList");
+						%>
 						<tr>
 							<th style="padding: 10px;"><h5>번호</h5></th>
 							<th style="padding: 10px"><h5>공지사항</h5></th>
 							<th style="padding: 10px"><h5>작성일</h5></th>
 							<th style="padding: 10px"><h5>조회수</h5></th>
 						</tr>
-					</thead>
-	 				<tbody> 					
-	 					<%@ page import="com.grab.hospital.vo.HospitalNotice" %>
-						<% 
-							List<HospitalNotice> hospitalNotices = (List<HospitalNotice>)request.getAttribute("hospitalNotices"); 
-							for(int i = hospitalNotices.size() - 1; i >= 0; i--) {
-						%>
-						<tr>
-							<td style="padding: 10px"><%= i + 1%></td>
-							<td style="padding: 10px"><%= hospitalNotices.get(i).getNotice_title()%></td>
-							<td style="padding: 10px"><%= hospitalNotices.get(i).getNotice_reg_date().getYear() %>-<%= hospitalNotices.get(i).getNotice_reg_date().getMonthValue() %>-<%= hospitalNotices.get(i).getNotice_reg_date().getDayOfMonth() %></td>
-							<td style="padding: 10px"><%= hospitalNotices.get(i).getNotice_view()%></td>
-						</tr>
-						<%}%>
-					</tbody>
-				</table>
+						</thead>
+						<tbody>
+							<%@ page import="com.grab.hospital.vo.HospitalNotice"%>
+							<%
+							List<HospitalNotice> hospitalNotices = (List<HospitalNotice>) request.getAttribute("hospitalNotices");
+							for (int i = hospitalNotices.size() - 1; i >= 0; i--) {
+							%>
+							<tr>
+								<td style="padding: 10px"><%=i + 1%></td>
+								<td style="padding: 10px"><%=hospitalNotices.get(i).getNotice_title()%></td>
+								<td style="padding: 10px"><%=hospitalNotices.get(i).getNotice_reg_date().getYear()%>-<%=hospitalNotices.get(i).getNotice_reg_date().getMonthValue()%>-<%=hospitalNotices.get(i).getNotice_reg_date().getDayOfMonth()%></td>
+								<td style="padding: 10px"><%=hospitalNotices.get(i).getNotice_view()%></td>
+							</tr>
+							<%
+							}
+							%>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
-	</div>
-</section>
+	</section>
 	<!-- Services Section End -->
 
 	<!-- Team Section Begin -->
@@ -239,33 +265,36 @@
 				</div>
 			</div>
 			<div style="display: flex; justify-content: center;">
-			<div class="detail__price" style="justify-content: center; text-align: center;">
-				<table class="col-lg-12">
-					<colgroup>
-						<col width="50%">
-						<col width="50%">
-					</colgroup>
-					<thead>
-						<tr>
-							<th style="padding: 10px"><h5>진료항목</h5></th>
-							<th style="padding: 10px"><h5>가격</h5></th>
-						</tr>
-					</thead>
-					<tbody>
-						<%@ page import="com.grab.hospital.vo.HospitalPrice" %>
-						<% 
-							List<HospitalPrice> hospitaPrices = (List<HospitalPrice>)request.getAttribute("priceList"); 
-							for(int i = 0; i < hospitaPrices.size(); i++) {
-						%>
-								<tr>
-									<td style="padding: 10px"><%=hospitaPrices.get(i).getType() %></td>
-									<td style="padding: 10px"><%=hospitaPrices.get(i).getPrice() %></td>
-								</tr>
-						<%}%>
-					</tbody>
-				</table>
-				
-			</div>
+				<div class="detail__price"
+					style="justify-content: center; text-align: center;">
+					<table class="col-lg-12">
+						<colgroup>
+							<col width="50%">
+							<col width="50%">
+						</colgroup>
+						<thead>
+							<tr>
+								<th style="padding: 10px"><h5>진료항목</h5></th>
+								<th style="padding: 10px"><h5>가격</h5></th>
+							</tr>
+						</thead>
+						<tbody>
+							<%@ page import="com.grab.hospital.vo.HospitalPrice"%>
+							<%
+							List<HospitalPrice> hospitaPrices = (List<HospitalPrice>) request.getAttribute("priceList");
+							for (int i = 0; i < hospitaPrices.size(); i++) {
+							%>
+							<tr>
+								<td style="padding: 10px"><%=hospitaPrices.get(i).getType()%></td>
+								<td style="padding: 10px"><%=hospitaPrices.get(i).getPrice()%></td>
+							</tr>
+							<%
+							}
+							%>
+						</tbody>
+					</table>
+
+				</div>
 			</div>
 		</div>
 	</section>
@@ -280,39 +309,42 @@
 					</div>
 					<div></div>
 					<div>
-						<div class="hompage_url__item" id="addr"> <%=h.getHospital_addr()%> </div>
-						<div class="hompage_url__item" id="map" style="padding: 158px 100px"></div>
+						<div class="hompage_url__item" id="addr">
+							<%=hospital.getHospital_addr()%>
+						</div>
+						<div class="hompage_url__item" id="map"
+							style="padding: 158px 100px"></div>
 					</div>
 				</div>
 				<div class="col-lg-6">
-          <div class="col">
-            <div class="homeUrl-title normal-title">
-              <h3>의사 수</h3>
-            </div>
-            <div class="hompage_url__item">
-              <p><%= h.getHospital_doctor_num() %></p>
-            </div>
-            <div class="homeUrl-title normal-title">
-              <h3>홈페이지</h3>
-            </div>
-            <div class="hompage_url__item">
-              <a href=<%= h.getHospital_homepage() %>><p><%= h.getHospital_homepage() %></p></a>
-            </div>
-            <div class="homeUrl-title normal-title">
-              <h3>전화번호</h3>
-            </div>
-            <div class="hompage_url__item">
-              <p><%= h.getHospital_phone() %></p>
-            </div>
-          </div>
-        </div>
+					<div class="col">
+						<div class="homeUrl-title normal-title">
+							<h3>의사 수</h3>
+						</div>
+						<div class="hompage_url__item">
+							<p><%=hospital.getHospital_doctor_num()%></p>
+						</div>
+						<div class="homeUrl-title normal-title">
+							<h3>홈페이지</h3>
+						</div>
+						<div class="hompage_url__item">
+							<a href=<%=hospital.getHospital_homepage()%>><p><%=hospital.getHospital_homepage()%></p></a>
+						</div>
+						<div class="homeUrl-title normal-title">
+							<h3>전화번호</h3>
+						</div>
+						<div class="hompage_url__item">
+							<p><%=hospital.getHospital_phone()%></p>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>
 
 	<!-- 리뷰 Begin -->
-	<% Map<String, Integer> map = (Map<String, Integer>) request.getAttribute("keyword"); %>
-	
+
+
 	<section class="team-section spad">
 		<div class="container">
 			<div class="row">
@@ -322,63 +354,132 @@
 					</div>
 				</div>
 			</div>
-				<a class="create__review" href="/hospital/create_review">리뷰작성</a>
+			<%
+			if (m != null && member.getMember_type() == 2) {
+			%>
+			<a class="create__review"
+				href="/hospital/create_review?hospital_no=<%=hospital.getHospital_no()%>">리뷰작성</a>
+			<%
+			}
+			%>
 			<div>
 				<div class="progress__table">
 					<table>
-					<colgroup>
-						<col width="10%">
-						<col width="90%">
-					</colgroup>
+						<colgroup>
+							<col width="10%">
+							<col width="90%">
+						</colgroup>
 						<tr>
 							<th style="width: 5em;">친절</th>
-							<td><progress value="<%= map.get("1")%>" max="<%= reviews.size() %>"></progress></td>
+							<td><progress
+									value="<%=map.get("1") == null ? 0 : map.get("1")%>"
+									max="<%=reviews.size()%>"></progress></td>
 						</tr>
-						<% %>
 						<tr>
 							<th>위생</th>
-							<td><progress value="<%= map.get("2")%>" max="<%= reviews.size() %>"></progress></td>
+							<td><progress
+									value="<%=map.get("2") == null ? 0 : map.get("2")%>"
+									max="<%=reviews.size()%>"></progress></td>
 						</tr>
 						<tr>
 							<th>시설</th>
-							<td><progress value="<%= map.get("3")%>" max="<%= reviews.size() %>"></progress></td>
+							<td><progress
+									value="<%=map.get("3") == null ? 0 : map.get("3")%>"
+									max="<%=reviews.size()%>"></progress></td>
 						</tr>
 						<tr>
 							<th>꼼꼼함</th>
-							<td><progress value="<%= map.get("4")%>" max="<%= reviews.size() %>"></progress></td>
+							<td><progress
+									value="<%=map.get("4") == null ? 0 : map.get("4")%>"
+									max="<%=reviews.size()%>"></progress></td>
 						</tr>
 						<tr>
 							<th>대기</th>
-							<td><progress value="<%= map.get("5")%>" max="<%= reviews.size() %>"></progress></td>
+							<td><progress
+									value="<%=map.get("5") == null ? 0 : map.get("5")%>"
+									max="<%=reviews.size()%>"></progress></td>
 						</tr>
 					</table>
 				</div>
 			</div>
-			<div>
-		</section>
-		
-		
-			<section class="team-section spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="homeUrl-title normal-title">
-                        <h3>리뷰</h3>
-                    </div>
-                </div>
-            </div>
-            <a class="create__review" href="/hospital/create_review">리뷰작성</a>
-            <div id="reviewContainer">
-                <!-- Ajax로 리뷰 데이터를 로드할 영역 -->
-            </div>
-            <div class="pagination" id="pagination">
-                <!-- Ajax로 페이징 버튼을 로드할 영역 -->
-            </div>
-        </div>
-    </section>
-	
-	
-	
+		</div>
+	</section>
+
+
+	<section class="team-section spad">
+		<div class="container">
+			<div id="reviewContainer">
+				<%
+				Review paging = (Review) request.getAttribute("paging");
+				%>
+
+				<%
+				// 페이지 번호 가져오기
+				int nowPage = 1;
+				if (request.getParameter("nowPage") != null) {
+					nowPage = Integer.parseInt(request.getParameter("nowPage"));
+				}
+				%>
+
+				<div id="content">
+					<!-- 데이터 출력 -->
+					<%
+					if (paging != null) {
+						for (Review r : selectedReviewList) {
+					%>
+					<tr>
+						<td style="padding: 10px"><%=r.getReview_score()%></td>
+						<td style="padding: 10px"><%=r.getReview_content()%></td>
+						<td style="padding: 10px"><%=r.getMember_no()%></td>
+						<td style="padding: 10px"><%=r.getReg_date().getYear()%>-<%=r.getReg_date().getMonthValue()%>-<%=r.getReg_date().getDayOfMonth()%></td>
+					</tr>
+					<%
+					}
+					}
+					%>
+				</div>
+
+				<div class="pagination" id="pagination">
+					<!-- 페이징 출력 -->
+					<%
+					if (paging != null) {
+					%>
+					<%
+					if (paging.isPrev()) {
+					%>
+					<a href="#" data-page="<%=(paging.getPageBarStart() - 1)%>"
+						style="z-index: 8;">&laquo;</a>
+					<%
+					}
+					%>
+					<%
+					for (int i = paging.getPageBarStart(); i <= paging.getPageBarEnd(); i++) {
+					%>
+					<a href="#" data-page="<%=i%>"
+						class="<%=paging.getNowPage() == i ? "active" : ""%>"><%=i%></a>
+					<%
+					}
+					%>
+					<%
+					if (paging.isNext()) {
+					%>
+					<a href="#" data-page="<%=(paging.getPageBarEnd() + 1)%>">&raquo;</a>
+					<%
+					}
+					%>
+					<%
+					}
+					%>
+				</div>
+			</div>
+			<div class="pagination" id="pagination">
+				<!-- Ajax로 페이징 버튼을 로드할 영역 -->
+			</div>
+		</div>
+	</section>
+
+
+
 
 	<%@ include file="../include/footer.jsp"%>
 
@@ -387,9 +488,11 @@
 	<script src="../../resources/js/common/jquery.slicknav.js"></script>
 	<script src="../../resources/js/common/owl.carousel.min.js"></script>
 	<script src="../../resources/js/common/main.js"></script>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4f36ed28a98f155fac9a64b707114d9c"></script>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services"></script>
-	
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4f36ed28a98f155fac9a64b707114d9c"></script>
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services"></script>
+
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = {
@@ -433,61 +536,84 @@
 	</script>
 
 	<script>
-        $(document).ready(function() {
-            loadReviews(1);
+		window.onload = function() {
+	        var alertMessage = "<%=(String) request.getAttribute("alertMessage")%>
+		"
 
-            function loadReviews(page) {
-                $.ajax({
-                    url: '/hospital/get_reviews',
-                    type: 'GET',
-                    data: { nowPage: page },
-                    success: function(data) {
-                        renderReviews(data.reviews);
-                        renderPagination(data.pagination);
-                    }
-                });
-            }
+			if (alertMessage != null && alertMessage != ""
+					&& alertMessage != "null") {
+				alert(alertMessage);
+			}
+		};
 
-            function renderReviews(reviews) {
-                var reviewHtml = '<div class="review__table"><table class="col-lg-12" style="padding: 20px 180px"><thead><colgroup><col width="10%"><col width="50%"><col width="20%"><col width="20%"></colgroup><tr><th style="padding: 10px;"><h5 style="text-decoration: underline #f8dd11 3px;">별점</h5></th><th style="padding: 10px"><h5 style="text-decoration: underline #f8dd11 3px;">리뷰</h5></th><th style="padding: 10px"><h5 style="text-decoration: underline #f8dd11 3px;">작성자</h5></th><th style="padding: 10px"><h5 style="text-decoration: underline #f8dd11 3px;">작성일</h5></th></tr></thead><tbody>';
+		$(document)
+				.ready(
+						function() {
+							loadReviews(1);
 
-                reviews.forEach(function(review) {
-                    reviewHtml += '<tr>';
-                    reviewHtml += '<td style="padding: 10px">' + review.review_score + '</td>';
-                    reviewHtml += '<td style="padding: 10px">' + review.review_content + '</td>';
-                    reviewHtml += '<td style="padding: 10px">' + review.member_no + '</td>';
-                    reviewHtml += '<td style="padding: 10px">' + review.reg_date + '</td>';
-                    reviewHtml += '</tr>';
-                });
+							function loadReviews(page) {
+								$.ajax({
+									url : '/hospital/get_reviews',
+									type : 'GET',
+									data : {
+										nowPage : page
+									},
+									success : function(data) {
+										renderReviews(data.reviews);
+										renderPagination(data.pagination);
+									}
+								});
+							}
 
-                reviewHtml += '</tbody></table></div>';
-                $('#reviewContainer').html(reviewHtml);
-            }
+							function renderReviews(reviews) {
+								var reviewHtml = '<div class="review__table"><table class="col-lg-12" style="padding: 20px 180px"><thead><colgroup><col width="10%"><col width="50%"><col width="20%"><col width="20%"></colgroup><tr><th style="padding: 10px;"><h5 style="text-decoration: underline #f8dd11 3px;">별점</h5></th><th style="padding: 10px"><h5 style="text-decoration: underline #f8dd11 3px;">리뷰</h5></th><th style="padding: 10px"><h5 style="text-decoration: underline #f8dd11 3px;">작성자</h5></th><th style="padding: 10px"><h5 style="text-decoration: underline #f8dd11 3px;">작성일</h5></th></tr></thead><tbody>';
 
-            function renderPagination(pagination) {
-                var paginationHtml = '';
+								reviews.forEach(function(review) {
+									reviewHtml += '<tr>';
+									reviewHtml += '<td style="padding: 10px">'
+											+ review.review_score + '</td>';
+									reviewHtml += '<td style="padding: 10px">'
+											+ review.review_content + '</td>';
+									reviewHtml += '<td style="padding: 10px">'
+											+ review.member_no + '</td>';
+									reviewHtml += '<td style="padding: 10px">'
+											+ review.reg_date + '</td>';
+									reviewHtml += '</tr>';
+								});
 
-                if (pagination.isPrev) {
-                    paginationHtml += '<a href="#" class="page-link" data-page="' + (pagination.pageBarStart - 1) + '">&laquo;</a>';
-                }
+								reviewHtml += '</tbody></table></div>';
+								$('#reviewContainer').html(reviewHtml);
+							}
 
-                for (var i = pagination.pageBarStart; i <= pagination.pageBarEnd; i++) {
-                    paginationHtml += '<a href="#" class="page-link" data-page="' + i + '">' + i + '</a>';
-                }
+							function renderPagination(pagination) {
+								var paginationHtml = '';
 
-                if (pagination.isNext) {
-                    paginationHtml += '<a href="#" class="page-link" data-page="' + (pagination.pageBarEnd + 1) + '">&raquo;</a>';
-                }
+								if (pagination.isPrev) {
+									paginationHtml += '<a href="#" class="page-link" data-page="'
+											+ (pagination.pageBarStart - 1)
+											+ '">&laquo;</a>';
+								}
 
-                $('#pagination').html(paginationHtml);
+								for (var i = pagination.pageBarStart; i <= pagination.pageBarEnd; i++) {
+									paginationHtml += '<a href="#" class="page-link" data-page="' + i + '">'
+											+ i + '</a>';
+								}
 
-                $('.page-link').click(function(e) {
-                    e.preventDefault();
-                    var page = $(this).data('page');
-                    loadReviews(page);
-                });
-            }
-        });
-    </script>
+								if (pagination.isNext) {
+									paginationHtml += '<a href="#" class="page-link" data-page="'
+											+ (pagination.pageBarEnd + 1)
+											+ '">&raquo;</a>';
+								}
+
+								$('#pagination').html(paginationHtml);
+
+								$('.page-link').click(function(e) {
+									e.preventDefault();
+									var page = $(this).data('page');
+									loadReviews(page);
+								});
+							}
+						});
+	</script>
 </body>
 </html>

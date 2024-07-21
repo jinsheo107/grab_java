@@ -14,7 +14,7 @@ import com.grab.hospital.service.HospitalDetailModifyService;
 import com.grab.hospital.vo.Hospital;
 import com.grab.hospital.vo.HospitalModifyRequest;
 
-@WebServlet("/hospital/hospital_detail_essentail_modify")
+@WebServlet(name="hospitalDetailModifyEnd", urlPatterns = "/hospital/hospital_detail_essentail_modify")
 public class HospitalDetailModifyEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

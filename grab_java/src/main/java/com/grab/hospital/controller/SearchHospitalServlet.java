@@ -31,7 +31,6 @@ public class SearchHospitalServlet extends HttpServlet {
 		
 		if(nowSearchPage != null) {
 			option.setNowPage(Integer.parseInt(nowSearchPage));
-			System.out.println(option.getNowPage());
 		}
 		
 		option.setTotalData(new HospitalGetService().selectHospitalCount(keyword));

@@ -15,11 +15,21 @@ import com.grab.hospital.vo.HospitalPrice;
 import com.grab.hospital.vo.Review;
 
 public class HospitalGetService {
+	
+	public Hospital getHospital(int hospital_no) {
+		Connection conn = getConnection();
+		
+		Hospital result = new HospitalGetDao().getHospital(hospital_no, conn);
+		close(conn);
+		
+		return result;
+		
+	}
 
-	public List<Department> getDepartment(int no) {
+	public List<Department> getDepartment(int hospital_no) {
 		Connection conn = getConnection();
 
-		List<Department> result = new HospitalGetDao().getDepartment(no, conn);
+		List<Department> result = new HospitalGetDao().getDepartment(hospital_no, conn);
 		close(conn);
 
 		return result;

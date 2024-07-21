@@ -22,61 +22,73 @@ import com.grab.hospital.vo.HospitalNotice;
 import com.grab.hospital.vo.HospitalPrice;
 import com.grab.hospital.vo.Review;
 
-@WebServlet("/hospital/hospital_detail")
+@WebServlet(name="hospitalDetail", urlPatterns = "/hospital/hospital_detail")
 public class HospitalDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public HospitalDetailServlet() {
-        super();
-    }
+	public HospitalDetailServlet() {
+		super();
+	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		
-		if(session != null) {
-			Hospital h = (Hospital)session.getAttribute("hospital");
-			
-			List<Department> d = new HospitalGetService().getDepartment(h.getHospital_no());
-			request.setAttribute("resultList", d);			
-			request.setAttribute("hospital", h);
-			
-			// 리뷰 리스트
-			List<Review> reviewList = new ReviewService().getReview(h.getHospital_no());
-			request.setAttribute("reviewList", reviewList);
-			
-			// 가격 리스트
-			List<HospitalPrice> priceList = new HospitalGetService().getPrice(h.getHospital_no());
-			request.setAttribute("priceList", priceList);
-			
-			// 리뷰의 총 키워드
-			Map<String, Integer> map = new HospitalGetService().getKeyword(reviewList);
-			request.setAttribute("keyword", map);
-			
-			// 병원공지 리스트
-			List<HospitalNotice> hospitalNoticeList = new HospitalGetService().getNotice(h.getHospital_no());
-			request.setAttribute("hospitalNotices", hospitalNoticeList);
-			
-			Review reveiwOption = new Review();
-			
-			String nowPage = request.getParameter("nowPage");
-			if(nowPage != null) {
-				reveiwOption.setNowPage(Integer.parseInt(nowPage));
-			}
-			
-			reveiwOption.setTotalData(reviewList.size());
-			
-			List<Review> selectedReviewList = new ReviewService().selectReviewList(reveiwOption);
-			
-			request.setAttribute("reviewPaging", reveiwOption);
-			request.setAttribute("selectedReviewList", selectedReviewList);
-			
+		String alertMessage = (String)request.getParameter("alertMessage");
+		request.setAttribute("alertMessage", alertMessage);
+		
+		String hospital_no_par = (String)request.getParameter("hospital_no");
+		
+		int hospital_no = Integer.parseInt(hospital_no_par);
+		
+		System.out.println("detail_hospital_no: " + hospital_no);
+		
+		
+		Hospital hospital = new HospitalGetService().getHospital(hospital_no);
+
+		
+		List<Department> department = new HospitalGetService().getDepartment(hospital_no);
+		request.setAttribute("resultList", department);
+		request.setAttribute("hospital", hospital);
+
+		// 리뷰 리스트
+		List<Review> reviewList = new ReviewService().getReview(hospital_no);
+		request.setAttribute("reviewList", reviewList);
+		
+		// 가격 리스트
+		List<HospitalPrice> priceList = new HospitalGetService().getPrice(hospital_no);
+		request.setAttribute("priceList", priceList);
+
+		// 리뷰의 총 키워드
+		if(!reviewList.isEmpty()) {
+			Map<String, Integer> reviewKeywordListMap = new HospitalGetService().getKeyword(reviewList);
+			request.setAttribute("keyword", reviewKeywordListMap);			
 		}
+
+		// 병원공지 리스트
+		List<HospitalNotice> hospitalNoticeList = new HospitalGetService().getNotice(hospital.getHospital_no());
+		request.setAttribute("hospitalNotices", hospitalNoticeList);
+
+		Review reveiwOption = new Review();
+
+		String nowPage = request.getParameter("nowPage");
+		if (nowPage != null) {
+			reveiwOption.setNowPage(Integer.parseInt(nowPage));
+		}
+
+		reveiwOption.setTotalData(reviewList.size());
+
 		
+		List<Review> selectedReviewList = new ReviewService().selectReviewList(reveiwOption);
+
+		request.setAttribute("reviewPaging", reveiwOption);
+		request.setAttribute("selectedReviewList", selectedReviewList);
+
 		RequestDispatcher view = request.getRequestDispatcher("/views/hospital/hospital_detail.jsp");
 		view.forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

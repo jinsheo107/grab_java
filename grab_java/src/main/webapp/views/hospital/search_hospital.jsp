@@ -68,7 +68,7 @@
 						<%@ page import="com.grab.hospital.vo.Review" %>
 						<%
 							List<Hospital> searchList = (List<Hospital>)request.getAttribute("searchList");
-							for(int i = 0 ; i < searchList.size(); i++){ %>
+							for(int i = 0 ; i < searchList.size(); i++) { %>
 						<% 
 							/* List<Review> reviews = (List<Review>)request.getAttribute("reviewList");
 							double score = 0.0;
@@ -78,7 +78,7 @@
 							
 							double avg = Math.round(score / reviews.size() * 10) / 10.0; */
 						%>
-								<tr>
+								<tr onclick="navigateTo('/hospital/hospital_detail?hospital_no=<%= searchList.get(i).getHospital_no() %>')">
 									<td><%=searchList.get(i).getHospital_name()%></td>
 									<td>5</td>
 									<%-- <td><%= avg%></td> --%>
@@ -87,7 +87,6 @@
 								</tr>
 						<%}%>
 					</tbody>
-					<%-- <a href="hospitalDetail.jsp?id=<%=hospital.getId()%>"> --%>
 					<tfoot>
 						<tr>
 							<td colspan="4">
@@ -132,6 +131,12 @@
 	<script src="../../resources/js/common/jquery.slicknav.js"></script>
 	<script src="../../resources/js/common/owl.carousel.min.js"></script>
 	<script src="../../resources/js/common/main.js"></script>
+	
+	<script type="text/javascript">
+		function navigateTo(url) {
+	        window.location.href = url;
+	    }	
+	</script>
 
 </body>
 </html>

@@ -32,8 +32,8 @@
 						<li><a href="#">마이페이지</a></li>
 						<%} else if(m.getMember_type() == 3) {%>
 						<li><a href="#">커뮤니티</a></li>
-						<li><a href="/hospital/hospital_detail">병원상세정보</a></li>
-						<li><a href="/hospital/hospital_detail_modify">병원정보수정</a></li>
+						<li><a href="/hospital/hospital_detail?hospital_no=<%= m.getMember_no() %>">병원상세정보</a></li>
+						<li><a href="/hospital/hospital_detail_modify?hospital_no=<%= m.getMember_no() %>">병원정보수정</a></li>
 						<li><a href="#">마이페이지</a></li>
 						<%} else {%>
 						<li><a href="#">커뮤니티</a></li>

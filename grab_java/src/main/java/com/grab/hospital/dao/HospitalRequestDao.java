@@ -7,19 +7,18 @@ import java.sql.ResultSet;
 import static com.grab.common.sql.JDBCTemplate.close;
 
 public class HospitalRequestDao {
-	public int createRequest(String re, String rt, Connection conn) {
+	public int createRequest(int member_no, int hospital_no, String re, String rt, Connection conn) {
 		int result = 0;
 		
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		
 		try {
-			String sql = "INSERT INTO `amendment_request` (hospital_no, member_no, request_element, request_content)"
+			String sql = "INSERT INTO `hospital_request` (hospital_no, member_no, request_element, request_content)"
 					+"VALUES (?,?,?,?)";
 			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, 1);
-			pstmt.setInt(2, 2);
+			pstmt.setInt(1, hospital_no);
+			pstmt.setInt(2, member_no);
 			pstmt.setString(3, re);
 			pstmt.setString(4, rt);
 			

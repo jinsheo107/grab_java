@@ -13,16 +13,24 @@ import javax.servlet.http.HttpServletResponse;
 public class HospitalRequestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public HospitalRequestServlet() {
-        super();
-    }
+	public HospitalRequestServlet() {
+		super();
+	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String hospital_no_par = request.getParameter("hospital_no");
+
+		int hospital_no = Integer.parseInt(hospital_no_par);
+
+		request.setAttribute("hospital_no", hospital_no);
+		
 		RequestDispatcher view = request.getRequestDispatcher("/views/hospital/hospital_request.jsp");
 		view.forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

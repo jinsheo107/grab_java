@@ -15,7 +15,7 @@ import java.util.List;
 import com.grab.hospital.vo.Review;
 
 public class ReviewDao {
-	public int[] createReview(int star, int[] arr, String content, String orName, String reName, Connection conn) {
+	public int[] createReview(int hospital_no, int member_no, int star, int[] arr, String content, String orName, String reName, Connection conn) {
 		int[] result = new int[arr.length];
 		
 		PreparedStatement pstmt = null;
@@ -28,8 +28,8 @@ public class ReviewDao {
 					+" org_img_name, new_img_name) VALUE (?,?,?,?,?,?)";
 			
 			pstmt = conn.prepareStatement(createReviewSql, Statement.RETURN_GENERATED_KEYS);
-			pstmt.setInt(1, 1);
-			pstmt.setInt(2, 3);
+			pstmt.setInt(1, hospital_no);
+			pstmt.setInt(2, member_no);
 			pstmt.setInt(3, star);
 			pstmt.setString(4, content);
 			pstmt.setString(5, orName);
@@ -109,8 +109,7 @@ public class ReviewDao {
 		ResultSet rs = null;
 		
 		try {
-			String sql = "SELECT * FROM `review` LIMIT " 
-					+ option.getLimitPageNo() + ", " + option.getNumPerPage();
+			String sql = "SELECT * FROM `review` LIMIT " + option.getLimitPageNo() + ", " + option.getNumPerPage();
 			
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();

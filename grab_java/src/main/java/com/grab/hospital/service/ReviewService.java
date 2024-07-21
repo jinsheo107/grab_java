@@ -10,11 +10,11 @@ import com.grab.hospital.dao.ReviewDao;
 import com.grab.hospital.vo.Review;
 
 public class ReviewService {
-	public int[] createReview(int star, int[] selectedArr, String content, String orName, String reName) {
+	public int[] createReview(int hospital_no, int member_no, int star, int[] selectedArr, String content, String orName, String reName) {
 		
 		Connection conn = getConnection();
 		
-		int[] result = new ReviewDao().createReview(star, selectedArr, content, orName, reName, conn);
+		int[] result = new ReviewDao().createReview(hospital_no, member_no, star, selectedArr, content, orName, reName, conn);
 		close(conn);
 		
 		return result;

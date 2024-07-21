@@ -17,7 +17,36 @@ import com.grab.hospital.vo.HospitalPrice;
 import com.grab.hospital.vo.Review;
 
 public class HospitalGetDao {
-	public List<Department> getDepartment(int no, Connection conn) {
+	public Hospital getHospital(int hospital_no, Connection conn) {
+		Hospital result = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			String sql = "SELECT * FROM `hospital` WHERE hospital_no = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, hospital_no);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = new Hospital(rs.getInt("hospital_no"), rs.getString("hospital_name"),
+						rs.getString("hospital_phone"), rs.getString("hospital_addr"), rs.getInt("hospital_doctor_num"),
+						rs.getString("hospital_homepage"), rs.getString("hospital_whether"),
+						rs.getInt("hospital_view"),rs.getTimestamp("hospital_login").toLocalDateTime());
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public List<Department> getDepartment(int hospital_no, Connection conn) {
 		List<Department> result = new ArrayList<Department>();
 
 		PreparedStatement pstmt = null;
@@ -27,13 +56,14 @@ public class HospitalGetDao {
 			String departmetSql = "SELECT h.hospital_no, h.hospital_name, ty.type_content FROM `hospital_department` de JOIN `hospital_type` ty ON de.type_no = ty.type_no JOIN `hospital` h ON h.hospital_no = de.hospital_no WHERE h.hospital_no = ?";
 
 			pstmt = conn.prepareStatement(departmetSql);
-			pstmt.setInt(1, no);
+			pstmt.setInt(1, hospital_no);
 
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				Department resultVo = new Department(rs.getInt("hospital_no"),rs.getString("hospital_name") ,rs.getString("type_content"));
 				result.add(resultVo);
+				
 			}
 
 		} catch (Exception e) {
@@ -46,7 +76,7 @@ public class HospitalGetDao {
 		return result;
 	}
 
-	public List<HospitalPrice> getPrice(int no, Connection conn) {
+	public List<HospitalPrice> getPrice(int hospital_no, Connection conn) {
 		List<HospitalPrice> result = new ArrayList<HospitalPrice>();
 
 		PreparedStatement pstmt = null;
@@ -56,7 +86,7 @@ public class HospitalGetDao {
 			String priceSql = "SELECT * FROM `hospital_price` WHERE `hospital_no` = ?";
 
 			pstmt = conn.prepareStatement(priceSql);
-			pstmt.setInt(1, no);
+			pstmt.setInt(1, hospital_no);
 
 			rs = pstmt.executeQuery();
 
@@ -83,7 +113,6 @@ public class HospitalGetDao {
 		ResultSet rs = null;
 
 		try {
-			// 리뷰 리스트에서 review_no만 추출하여 쉼표로 구분된 문자열 생성
 			StringBuilder reviewNos = new StringBuilder();
 			for (int i = 0; i < reviews.size(); i++) {
 				reviewNos.append(reviews.get(i).review_no);
@@ -91,9 +120,12 @@ public class HospitalGetDao {
 					reviewNos.append(",");
 				}
 			}
-
-			// SQL 쿼리 작성
-			String sql = "SELECT keyword_no, COUNT(*) cnt FROM `review_keyword_mapping` WHERE `review_no` IN (" + reviewNos.toString() + ") GROUP BY keyword_no";
+			
+			String sql = "SELECT keyword_no, 0 AS cnt FROM `review_keyword_mapping` WHERE 1=0";
+			
+			if(reviews.size() > 0) {
+				sql = "SELECT keyword_no, COUNT(*) cnt FROM `review_keyword_mapping` WHERE `review_no` IN (" + reviewNos.toString() + ") GROUP BY keyword_no";				
+			}
 
 			// PreparedStatement 생성 및 실행
 			pstmt = conn.prepareStatement(sql);
@@ -101,7 +133,7 @@ public class HospitalGetDao {
 
 			// 결과 처리
 			while (rs.next()) {
-				String keyword_no = "" + rs.getInt("keyword_no");
+				String keyword_no = Integer.toString(rs.getInt("keyword_no"));
 				int cnt = rs.getInt("cnt");
 				map.put(keyword_no, cnt);
 			}
@@ -115,7 +147,7 @@ public class HospitalGetDao {
 		return map;
 	}
 	
-	public List<HospitalNotice> getNotice(int no, Connection conn) {
+	public List<HospitalNotice> getNotice(int hospital_no, Connection conn) {
 		List<HospitalNotice> result = new ArrayList<>();
 		
 		PreparedStatement pstmt = null;
@@ -125,7 +157,7 @@ public class HospitalGetDao {
 			String sql = "SELECT * FROM `hospital_notice` WHERE hospital_no = ?";
 			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, no);
+			pstmt.setInt(1, hospital_no);
 			
 			rs = pstmt.executeQuery();
 			
