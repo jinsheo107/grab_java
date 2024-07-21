@@ -44,10 +44,51 @@
 	width: 120px;
 	margin: 5px;
 }
+
+.checkLabel {
+	font-size: 15px;
+	width: 5px;
+	/* padding: 14px 10px 12px; */
+	padding: 7px 0px;
+	color: #000000;
+	background-color: #ffffff;
+	font-weight: 700;
+	border-radius: 50px;
+	text-decoration: none;
+	float: right;
+	align-items: center;
+	cursor: pointer;
+	user-select: none;
+	border: 2px solid #ececec;
+	text-align: center;
+	flex: 1 1 calc(50% - 5px); /* 4개씩 한 줄에 배치, 간격 조절을 위해 10px 뺌 */
+    box-sizing: border-box;
+}
+
+.checkLabel input[type="checkbox"] {
+	display: none;
+}
+
+.checkedLabel {
+	background-color: #f8dd11;
+	color: 000000;
+	border: 2px solid #f8dd11;
+}
+
+.keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px; /* 간격 조절 */
+}
 </style>
 </head>
 <body>
 	<%@ include file="../include/hospital_nav.jsp"%>
+	<%@ page import="com.grab.hospital.vo.HospitalType, java.util.*"%>
+	<%@ page import="com.grab.hospital.vo.Hospital" %>
+	<% Hospital hospital = (Hospital)session.getAttribute("hospital"); %>
+	
+	<% List<HospitalType> hospitalTypeList = (List<HospitalType>)request.getAttribute("hospitalTypeList");%>
 
 	<section class="feature-section about__spad"
 		style="background-color: white; margin-top: 50px;">
@@ -57,33 +98,44 @@
 					<div class="select__div">
 						<h3>병원 정보 변경</h3>
 						<hr>
-						<form action="/hospital/hospital_detail_select_modify"
-							name="modify_hospital_select_detail" method="post">
+						<form action="/hospital/hospital_detail_select_modify" name="modify_hospital_select_detail" method="post">
 							<div class="essentail__btn">
-								<input type="button" value="수정하기" class="searchBtn"
-									onclick="selectModify();"> <input type="reset"
-									value="다시쓰기" class="searchBtn">
+								<input type="button" value="수정하기" class="searchBtn" onclick="selectModify();"> 
+								<input type="reset" value="다시쓰기" class="searchBtn">
 							</div>
 							<table class="select__table">
+							<colgroup>
+								<col width="20%">
+								<col width="70%">
+							</colgroup>
 								<tr>
 									<th>진료시간</th>
-									<td><input type="text" placeholder="" name="hospital_time"></td>
+									<td><input type="text" placeholder="<%=hospital.getHospital_time() %>" name="hospital_time"></td>
 								</tr>
 								<tr>
 									<th>점심시간</th>
-									<td><input type="text" placeholder="" name="hospital_lunch_time"></td>
+									<td><input type="text" placeholder="<%=hospital.getHospital_lunch_time() %>" name="hospital_lunch_time"></td>
 								</tr>
 								<tr>
 									<th>의사수</th>
-									<td><input type="text" placeholder="" name="doctor_num"></td>
+									<td><input type="text" placeholder="<%=hospital.getHospital_doctor_num() %>" name="doctor_num"></td>
 								</tr>
 								<tr>
 									<th>진료정보</th>
-									<td><input type="text" name="hospital_type"></td>
+									<td>
+										<div class="request__element" style="margin: 10px 0px; padding: 0px;">
+											<div class="keywords">
+												<% for(int i = 0; i < hospitalTypeList.size(); i++) {%>
+													<label class="checkLabel"><input type="checkbox" onclick="changeLabelColor(this)" value="<%=i+1 %>" name="type_no"><%= hospitalTypeList.get(i).getType_content() %></label>
+													
+												<%} %>
+											</div>
+										</div>	
+									</td>
 								</tr>
 								<tr>
 									<th>연락처</th>
-									<td><input type="text" name="hospital_phone"></td>
+									<td><input type="text" placeholder="<%=hospital.getHospital_phone() %>" name="hospital_phone"></td>
 								</tr>
 							</table>
 						</form>
@@ -97,16 +149,12 @@
 
 	<script>
 		// Function to enable/disable time inputs and set their value to null
-		function toggleInputs(checkbox, inputNames) {
-			inputNames.forEach(function (name) {
-				const input = document.getElementsByName(name)[0];
-				if (checkbox.checked) {
-					input.value = '';
-					input.disabled = true;
-				} else {
-					input.disabled = false;
-				}
-			});
+		function changeLabelColor(checkbox) {
+			if (checkbox.checked) {
+				checkbox.parentNode.classList.add('checkedLabel');
+			} else {
+				checkbox.parentNode.classList.remove('checkedLabel');
+			}
 		}
 	</script>
 
@@ -120,33 +168,24 @@
 	<script>
   	function selectModify() {
   		const form = document.modify_hospital_select_detail;
-  		if(!form.hospital_name.value) {
-  			alert("병원명을 입력하세요!");
-				form.hospital_name.focus();
-  		} else if (!form.doctor_num.value) {
-  			alert("의사수를 입력하세요!");
+  		if(!form.hospital_time.value) {
+  			alert("병원 진료시간을 입력하세요!");
+				form.hospital_time.focus();
+  		} else if (!form.hospital_lunch_time.value) {
+  			alert("병원 점심시간를 입력하세요!");
 				form.doctor_num.focus();
-  		} else if (!form.hospital_addr.value) {
-  			alert("주소를 입력하세요!");
-  			form.addrBtn.focus();
-  		} else if () { 
-  			alert("이미지를 추가해주세요!");
-  			form.addrBtn.focus();
+  		} else if (!form.doctor_num.value) {
+  			alert("병원 의사 수를 입력하세요!");
+  			form.doctor_num.focus();
   		} else {
-  			if (form.review_file.value == "") {
-                form.submit();
-            } else {
-                const val = form.review_file.value;
-                const idx = val.lastIndexOf('.');
-                const type = val.substring(idx + 1, val.length);
-
-                if (type == 'jpg' || type == 'jpeg' || type == 'png') {
-                    form.submit();
-                } else {
-                    alert("이미지 파일만 선택할 수 있습니다!");
-                    form.review_file.value = '';
-                }
-            }
+  			const selectedCheckboxes = form.querySelectorAll('input[type="checkbox"]:checked');
+  	        const selectedCount = selectedCheckboxes.length;
+  	        
+  	        if (selectedCount < 1 || selectedCount > 3) {
+  	            alert("체크박스를 1개 이상 3개 이하로 선택해주세요!");
+  	        } else {
+  	            form.submit();
+  	        }
   		}
   		
   	}

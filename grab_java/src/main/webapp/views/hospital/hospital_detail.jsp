@@ -269,7 +269,18 @@
 				</div>
 			</div>
 			<div class="row">
-				<!-- 진료시간 구현 필요 -->
+				<div class="review__table">
+				<table>
+					<tr>
+						<th>진료시간</th>
+						<th>점심시간</th>
+					</tr>
+					<tr>
+						<td><%=hospital.getHospital_time() %></td>
+						<td><%=hospital.getHospital_lunch_time()%></td>
+					</tr>
+				</table>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -339,6 +350,7 @@
 			%>
 			<div>
 				<div class="progress__table">
+					<% if (keywordMap != null && !keywordMap.isEmpty()) { System.out.println("check"); %>
 					<table>
 						<colgroup>
 							<col width="10%">
@@ -346,28 +358,61 @@
 						</colgroup>
 						<tr>
 							<th style="width: 5em;">친절</th>
-							<td><progress value="<%=keywordMap != null && keywordMap.get("1") == null ? 0 : keywordMap.get("1")%>" max="<%=reviews.size()%>"></progress></td>
+							<td><progress value="<%=keywordMap.get("1") == null ? 0 : keywordMap.get("1")%>" max="<%=reviews.size()%>"></progress></td>
 						</tr>
 						<tr>
 							<th>위생</th>
-							<td><progress value="<%=keywordMap != null && keywordMap.get("2") == null ? 0 : keywordMap.get("2")%>" max="<%=reviews.size()%>"></progress></td>
+							<td><progress value="<%=keywordMap.get("2") == null ? 0 : keywordMap.get("2")%>" max="<%=reviews.size()%>"></progress></td>
 						</tr>
 						<tr>
 							<th>시설</th>
-							<td><progress value="<%=keywordMap != null && keywordMap.get("3") == null ? 0 : keywordMap.get("3")%>" max="<%=reviews.size()%>"></progress></td>
+							<td><progress value="<%=keywordMap.get("3") == null ? 0 : keywordMap.get("3")%>" max="<%=reviews.size()%>"></progress></td>
 						</tr>
 						<tr>
 							<th>꼼꼼함</th>
-							<td><progress value="<%=keywordMap != null && keywordMap.get("4") == null ? 0 : keywordMap.get("4")%>" max="<%=reviews.size()%>"></progress></td>
+							<td><progress value="<%=keywordMap.get("4") == null ? 0 : keywordMap.get("4")%>" max="<%=reviews.size()%>"></progress></td>
 						</tr>
 						<tr>
 							<th>대기</th>
-							<td><progress value="<%=keywordMap != null && keywordMap.get("5") == null ? 0 : keywordMap.get("5")%>" max="<%=reviews.size()%>"></progress></td>
+							<td><progress value="<%=keywordMap.get("5") == null ? 0 : keywordMap.get("5")%>" max="<%=reviews.size()%>"></progress></td>
 						</tr>
 					</table>
+					<%} else {%>
+						<table>
+						<colgroup>
+							<col width="10%">
+							<col width="90%">
+						</colgroup>
+						<tr>
+							<th style="width: 5em;">친절</th>
+							<td><progress value="0%>" max="<0"></progress></td>
+						</tr>
+						<tr>
+							<th>위생</th>
+							<td><progress value="0%>" max="<0"></progress></td>
+						</tr>
+						<tr>
+							<th>시설</th>
+							<td><progress value="0%>" max="<0"></progress></td>
+						</tr>
+						<tr>
+							<th>꼼꼼함</th>
+							<td><progress value="0%>" max="<0"></progress></td>
+						</tr>
+						<tr>
+							<th>대기</th>
+							<td><progress value="0%>" max="<0"></progress></td>
+						</tr>
+					</table>
+						
+					<%} %>
 				</div>
 			</div>
-
+			
+			
+			<%if(member != null) {
+				if(!selectedReviewList.isEmpty()){
+			%>
 			<div id="reviewContainer">
 				<%
 				Review paging = (Review) request.getAttribute("reviewPaging");
@@ -383,15 +428,16 @@
 					<div id="content" class="review_a_table">
 						<table>
 							<!-- 데이터 출력 -->
-							<% if (paging != null) {
+							<% if (paging != null && selectedReviewList != null && !selectedReviewList.isEmpty() && reviewMemberList != null && !reviewMemberList.isEmpty()) {
 								for (int i = 0; i < selectedReviewList.size(); i++) { %>
 							<tr style="background-color: #f0f0f0;">
 								<td style="padding: 10px; width: 10%;">
 								<%=reviewMemberList.get(i).getMember_id()%>
-								<%if(selectedReviewList.get(i).get) %>
-								<div class="badge bg-success">리뷰인증</div>
+								<%if("Y".equals(selectedReviewList.get(i).getReview_check())) {%>
+									<div class="badge bg-success">리뷰인증</div>								
+								<%} %>
 								</td>
-								<td style="padding: 10px; color: #f8dd11; width: 20%; font-size: 14px;	">
+								<td style="padding: 10px; color: red; width: 20%; font-size: 14px;	">
 									<% for (int j = 0; j < selectedReviewList.get(i).getReview_score(); j++) { %>
 										★ 
 									<% } %> 
@@ -403,36 +449,68 @@
 								<td style="padding: 10px; width: 20%;"><%=selectedReviewList.get(i).getReg_date().getYear()%>-<%=selectedReviewList.get(i).getReg_date().getMonthValue()%>-<%=selectedReviewList.get(i).getReg_date().getDayOfMonth()%>
 									<%if(selectedReviewList.get(i).getMember_no() == member.getMember_no()) {%>
 										<div>
-											<a href="#"><svg xmlns="http://www.w3.org/2000/svg" style="width:12px;" viewBox="0 0 512 512"><path d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"/></svg></a>
+											<a href="/review/modify?review_no=<%=selectedReviewList.get(i).getReview_no()%>"><svg xmlns="http://www.w3.org/2000/svg" style="width:12px;" viewBox="0 0 512 512"><path d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"/></svg></a>
 											&nbsp;
-											<a href="#"><svg xmlns="http://www.w3.org/2000/svg" style="width:12px;" viewBox="0 0 448 512"><path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg></a>
+											<a href="/review/delete?review_no=<%=selectedReviewList.get(i).getReview_no()%>"><svg xmlns="http://www.w3.org/2000/svg" style="width:12px;" viewBox="0 0 448 512"><path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg></a>
 										</div>
 									<%} %>
 								</td>
 								
 							</tr>
-							<% } } %>
+							<% } %>
 							<tr>
 								<td colspan="4">
 									<div class="pagination" id="pagination">
 										<% if (paging != null) { %>
 											<% if (paging.isPrev()) { %>
-												<a href="#content" data-page="<%=(paging.getPageBarStart() - 1)%>" style="z-index: 8;">&laquo;</a>
+												<a href="/hospital/hospital_detail?hospital_no=<%=hospital.getHospital_no()%>&nowPage=<%=(paging.getPageBarStart()-1)%>#content">&laquo;</a>
 											<% } %>
 											<% for (int i = paging.getPageBarStart(); i <= paging.getPageBarEnd(); i++) { %>
-												<a href="#content" data-page="<%=i%>" class="<%=paging.getNowPage() == i ? "active" : ""%>"><%=i%></a>
+												<a href="/hospital/hospital_detail?hospital_no=<%=hospital.getHospital_no()%>&nowPage=<%=i%>#content"<%=paging.getNowPage() == i ? "class='active'" : " " %>><%=i %></a>
 											<% } %>
 											<% if (paging.isNext()) { %>
-												<a href="#content" data-page="<%=(paging.getPageBarEnd() + 1)%>">&raquo;</a>
+												<a href="/hospital/hospital_detail?hospital_no=<%=hospital.getHospital_no()%>&nowPage=<%=(paging.getPageBarEnd()+1)%>#content">&raquo;</a>
 											<% } %>
 										<% } %>
 									</div>
 								</td>
+							<%} else {%>
+								<div>
+									<div class="review_a_table">
+										<table>
+											<tr>
+												<td>
+													<div style="margin-bottom: 20px;">작성된 리뷰가 없습니다</div>
+												</td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							<%} %>
 							</tr>
 						</table>
 					</div>
 				</div>
 			</div>
+			
+			<%}} else {%>
+			<div>
+				<div id="content" class="progress__table">
+					<table>
+						<tr>
+							<td>
+								<div>로그인 시 확인 가능합니다!</div>							
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<a class="searchBtn" href="/member/login?hospital_no=<%=hospital.getHospital_no()%>">로그인</a>							
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<%} %>
 		</div>
 	</section>
 
@@ -497,6 +575,13 @@
 				alert(alertMessage);
 			}
 		};
+		
+		document.addEventListener("DOMContentLoaded", function() {
+	        var contentElement = document.getElementById("content");
+	        if (contentElement) {
+	            contentElement.scrollIntoView({ behavior: 'instant', block: 'start' });
+	        }
+	    });
 	</script>
 </body>
 </html>

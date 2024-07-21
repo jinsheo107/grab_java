@@ -16,7 +16,7 @@ public class Hospital extends Paging20{
 	private String hospital_new_registration;
 	private String hospital_org_registration;
 	private String hospital_time;
-	private String hospita_lunch_time;
+	private String hospital_lunch_time;
 	private String hospital_whether;
 	private int hospital_view;
 	private LocalDateTime hospital_login;
@@ -30,7 +30,7 @@ public class Hospital extends Paging20{
 	public Hospital(int hospital_no, String hospital_name, String hospital_phone, String hospital_addr,
 			int hospital_doctor_num, String hospital_homepage, String hospital_new_license, String hospital_org_license,
 			String hospital_new_registration, String hospital_org_registration, String hospital_time,
-			String hospita_lunch_time, String hospital_whether, int hospital_view, LocalDateTime hospital_login) {
+			String hospital_lunch_time, String hospital_whether, int hospital_view, LocalDateTime hospital_login) {
 		super();
 		this.hospital_no = hospital_no;
 		this.hospital_name = hospital_name;
@@ -43,7 +43,7 @@ public class Hospital extends Paging20{
 		this.hospital_new_registration = hospital_new_registration;
 		this.hospital_org_registration = hospital_org_registration;
 		this.hospital_time = hospital_time;
-		this.hospita_lunch_time = hospita_lunch_time;
+		this.hospital_lunch_time = hospital_lunch_time;
 		this.hospital_whether = hospital_whether;
 		this.hospital_view = hospital_view;
 		this.hospital_login = hospital_login;
@@ -155,18 +155,18 @@ public class Hospital extends Paging20{
 	}
 
 
-	public void setHospital_time(String hospital_time) {
-		this.hospital_time = hospital_time;
+	public void setHospital_time(String hospital_lunch_time) {
+		this.hospital_time = hospital_lunch_time;
 	}
 
 
-	public String getHospita_lunch_time() {
-		return hospita_lunch_time;
+	public String getHospital_lunch_time() {
+		return hospital_lunch_time;
 	}
 
 
-	public void setHospita_lunch_time(String hospita_lunch_time) {
-		this.hospita_lunch_time = hospita_lunch_time;
+	public void setHospital_lunch_time(String hospital_lunch_time) {
+		this.hospital_lunch_time = hospital_lunch_time;
 	}
 
 
@@ -207,7 +207,7 @@ public class Hospital extends Paging20{
 				+ ", hospital_homepage=" + hospital_homepage + ", hospital_new_license=" + hospital_new_license
 				+ ", hospital_org_license=" + hospital_org_license + ", hospital_new_registration="
 				+ hospital_new_registration + ", hospital_org_registration=" + hospital_org_registration
-				+ ", hospital_time=" + hospital_time + ", hospita_lunch_time=" + hospita_lunch_time
+				+ ", hospital_time=" + hospital_time + ", hospital_lunch_time=" + hospital_lunch_time
 				+ ", hospital_whether=" + hospital_whether + ", hospital_view=" + hospital_view + ", hospital_login="
 				+ hospital_login + "]";
 	}

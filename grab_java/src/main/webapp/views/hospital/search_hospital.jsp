@@ -6,6 +6,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+						<% 
+							/* List<Review> reviews = (List<Review>)request.getAttribute("reviewList");
+							double score = 0.0;
+							for(int j = 0; j < reviews.size(); j++) {
+								score += reviews.get(i).getReview_score();
+							}
+							
+							double avg = Math.round(score / reviews.size() * 10) / 10.0; */
+						%>
+
+
 <!-- Google Font -->
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
@@ -30,7 +41,11 @@
 </head>
 <body>
 	<%@ include file="../include/hospital_nav.jsp"%>
-
+	<% String keyword = (String)request.getAttribute("keyword") == null ? "": (String)request.getAttribute("keyword");  %>
+	<% Hospital searchPaging = (Hospital)request.getAttribute("searchPaging"); %>
+	<% List<Hospital> searchList = (List<Hospital>)request.getAttribute("searchList"); %>
+	
+	
 	<section class="register-domain spad">
 		<div class="container">
 			<div class="row d-flex justify-content-center">
@@ -66,18 +81,8 @@
 					<tbody>
 						<%@ page import="com.grab.hospital.vo.Hospital, java.util.*" %>
 						<%@ page import="com.grab.hospital.vo.Review" %>
-						<%
-							List<Hospital> searchList = (List<Hospital>)request.getAttribute("searchList");
-							for(int i = 0 ; i < searchList.size(); i++) { %>
-						<% 
-							/* List<Review> reviews = (List<Review>)request.getAttribute("reviewList");
-							double score = 0.0;
-							for(int j = 0; j < reviews.size(); j++) {
-								score += reviews.get(i).getReview_score();
-							}
-							
-							double avg = Math.round(score / reviews.size() * 10) / 10.0; */
-						%>
+						<% for(int i = 0 ; i < searchList.size(); i++) { 
+								if(searchList.get(i).getHospital_whether().equals("Y")) {%>
 								<tr onclick="navigateTo('/hospital/hospital_detail?hospital_no=<%= searchList.get(i).getHospital_no() %>')">
 									<td><%=searchList.get(i).getHospital_name()%></td>
 									<td>5</td>
@@ -85,38 +90,28 @@
 									<td><%=searchList.get(i).getHospital_addr()%></td>
 									<td><%=searchList.get(i).getHospital_view()%></td>
 								</tr>
-						<%}%>
+							<%} %>
+						<%} %>
+								
 					</tbody>
 					<tfoot>
-						<tr>
-							<td colspan="4">
-								<% Hospital searchPaging = (Hospital)request.getAttribute("searchPaging"); %>
-								<% if(searchPaging !=null){ %>
-									<div class="center">
-										<div class="pagination">
-											<!-- 이전 버튼이 활성화 되었을시 해당 코드 실행 -->
-											<% if(searchPaging.isPrev()){ %>
-												<!-- ?는 값도 같이 보내겠다는 의미이다. get만 가능 -->
-												<!-- nowPage의 값을 현재 페이지-1한 값(이전 페이지) 로 보내겠다는 뜻 -->
-												<a href="/hospital/search?nowSearchPage=<%=(searchPaging.getPageBarStart()-1)%>">&laquo;</a>
-											<%} %>
-											
-											<%
-												for(int i = searchPaging.getPageBarStart(); i <= searchPaging.getPageBarEnd(); i++){ %>
-													
-												<a href="/hospital/search?nowSearchPage=<%=i%>"<%=searchPaging.getNowPage() == i ? "class='active'" : "" %>>
-													<%=i %>
-												</a>
-											<%} %>
-											<!-- 다음 버튼이 활성화 되었을시 해당 코드 실행 -->
-											<%if(searchPaging.isNext()){ %>
-												<a href="/hospital/search?nowSearchPage=<%=(searchPaging.getPageBarEnd()+1)%>">&raquo;</a>
-											<%} %>
-										</div>
+							<tr>
+								<td colspan="4">
+									<div class="pagination" id="pagination">
+										<% if (searchPaging != null) { %>
+											<% if (searchPaging.isPrev()) { %>
+												<a href="/hospital/search?search_text=<%=keyword%>&nowPage=<%=(searchPaging.getPageBarStart()-1)%>#content">&laquo;</a>
+											<% } %>
+											<% for (int i = searchPaging.getPageBarStart(); i <= searchPaging.getPageBarEnd(); i++) { %>
+												<a href="/hospital/search?search_text=<%=keyword%>&nowPage=<%=i%>#content"<%=searchPaging.getNowPage() == i ? "class='active'" : " " %>><%=i %></a>
+											<% } %>
+											<% if (searchPaging.isNext()) { %>
+												<a href="/hospital/search?search_text=<%=keyword%>&nowPage=<%=(searchPaging.getPageBarEnd()+1)%>#content">&raquo;</a>
+											<% } %>
+										<% } %>
 									</div>
-								<%} %>
-							</td>
-						</tr>
+								</td>
+							</tr>
 					</tfoot>
 				</table>
 			</div>		

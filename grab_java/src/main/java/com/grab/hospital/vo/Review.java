@@ -8,7 +8,6 @@ public class Review extends Paging10 {
 	public int review_no;
 	public int hospital_no;
 	public int member_no;
-	public String member_id;
 	public int review_score;
 	public String review_content;
 	public String org_img_name;
@@ -23,14 +22,13 @@ public class Review extends Paging10 {
 	}
 
 
-	public Review(int review_no, int hospital_no, int member_no, String member_id, int review_score,
+	public Review(int review_no, int hospital_no, int member_no, int review_score,
 			String review_content, String org_img_name, String new_img_name, LocalDateTime reg_date,
 			LocalDateTime mod_date, String review_check) {
 		super();
 		this.review_no = review_no;
 		this.hospital_no = hospital_no;
 		this.member_no = member_no;
-		this.member_id = member_id;
 		this.review_score = review_score;
 		this.review_content = review_content;
 		this.org_img_name = org_img_name;
@@ -68,16 +66,6 @@ public class Review extends Paging10 {
 
 	public void setMember_no(int member_no) {
 		this.member_no = member_no;
-	}
-
-
-	public String getMember_id() {
-		return member_id;
-	}
-
-
-	public void setMember_id(String member_id) {
-		this.member_id = member_id;
 	}
 
 
@@ -153,11 +141,13 @@ public class Review extends Paging10 {
 
 	@Override
 	public String toString() {
-		return "Review [review_no=" + review_no + ", hospital_no=" + hospital_no + ", member_no=" + member_no
-				+ ", member_id=" + member_id + ", review_score=" + review_score + ", review_content=" + review_content
+		return "Review [review_no=" + review_no + ", hospital_no=" + hospital_no + ", member_no=" + member_no 
+				+ ", review_score=" + review_score + ", review_content=" + review_content
 				+ ", org_img_name=" + org_img_name + ", new_img_name=" + new_img_name + ", reg_date=" + reg_date
 				+ ", mod_date=" + mod_date + ", review_check=" + review_check + "]";
 	}
+
+	
 
 	
 	

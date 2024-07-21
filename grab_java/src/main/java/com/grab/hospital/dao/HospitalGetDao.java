@@ -13,6 +13,7 @@ import java.util.Map;
 import com.grab.hospital.vo.Department;
 import com.grab.hospital.vo.Hospital;
 import com.grab.hospital.vo.HospitalNotice;
+import com.grab.hospital.vo.HospitalType;
 import com.grab.hospital.vo.Review;
 import com.grab.member.vo.Member;
 
@@ -273,6 +274,32 @@ public class HospitalGetDao {
 			}
 			
 			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public List<HospitalType> getHospitalType(Connection conn) {
+		List<HospitalType> result = new ArrayList<HospitalType>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT * FROM hospital_type";
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				HospitalType resultVo = new HospitalType(rs.getInt("type_no"), rs.getString("type_content"));
+				result.add(resultVo);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

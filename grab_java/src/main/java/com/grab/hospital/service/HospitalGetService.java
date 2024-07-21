@@ -11,6 +11,7 @@ import com.grab.hospital.dao.HospitalGetDao;
 import com.grab.hospital.vo.Department;
 import com.grab.hospital.vo.Hospital;
 import com.grab.hospital.vo.HospitalNotice;
+import com.grab.hospital.vo.HospitalType;
 import com.grab.hospital.vo.Review;
 import com.grab.member.vo.Member;
 
@@ -88,6 +89,15 @@ public class HospitalGetService {
 		Connection conn = getConnection();
 		
 		List<Hospital> result = new HospitalGetDao().selectHospitalList(keyword, option, conn);
+		close(conn);
+		
+		return result;
+	}
+	
+	public List<HospitalType> getHospitalType() {
+		Connection conn = getConnection();
+		
+		List<HospitalType> result = new HospitalGetDao().getHospitalType(conn);
 		close(conn);
 		
 		return result;

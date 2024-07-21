@@ -86,8 +86,7 @@ public class ReviewDao {
 				Review r = new Review(rs.getInt("review_no"), rs.getInt("hospital_no"),
 						rs.getInt("member_no"), rs.getInt("review_score"), rs.getString("review_content"),
 						rs.getString("org_img_name"), rs.getString("new_img_name"),
-						rs.getTimestamp("reg_date").toLocalDateTime(), rs.getTimestamp("mod_date").toLocalDateTime()),
-						rsReview.getString("review_check");
+						rs.getTimestamp("reg_date").toLocalDateTime(), rs.getTimestamp("mod_date").toLocalDateTime(), rs.getString("review_check"));
 				
 				result.add(r);
 			}			
@@ -118,7 +117,7 @@ public class ReviewDao {
 				Review resultVo = new Review(rs.getInt("review_no"), rs.getInt("hospital_no"),
 						rs.getInt("member_no"), rs.getInt("review_score"), rs.getString("review_content"),
 						rs.getString("org_img_name"), rs.getString("new_img_name"),
-						rs.getTimestamp("reg_date").toLocalDateTime(), rs.getTimestamp("mod_date").toLocalDateTime());
+						rs.getTimestamp("reg_date").toLocalDateTime(), rs.getTimestamp("mod_date").toLocalDateTime(), rs.getString("review_check"));
 				
 				result.add(resultVo);
 			}
