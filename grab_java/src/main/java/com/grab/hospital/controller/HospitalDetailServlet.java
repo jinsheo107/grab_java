@@ -10,17 +10,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.json.simple.JSONObject;
 
 import com.grab.hospital.service.HospitalGetService;
 import com.grab.hospital.service.ReviewService;
 import com.grab.hospital.vo.Department;
 import com.grab.hospital.vo.Hospital;
 import com.grab.hospital.vo.HospitalNotice;
-import com.grab.hospital.vo.HospitalPrice;
 import com.grab.hospital.vo.Review;
+import com.grab.member.vo.Member;
 
 @WebServlet(name="hospitalDetail", urlPatterns = "/hospital/hospital_detail")
 public class HospitalDetailServlet extends HttpServlet {
@@ -38,14 +35,11 @@ public class HospitalDetailServlet extends HttpServlet {
 		
 		String hospital_no_par = (String)request.getParameter("hospital_no");
 		
-		int hospital_no = Integer.parseInt(hospital_no_par);
-		
-		System.out.println("detail_hospital_no: " + hospital_no);
-		
+		int hospital_no = Integer.parseInt(hospital_no_par);		
 		
 		Hospital hospital = new HospitalGetService().getHospital(hospital_no);
-
 		
+				
 		List<Department> department = new HospitalGetService().getDepartment(hospital_no);
 		request.setAttribute("resultList", department);
 		request.setAttribute("hospital", hospital);
@@ -53,11 +47,10 @@ public class HospitalDetailServlet extends HttpServlet {
 		// 리뷰 리스트
 		List<Review> reviewList = new ReviewService().getReview(hospital_no);
 		request.setAttribute("reviewList", reviewList);
-		
-		// 가격 리스트
-		List<HospitalPrice> priceList = new HospitalGetService().getPrice(hospital_no);
-		request.setAttribute("priceList", priceList);
 
+		List<Member> review_member_list = new HospitalGetService().getMemberList(reviewList);
+		request.setAttribute("reviewMemberList", review_member_list);
+		
 		// 리뷰의 총 키워드
 		if(!reviewList.isEmpty()) {
 			Map<String, Integer> reviewKeywordListMap = new HospitalGetService().getKeyword(reviewList);
@@ -77,7 +70,6 @@ public class HospitalDetailServlet extends HttpServlet {
 
 		reveiwOption.setTotalData(reviewList.size());
 
-		
 		List<Review> selectedReviewList = new ReviewService().selectReviewList(reveiwOption);
 
 		request.setAttribute("reviewPaging", reveiwOption);

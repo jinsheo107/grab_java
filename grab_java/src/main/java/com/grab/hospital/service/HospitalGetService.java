@@ -11,8 +11,8 @@ import com.grab.hospital.dao.HospitalGetDao;
 import com.grab.hospital.vo.Department;
 import com.grab.hospital.vo.Hospital;
 import com.grab.hospital.vo.HospitalNotice;
-import com.grab.hospital.vo.HospitalPrice;
 import com.grab.hospital.vo.Review;
+import com.grab.member.vo.Member;
 
 public class HospitalGetService {
 	
@@ -25,6 +25,24 @@ public class HospitalGetService {
 		return result;
 		
 	}
+	
+	public Member getMember(int member_no) {
+		Connection conn = getConnection();
+		
+		Member result = new HospitalGetDao().getMember(member_no, conn);
+		close(conn);
+		
+		return result;
+	}
+	
+	public List<Member> getMemberList(List<Review> reviewList) {
+		Connection conn = getConnection();
+		
+		List<Member> result = new HospitalGetDao().getMemberList(reviewList, conn);
+		close(conn);
+		
+		return result;
+	}
 
 	public List<Department> getDepartment(int hospital_no) {
 		Connection conn = getConnection();
@@ -35,14 +53,6 @@ public class HospitalGetService {
 		return result;
 	}
 	
-	public List<HospitalPrice> getPrice(int no) {
-		Connection conn = getConnection();
-		
-		List<HospitalPrice> result = new HospitalGetDao().getPrice(no, conn);
-		close(conn);
-		
-		return result;
-	}
 	
 	public Map<String, Integer> getKeyword(List<Review> reviews) {
 		Connection conn = getConnection();

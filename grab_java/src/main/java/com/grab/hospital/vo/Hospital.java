@@ -11,6 +11,12 @@ public class Hospital extends Paging20{
 	private String hospital_addr;
 	private int hospital_doctor_num;
 	private String hospital_homepage;
+	private String hospital_new_license;
+	private String hospital_org_license;
+	private String hospital_new_registration;
+	private String hospital_org_registration;
+	private String hospital_time;
+	private String hospita_lunch_time;
 	private String hospital_whether;
 	private int hospital_view;
 	private LocalDateTime hospital_login;
@@ -21,9 +27,10 @@ public class Hospital extends Paging20{
 	}
 
 
-	public Hospital(int hospital_no, String hospital_name,
-			String hospital_phone, String hospital_addr, int hospital_doctor_num,
-			String hospital_homepage, String hospital_whether, int hospital_view, LocalDateTime hospital_login) {
+	public Hospital(int hospital_no, String hospital_name, String hospital_phone, String hospital_addr,
+			int hospital_doctor_num, String hospital_homepage, String hospital_new_license, String hospital_org_license,
+			String hospital_new_registration, String hospital_org_registration, String hospital_time,
+			String hospita_lunch_time, String hospital_whether, int hospital_view, LocalDateTime hospital_login) {
 		super();
 		this.hospital_no = hospital_no;
 		this.hospital_name = hospital_name;
@@ -31,6 +38,12 @@ public class Hospital extends Paging20{
 		this.hospital_addr = hospital_addr;
 		this.hospital_doctor_num = hospital_doctor_num;
 		this.hospital_homepage = hospital_homepage;
+		this.hospital_new_license = hospital_new_license;
+		this.hospital_org_license = hospital_org_license;
+		this.hospital_new_registration = hospital_new_registration;
+		this.hospital_org_registration = hospital_org_registration;
+		this.hospital_time = hospital_time;
+		this.hospita_lunch_time = hospita_lunch_time;
 		this.hospital_whether = hospital_whether;
 		this.hospital_view = hospital_view;
 		this.hospital_login = hospital_login;
@@ -45,6 +58,7 @@ public class Hospital extends Paging20{
 	public void setHospital_no(int hospital_no) {
 		this.hospital_no = hospital_no;
 	}
+
 
 	public String getHospital_name() {
 		return hospital_name;
@@ -64,6 +78,7 @@ public class Hospital extends Paging20{
 	public void setHospital_phone(String hospital_phone) {
 		this.hospital_phone = hospital_phone;
 	}
+
 
 	public String getHospital_addr() {
 		return hospital_addr;
@@ -92,6 +107,66 @@ public class Hospital extends Paging20{
 
 	public void setHospital_homepage(String hospital_homepage) {
 		this.hospital_homepage = hospital_homepage;
+	}
+
+
+	public String getHospital_new_license() {
+		return hospital_new_license;
+	}
+
+
+	public void setHospital_new_license(String hospital_new_license) {
+		this.hospital_new_license = hospital_new_license;
+	}
+
+
+	public String getHospital_org_license() {
+		return hospital_org_license;
+	}
+
+
+	public void setHospital_org_license(String hospital_org_license) {
+		this.hospital_org_license = hospital_org_license;
+	}
+
+
+	public String getHospital_new_registration() {
+		return hospital_new_registration;
+	}
+
+
+	public void setHospital_new_registration(String hospital_new_registration) {
+		this.hospital_new_registration = hospital_new_registration;
+	}
+
+
+	public String getHospital_org_registration() {
+		return hospital_org_registration;
+	}
+
+
+	public void setHospital_org_registration(String hospital_org_registration) {
+		this.hospital_org_registration = hospital_org_registration;
+	}
+
+
+	public String getHospital_time() {
+		return hospital_time;
+	}
+
+
+	public void setHospital_time(String hospital_time) {
+		this.hospital_time = hospital_time;
+	}
+
+
+	public String getHospita_lunch_time() {
+		return hospita_lunch_time;
+	}
+
+
+	public void setHospita_lunch_time(String hospita_lunch_time) {
+		this.hospita_lunch_time = hospita_lunch_time;
 	}
 
 
@@ -127,13 +202,16 @@ public class Hospital extends Paging20{
 
 	@Override
 	public String toString() {
-		return "Hospital [hospital_no=" + hospital_no + ", hospital_registration="
-				+ ", hospital_license=" + ", hospital_name=" + hospital_name + ", hospital_phone="
-				+ hospital_phone + ", hospital_number=" + ", hospital_addr=" + hospital_addr
-				+ ", hospital_doctor_num=" + hospital_doctor_num + ", hospital_homepage=" + hospital_homepage
-				+ ", hospital_mapping=" + ", hospital_time=" + ", hospital_price="
-				+ ", hospital_whether=" + hospital_whether + ", hospital_view=" + hospital_view
-				+ ", hospital_login=" + hospital_login + "]";
+		return "Hospital [hospital_no=" + hospital_no + ", hospital_name=" + hospital_name + ", hospital_phone="
+				+ hospital_phone + ", hospital_addr=" + hospital_addr + ", hospital_doctor_num=" + hospital_doctor_num
+				+ ", hospital_homepage=" + hospital_homepage + ", hospital_new_license=" + hospital_new_license
+				+ ", hospital_org_license=" + hospital_org_license + ", hospital_new_registration="
+				+ hospital_new_registration + ", hospital_org_registration=" + hospital_org_registration
+				+ ", hospital_time=" + hospital_time + ", hospita_lunch_time=" + hospita_lunch_time
+				+ ", hospital_whether=" + hospital_whether + ", hospital_view=" + hospital_view + ", hospital_login="
+				+ hospital_login + "]";
 	}
 	
+	
+
 }

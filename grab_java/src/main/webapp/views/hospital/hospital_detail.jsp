@@ -6,9 +6,7 @@
 <meta charset="UTF-8">
 <title>병원상세페이지</title>
 <!-- Google Font -->
-<link
-	href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900&display=swap" rel="stylesheet">
 
 <!-- Css Styles -->
 <link rel="stylesheet" href="../../resources/css/common/폰트.css">
@@ -64,12 +62,38 @@
 	justify-content: center;
 }
 
+.review_a_table table {
+	display: inline-flex;
+	background: #ffffff;
+	-webkit-box-shadow: 0px 0px 10px rgba(18, 8, 81, 0.15);
+	box-shadow: 0px 0px 10px rgba(18, 8, 81, 0.15);
+	text-align: center;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+	width: 100%;
+	/* height: 80px; */
+	align-items: center;
+	justify-content: center;
+}
+
+.review_a_table tr {
+	border-radius: 20px;
+	display: flex;
+	margin: 10px;
+	justify-content: center;
+}
+
+.review_a_table tbody {
+	margin-top: 30px;
+	width: 80%;
+}
+
 .review__table table {
 	width: 100%;
 	margin: 2px;
 	/* height: 2em; */
 	background-color: white;
-	border-radius: 20px;
 }
 
 .review__table th, .review__table td {
@@ -120,23 +144,20 @@
 </head>
 <body>
 	<%@ include file="../include/hospital_nav.jsp"%>
+	
 	<%@ page import="com.grab.hospital.vo.Hospital"%>
-
-	<%
-	Member member = (Member) session.getAttribute("member");
-	%>
-	<%
-	Map<String, Integer> map = (Map<String, Integer>) request.getAttribute("keyword");
-	%>
-	<%
-	Hospital hospital = (Hospital) request.getAttribute("hospital");
-	%>
-	<%
-	List<Department> list = (List<Department>) request.getAttribute("resultList");
-	%>
-	<%
-	List<Review> reviews = (List<Review>) request.getAttribute("reviewList");
-	%>
+	<%@ page import="com.grab.hospital.vo.Review"%>
+	<%@ page import="com.grab.hospital.vo.HospitalNotice"%>
+	
+	
+	<% Member member = (Member) session.getAttribute("member"); %>
+	<% Hospital hospital = (Hospital) request.getAttribute("hospital"); %>
+	<% List<Department> list = (List<Department>) request.getAttribute("resultList"); %>
+	<% List<Review> reviews = (List<Review>) request.getAttribute("reviewList"); %>
+	<% List<Member> reviewMemberList = (List<Member>) request.getAttribute("reviewMemberList"); %>
+	<% List<HospitalNotice> hospitalNotices = (List<HospitalNotice>) request.getAttribute("hospitalNotices"); %>
+	<% Map<String, Integer> keywordMap = (Map<String, Integer>) request.getAttribute("keyword"); %>
+	<% List<Review> selectedReviewList = (List<Review>) request.getAttribute("selectedReviewList"); %>
 
 	<section class="about-section about__spad">
 		<div class="container">
@@ -155,7 +176,7 @@
 					</div>
 					<div class="row">
 						<div class="about__addr col-lg-8">
-							<%@ page import="com.grab.hospital.vo.Review"%>
+							
 							<%
 							double score = 0.0;
 							for (int i = 0; i < reviews.size(); i++) {
@@ -206,9 +227,7 @@
 							<col width="20%">
 							<col width="20%">
 						</colgroup>
-						<%
-						List<Review> selectedReviewList = (List<Review>) request.getAttribute("selectedReviewList");
-						%>
+						
 						<tr>
 							<th style="padding: 10px;"><h5>번호</h5></th>
 							<th style="padding: 10px"><h5>공지사항</h5></th>
@@ -217,9 +236,9 @@
 						</tr>
 						</thead>
 						<tbody>
-							<%@ page import="com.grab.hospital.vo.HospitalNotice"%>
+							
 							<%
-							List<HospitalNotice> hospitalNotices = (List<HospitalNotice>) request.getAttribute("hospitalNotices");
+							
 							for (int i = hospitalNotices.size() - 1; i >= 0; i--) {
 							%>
 							<tr>
@@ -249,55 +268,12 @@
 					</div>
 				</div>
 			</div>
-			<div class="row"></div>
+			<div class="row">
+				<!-- 진료시간 구현 필요 -->
+			</div>
 		</div>
 	</section>
 	<!-- Team Section End -->
-
-	<!-- 가격표 -->
-	<section class="team-section about__spad">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="homeUrl-title normal-title">
-						<h3>가격표</h3>
-					</div>
-				</div>
-			</div>
-			<div style="display: flex; justify-content: center;">
-				<div class="detail__price"
-					style="justify-content: center; text-align: center;">
-					<table class="col-lg-12">
-						<colgroup>
-							<col width="50%">
-							<col width="50%">
-						</colgroup>
-						<thead>
-							<tr>
-								<th style="padding: 10px"><h5>진료항목</h5></th>
-								<th style="padding: 10px"><h5>가격</h5></th>
-							</tr>
-						</thead>
-						<tbody>
-							<%@ page import="com.grab.hospital.vo.HospitalPrice"%>
-							<%
-							List<HospitalPrice> hospitaPrices = (List<HospitalPrice>) request.getAttribute("priceList");
-							for (int i = 0; i < hospitaPrices.size(); i++) {
-							%>
-							<tr>
-								<td style="padding: 10px"><%=hospitaPrices.get(i).getType()%></td>
-								<td style="padding: 10px"><%=hospitaPrices.get(i).getPrice()%></td>
-							</tr>
-							<%
-							}
-							%>
-						</tbody>
-					</table>
-
-				</div>
-			</div>
-		</div>
-	</section>
 
 	<!-- 주소 -->
 	<section class="team-section about__spad">
@@ -357,8 +333,7 @@
 			<%
 			if (m != null && member.getMember_type() == 2) {
 			%>
-			<a class="create__review"
-				href="/hospital/create_review?hospital_no=<%=hospital.getHospital_no()%>">리뷰작성</a>
+			<a class="create__review" href="/hospital/create_review?hospital_no=<%=hospital.getHospital_no()%>">리뷰작성</a>
 			<%
 			}
 			%>
@@ -371,115 +346,95 @@
 						</colgroup>
 						<tr>
 							<th style="width: 5em;">친절</th>
-							<td><progress
-									value="<%=map.get("1") == null ? 0 : map.get("1")%>"
-									max="<%=reviews.size()%>"></progress></td>
+							<td><progress value="<%=keywordMap != null && keywordMap.get("1") == null ? 0 : keywordMap.get("1")%>" max="<%=reviews.size()%>"></progress></td>
 						</tr>
 						<tr>
 							<th>위생</th>
-							<td><progress
-									value="<%=map.get("2") == null ? 0 : map.get("2")%>"
-									max="<%=reviews.size()%>"></progress></td>
+							<td><progress value="<%=keywordMap != null && keywordMap.get("2") == null ? 0 : keywordMap.get("2")%>" max="<%=reviews.size()%>"></progress></td>
 						</tr>
 						<tr>
 							<th>시설</th>
-							<td><progress
-									value="<%=map.get("3") == null ? 0 : map.get("3")%>"
-									max="<%=reviews.size()%>"></progress></td>
+							<td><progress value="<%=keywordMap != null && keywordMap.get("3") == null ? 0 : keywordMap.get("3")%>" max="<%=reviews.size()%>"></progress></td>
 						</tr>
 						<tr>
 							<th>꼼꼼함</th>
-							<td><progress
-									value="<%=map.get("4") == null ? 0 : map.get("4")%>"
-									max="<%=reviews.size()%>"></progress></td>
+							<td><progress value="<%=keywordMap != null && keywordMap.get("4") == null ? 0 : keywordMap.get("4")%>" max="<%=reviews.size()%>"></progress></td>
 						</tr>
 						<tr>
 							<th>대기</th>
-							<td><progress
-									value="<%=map.get("5") == null ? 0 : map.get("5")%>"
-									max="<%=reviews.size()%>"></progress></td>
+							<td><progress value="<%=keywordMap != null && keywordMap.get("5") == null ? 0 : keywordMap.get("5")%>" max="<%=reviews.size()%>"></progress></td>
 						</tr>
 					</table>
 				</div>
 			</div>
-		</div>
-	</section>
 
-
-	<section class="team-section spad">
-		<div class="container">
 			<div id="reviewContainer">
 				<%
-				Review paging = (Review) request.getAttribute("paging");
+				Review paging = (Review) request.getAttribute("reviewPaging");
 				%>
 
 				<%
-				// 페이지 번호 가져오기
 				int nowPage = 1;
 				if (request.getParameter("nowPage") != null) {
 					nowPage = Integer.parseInt(request.getParameter("nowPage"));
 				}
 				%>
-
-				<div id="content">
-					<!-- 데이터 출력 -->
-					<%
-					if (paging != null) {
-						for (Review r : selectedReviewList) {
-					%>
-					<tr>
-						<td style="padding: 10px"><%=r.getReview_score()%></td>
-						<td style="padding: 10px"><%=r.getReview_content()%></td>
-						<td style="padding: 10px"><%=r.getMember_no()%></td>
-						<td style="padding: 10px"><%=r.getReg_date().getYear()%>-<%=r.getReg_date().getMonthValue()%>-<%=r.getReg_date().getDayOfMonth()%></td>
-					</tr>
-					<%
-					}
-					}
-					%>
+				<div class="">
+					<div id="content" class="review_a_table">
+						<table>
+							<!-- 데이터 출력 -->
+							<% if (paging != null) {
+								for (int i = 0; i < selectedReviewList.size(); i++) { %>
+							<tr style="background-color: #f0f0f0;">
+								<td style="padding: 10px; width: 10%;">
+								<%=reviewMemberList.get(i).getMember_id()%>
+								<%if(selectedReviewList.get(i).get) %>
+								<div class="badge bg-success">리뷰인증</div>
+								</td>
+								<td style="padding: 10px; color: #f8dd11; width: 20%; font-size: 14px;	">
+									<% for (int j = 0; j < selectedReviewList.get(i).getReview_score(); j++) { %>
+										★ 
+									<% } %> 
+									<% for (int j = 0; j < 5 - selectedReviewList.get(i).getReview_score(); j++) { %>
+										☆ 
+									<% }%>
+								</td>
+								<td style="padding: 10px; width: 50%;"><%=selectedReviewList.get(i).getReview_content()%></td>
+								<td style="padding: 10px; width: 20%;"><%=selectedReviewList.get(i).getReg_date().getYear()%>-<%=selectedReviewList.get(i).getReg_date().getMonthValue()%>-<%=selectedReviewList.get(i).getReg_date().getDayOfMonth()%>
+									<%if(selectedReviewList.get(i).getMember_no() == member.getMember_no()) {%>
+										<div>
+											<a href="#"><svg xmlns="http://www.w3.org/2000/svg" style="width:12px;" viewBox="0 0 512 512"><path d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"/></svg></a>
+											&nbsp;
+											<a href="#"><svg xmlns="http://www.w3.org/2000/svg" style="width:12px;" viewBox="0 0 448 512"><path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg></a>
+										</div>
+									<%} %>
+								</td>
+								
+							</tr>
+							<% } } %>
+							<tr>
+								<td colspan="4">
+									<div class="pagination" id="pagination">
+										<% if (paging != null) { %>
+											<% if (paging.isPrev()) { %>
+												<a href="#content" data-page="<%=(paging.getPageBarStart() - 1)%>" style="z-index: 8;">&laquo;</a>
+											<% } %>
+											<% for (int i = paging.getPageBarStart(); i <= paging.getPageBarEnd(); i++) { %>
+												<a href="#content" data-page="<%=i%>" class="<%=paging.getNowPage() == i ? "active" : ""%>"><%=i%></a>
+											<% } %>
+											<% if (paging.isNext()) { %>
+												<a href="#content" data-page="<%=(paging.getPageBarEnd() + 1)%>">&raquo;</a>
+											<% } %>
+										<% } %>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
 				</div>
-
-				<div class="pagination" id="pagination">
-					<!-- 페이징 출력 -->
-					<%
-					if (paging != null) {
-					%>
-					<%
-					if (paging.isPrev()) {
-					%>
-					<a href="#" data-page="<%=(paging.getPageBarStart() - 1)%>"
-						style="z-index: 8;">&laquo;</a>
-					<%
-					}
-					%>
-					<%
-					for (int i = paging.getPageBarStart(); i <= paging.getPageBarEnd(); i++) {
-					%>
-					<a href="#" data-page="<%=i%>"
-						class="<%=paging.getNowPage() == i ? "active" : ""%>"><%=i%></a>
-					<%
-					}
-					%>
-					<%
-					if (paging.isNext()) {
-					%>
-					<a href="#" data-page="<%=(paging.getPageBarEnd() + 1)%>">&raquo;</a>
-					<%
-					}
-					%>
-					<%
-					}
-					%>
-				</div>
-			</div>
-			<div class="pagination" id="pagination">
-				<!-- Ajax로 페이징 버튼을 로드할 영역 -->
 			</div>
 		</div>
 	</section>
-
-
-
 
 	<%@ include file="../include/footer.jsp"%>
 
@@ -538,82 +493,10 @@
 	<script>
 		window.onload = function() {
 	        var alertMessage = "<%=(String) request.getAttribute("alertMessage")%>
-		"
-
-			if (alertMessage != null && alertMessage != ""
-					&& alertMessage != "null") {
+			if (alertMessage != null && alertMessage != "" && alertMessage != "null") {
 				alert(alertMessage);
 			}
 		};
-
-		$(document)
-				.ready(
-						function() {
-							loadReviews(1);
-
-							function loadReviews(page) {
-								$.ajax({
-									url : '/hospital/get_reviews',
-									type : 'GET',
-									data : {
-										nowPage : page
-									},
-									success : function(data) {
-										renderReviews(data.reviews);
-										renderPagination(data.pagination);
-									}
-								});
-							}
-
-							function renderReviews(reviews) {
-								var reviewHtml = '<div class="review__table"><table class="col-lg-12" style="padding: 20px 180px"><thead><colgroup><col width="10%"><col width="50%"><col width="20%"><col width="20%"></colgroup><tr><th style="padding: 10px;"><h5 style="text-decoration: underline #f8dd11 3px;">별점</h5></th><th style="padding: 10px"><h5 style="text-decoration: underline #f8dd11 3px;">리뷰</h5></th><th style="padding: 10px"><h5 style="text-decoration: underline #f8dd11 3px;">작성자</h5></th><th style="padding: 10px"><h5 style="text-decoration: underline #f8dd11 3px;">작성일</h5></th></tr></thead><tbody>';
-
-								reviews.forEach(function(review) {
-									reviewHtml += '<tr>';
-									reviewHtml += '<td style="padding: 10px">'
-											+ review.review_score + '</td>';
-									reviewHtml += '<td style="padding: 10px">'
-											+ review.review_content + '</td>';
-									reviewHtml += '<td style="padding: 10px">'
-											+ review.member_no + '</td>';
-									reviewHtml += '<td style="padding: 10px">'
-											+ review.reg_date + '</td>';
-									reviewHtml += '</tr>';
-								});
-
-								reviewHtml += '</tbody></table></div>';
-								$('#reviewContainer').html(reviewHtml);
-							}
-
-							function renderPagination(pagination) {
-								var paginationHtml = '';
-
-								if (pagination.isPrev) {
-									paginationHtml += '<a href="#" class="page-link" data-page="'
-											+ (pagination.pageBarStart - 1)
-											+ '">&laquo;</a>';
-								}
-
-								for (var i = pagination.pageBarStart; i <= pagination.pageBarEnd; i++) {
-									paginationHtml += '<a href="#" class="page-link" data-page="' + i + '">'
-											+ i + '</a>';
-								}
-
-								if (pagination.isNext) {
-									paginationHtml += '<a href="#" class="page-link" data-page="'
-											+ (pagination.pageBarEnd + 1)
-											+ '">&raquo;</a>';
-								}
-
-								$('#pagination').html(paginationHtml);
-
-								$('.page-link').click(function(e) {
-									e.preventDefault();
-									var page = $(this).data('page');
-									loadReviews(page);
-								});
-							}
-						});
 	</script>
 </body>
 </html>

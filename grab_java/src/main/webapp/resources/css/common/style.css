@@ -1531,10 +1531,19 @@ input[type='file'] {
   padding: 20px 0px;
 }
 
-.review__table progress {
-  width: 35em;
-  margin: 2px;
+/* .review__table {
+  display: inline-table;
+  justify-content: center;
+  background-color: #f5f5f5;
+  border-radius: 20px;
+  padding: 20px 0px;
 }
+
+.review__table table {
+  width: 100%;
+  margin: 2px;
+  background-color: blue;
+} */
 
 .about__table td {
   display: flex;

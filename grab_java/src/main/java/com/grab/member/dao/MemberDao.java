@@ -55,13 +55,13 @@ public class MemberDao {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				result = new Hospital(
-						rs.getInt("hospital_no"), rs.getString("hospital_name"),
-						rs.getString("hospital_phone"), 
-						rs.getString("hospital_addr"), rs.getInt("hospital_doctor_num"), 
-						rs.getString("hospital_homepage"), rs.getString("hospital_whether"), 
-						rs.getInt("hospital_view"), rs.getTimestamp("hospital_login").toLocalDateTime()
-						);
+				result = new Hospital(rs.getInt("hospital_no"), rs.getString("hospital_name"),
+						rs.getString("hospital_phone"), rs.getString("hospital_addr"), rs.getInt("hospital_doctor_num"),
+						rs.getString("hospital_homepage"), rs.getString("hospital_new_license"),
+						rs.getString("hospital_org_license"), rs.getString("hospital_new_registration"), 
+						rs.getString("hospital_org_registration") , rs.getString("hospital_time") , 
+						rs.getString("hospital_lunch_time"),rs.getString("hospital_whether"),
+						rs.getInt("hospital_view"),rs.getTimestamp("hospital_login").toLocalDateTime());
 			}
 			
 			String departmetSql = "SELECT * FROM `hospital_department` WHERE `hospital_no` = ?";

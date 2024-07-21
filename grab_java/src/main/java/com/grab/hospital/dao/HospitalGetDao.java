@@ -13,8 +13,8 @@ import java.util.Map;
 import com.grab.hospital.vo.Department;
 import com.grab.hospital.vo.Hospital;
 import com.grab.hospital.vo.HospitalNotice;
-import com.grab.hospital.vo.HospitalPrice;
 import com.grab.hospital.vo.Review;
+import com.grab.member.vo.Member;
 
 public class HospitalGetDao {
 	public Hospital getHospital(int hospital_no, Connection conn) {
@@ -32,7 +32,10 @@ public class HospitalGetDao {
 			if(rs.next()) {
 				result = new Hospital(rs.getInt("hospital_no"), rs.getString("hospital_name"),
 						rs.getString("hospital_phone"), rs.getString("hospital_addr"), rs.getInt("hospital_doctor_num"),
-						rs.getString("hospital_homepage"), rs.getString("hospital_whether"),
+						rs.getString("hospital_homepage"), rs.getString("hospital_new_license"),
+						rs.getString("hospital_org_license"), rs.getString("hospital_new_registration"), 
+						rs.getString("hospital_org_registration") , rs.getString("hospital_time") , 
+						rs.getString("hospital_lunch_time"),rs.getString("hospital_whether"),
 						rs.getInt("hospital_view"),rs.getTimestamp("hospital_login").toLocalDateTime());
 				
 			}
@@ -41,6 +44,67 @@ public class HospitalGetDao {
 		} finally {
 			close(rs);
 			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public List<Member> getMemberList(List<Review> reviewList, Connection conn) {
+		List<Member> result= new ArrayList<Member>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+            String sql = "SELECT * FROM member WHERE member_no = ?";
+            pstmt = conn.prepareStatement(sql);
+
+            for (Review review : reviewList) {
+                pstmt.setInt(1, review.getMember_no());
+                rs = pstmt.executeQuery();
+
+                if (rs.next()) {
+                    Member member = new Member(
+                        rs.getInt("member_no"),
+                        rs.getString("member_id"),
+                        rs.getString("member_pw"),
+                        rs.getString("member_email"),
+                        rs.getInt("member_type")
+                    );
+                    result.add(member);
+                }
+            }
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return result;
+	}
+	
+	public Member getMember(int member_no, Connection conn) {
+		Member result = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			String sql = "SELECT * FROM member WHERE member_no = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, member_no);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = new Member(rs.getInt("member_no"),
+						rs.getString("member_id"), rs.getString("member_pw"),
+						rs.getString("member_email"), rs.getInt("member_type"));
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
 		}
 		
 		return result;
@@ -66,36 +130,6 @@ public class HospitalGetDao {
 				
 			}
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-
-		return result;
-	}
-
-	public List<HospitalPrice> getPrice(int hospital_no, Connection conn) {
-		List<HospitalPrice> result = new ArrayList<HospitalPrice>();
-
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-			String priceSql = "SELECT * FROM `hospital_price` WHERE `hospital_no` = ?";
-
-			pstmt = conn.prepareStatement(priceSql);
-			pstmt.setInt(1, hospital_no);
-
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				HospitalPrice resultVo = new HospitalPrice(rs.getInt("price_no"), rs.getInt("hospital_no"),
-						rs.getString("type"), rs.getInt("price"));
-
-				result.add(resultVo);
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -229,7 +263,10 @@ public class HospitalGetDao {
 			while(rs.next()) {
 				Hospital resultVo = new Hospital(rs.getInt("hospital_no"), rs.getString("hospital_name"),
 						rs.getString("hospital_phone"), rs.getString("hospital_addr"), rs.getInt("hospital_doctor_num"),
-						rs.getString("hospital_homepage"), rs.getString("hospital_whether"),
+						rs.getString("hospital_homepage"), rs.getString("hospital_new_license"),
+						rs.getString("hospital_org_license"), rs.getString("hospital_new_registration"), 
+						rs.getString("hospital_org_registration") , rs.getString("hospital_time") , 
+						rs.getString("hospital_lunch_time"),rs.getString("hospital_whether"),
 						rs.getInt("hospital_view"),rs.getTimestamp("hospital_login").toLocalDateTime());
 				
 				result.add(resultVo);
