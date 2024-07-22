@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.grab.hospital.service.HospitalGetService;
+import com.grab.hospital.service.ReviewService;
 import com.grab.hospital.vo.Department;
 import com.grab.hospital.vo.Hospital;
+import com.grab.hospital.vo.Review;
 
 @WebServlet("/hospital/search")
 public class SearchHospitalServlet extends HttpServlet {
@@ -37,6 +39,24 @@ public class SearchHospitalServlet extends HttpServlet {
 		
 		List<Hospital> list = new HospitalGetService().selectHospitalList(keyword, option);
 		
+		
+		List<Review> reviewList;
+		List<Department> departmentList = null;
+		double avg = 0.0;
+		for (Hospital hospital : list) {
+	        reviewList = new ReviewService().getReviewList(hospital.getHospital_no());
+	        double score = 0.0;
+	        for (Review review : reviewList) {
+	            score += review.getReview_score();
+	        }
+	        avg = reviewList.isEmpty() ? 0.0 : Math.round(score / reviewList.size() * 10) / 10.0;
+	        
+	        departmentList = new HospitalGetService().getDepartment(hospital.getHospital_no());
+	        
+	    }
+		
+		request.setAttribute("departmentList", departmentList);
+		request.setAttribute("starAvg", avg);
 		request.setAttribute("searchPaging", option);
 		request.setAttribute("searchKeyword", keyword);
 		request.setAttribute("searchList", list);

@@ -140,7 +140,7 @@ public class HospitalGetDao {
 
 		return result;
 	}
-
+	
 	public Map<String, Integer> getKeyword(List<Review> reviews, Connection conn) {
 		Map<String, Integer> map = new HashMap<>();
 		
@@ -310,4 +310,5 @@ public class HospitalGetDao {
 		
 		return result;
 	}
+	
 }

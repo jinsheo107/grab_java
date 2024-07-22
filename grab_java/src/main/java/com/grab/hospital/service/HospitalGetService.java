@@ -4,10 +4,12 @@ import static com.grab.common.sql.JDBCTemplate.close;
 import static com.grab.common.sql.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.grab.hospital.dao.HospitalGetDao;
+import com.grab.hospital.dao.ReviewDao;
 import com.grab.hospital.vo.Department;
 import com.grab.hospital.vo.Hospital;
 import com.grab.hospital.vo.HospitalNotice;
@@ -98,6 +100,22 @@ public class HospitalGetService {
 		Connection conn = getConnection();
 		
 		List<HospitalType> result = new HospitalGetDao().getHospitalType(conn);
+		close(conn);
+		
+		return result;
+	}
+	
+	public Map<String, Object> getStarType(int hospital_no) {
+		Connection conn = getConnection();
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		List<Department> departmentResult = new HospitalGetDao().getDepartment(hospital_no, conn);
+		List<Review> reviewResult = new ReviewDao().getReviewList(hospital_no, conn);
+		
+		result.put("departmentList", departmentResult);
+		result.put("reviewList", reviewResult);
+		
 		close(conn);
 		
 		return result;

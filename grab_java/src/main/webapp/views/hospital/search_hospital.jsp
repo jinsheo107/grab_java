@@ -65,10 +65,11 @@
 </head>
 <body>
 	<%@ include file="../include/hospital_nav.jsp"%>
+	<%@ page import="java.util.*" %>
 	<% String keyword = (String)request.getAttribute("keyword") == null ? "": (String)request.getAttribute("keyword");  %>
 	<% Hospital searchPaging = (Hospital)request.getAttribute("searchPaging"); %>
 	<% List<Hospital> searchList = (List<Hospital>)request.getAttribute("searchList"); %>
-	
+	<%@ page import="com.grab.hospital.vo.Department" %>
 	
 	<section class="register-domain spad">
 		<div class="container">
@@ -99,7 +100,7 @@
 							<th style="padding: 10px 20px; font-size: 20px;">병원명</th>
 							<th style="padding: 10px 20px; font-size: 20px;">별점</th>
 							<th style="padding: 10px 20px; font-size: 20px;">병원주소</th>
-							<th style="padding: 10px 20px; font-size: 20px;">조회수</th>
+							<th style="padding: 10px 20px; font-size: 20px;">진료과목</th>
 						</tr>
 					</thead>
 					<tbody class="searchTbody">
@@ -107,11 +108,22 @@
 						<%@ page import="com.grab.hospital.vo.Review" %>
 						<% for(int i = 0 ; i < searchList.size(); i++) { %>
 								<tr onclick="navigateTo('/hospital/hospital_detail?hospital_no=<%= searchList.get(i).getHospital_no() %>')">
+									
+									for(int j = 0; j < )
+									<% List<Department> departmentList = (List<Department>) request.getAttribute("departmentList"); %>
+									<% double avg = (double)request.getAttribute("starAvg"); %>
+
 									<td><%=searchList.get(i).getHospital_name()%></td>
-									<td>5</td>
+									<td><%= avg %></td>
 									<%-- <td><%= avg%></td> --%>
 									<td><%=searchList.get(i).getHospital_addr()%></td>
-									<td><%=searchList.get(i).getHospital_view()%></td>
+									<td>
+										<%
+											for(int j = 0; j < departmentList.size(); j++) {
+										%>
+											<%= departmentList.get(j).getType_content() %>
+										<%} %>
+									</td>
 								</tr>
 							<%} %>
 								
