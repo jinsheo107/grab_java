@@ -86,7 +86,7 @@
 	<%@ include file="../include/hospital_nav.jsp"%>
 	<%@ page import="com.grab.hospital.vo.HospitalType, java.util.*"%>
 	<%@ page import="com.grab.hospital.vo.Hospital" %>
-	<% Hospital hospital = (Hospital)session.getAttribute("hospital"); %>
+	<% Hospital hospital = (Hospital)request.getAttribute("hospital"); %>
 	
 	<% List<HospitalType> hospitalTypeList = (List<HospitalType>)request.getAttribute("hospitalTypeList");%>
 
@@ -103,6 +103,7 @@
 								<input type="button" value="수정하기" class="searchBtn" onclick="selectModify();"> 
 								<input type="reset" value="다시쓰기" class="searchBtn">
 							</div>
+							<input type="hidden" name="hospital_no" value="<%=hospital.getHospital_no() %>">
 							<table class="select__table">
 							<colgroup>
 								<col width="20%">

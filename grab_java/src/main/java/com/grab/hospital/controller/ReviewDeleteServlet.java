@@ -10,25 +10,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.grab.hospital.service.ReviewService;
-import com.grab.hospital.vo.Review;
 
-@WebServlet("/review/modify")
-public class ReviewModifyServlet extends HttpServlet {
+@WebServlet("/review/delete")
+public class ReviewDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public ReviewModifyServlet() {
+ 
+    public ReviewDeleteServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String review_no_par = request.getParameter("review_no");
+		String hospital_no_par = request.getParameter("hospital_no");
 		int review_no = Integer.parseInt(review_no_par);
+		int hospital_no = Integer.parseInt(hospital_no_par);
 		
-		Review review = new ReviewService().getReview(review_no);
+		int result = new ReviewService().deleteReview(review_no);
 		
-		request.setAttribute("writenReview", review);
+		if(result > 0) {
+			System.out.println("delete review success");
+		} else if (result == -1){ 
+		} else {
+			System.out.println("delete review fail");
+		}
 		
-		RequestDispatcher view = request.getRequestDispatcher("/views/hospital/modify_review.jsp");
+		request.setAttribute("hospital_no", hospital_no);
+		
+		RequestDispatcher view = request.getRequestDispatcher("/hospital/hospital_detail");
 		view.forward(request, response);
 	}
 

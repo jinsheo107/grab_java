@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <title>병원상세페이지</title>
 <!-- Google Font -->
+
+
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900&display=swap" rel="stylesheet">
 
 <!-- Css Styles -->
@@ -143,6 +145,10 @@
 </style>
 </head>
 <body>
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4f36ed28a98f155fac9a64b707114d9c"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
+
 	<%@ include file="../include/hospital_nav.jsp"%>
 	
 	<%@ page import="com.grab.hospital.vo.Hospital"%>
@@ -432,7 +438,7 @@
 								for (int i = 0; i < selectedReviewList.size(); i++) { %>
 							<tr style="background-color: #f0f0f0;">
 								<td style="padding: 10px; width: 10%;">
-								<%=reviewMemberList.get(i).getMember_id()%>
+								<%=reviewMemberList.get(i).getMember_id().subSequence(0, 3) + "***"%>
 								<%if("Y".equals(selectedReviewList.get(i).getReview_check())) {%>
 									<div class="badge bg-success">리뷰인증</div>								
 								<%} %>
@@ -449,9 +455,18 @@
 								<td style="padding: 10px; width: 20%;"><%=selectedReviewList.get(i).getReg_date().getYear()%>-<%=selectedReviewList.get(i).getReg_date().getMonthValue()%>-<%=selectedReviewList.get(i).getReg_date().getDayOfMonth()%>
 									<%if(selectedReviewList.get(i).getMember_no() == member.getMember_no()) {%>
 										<div>
-											<a href="/review/modify?review_no=<%=selectedReviewList.get(i).getReview_no()%>"><svg xmlns="http://www.w3.org/2000/svg" style="width:12px;" viewBox="0 0 512 512"><path d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"/></svg></a>
+											<a href="/review/modify?review_no=<%=selectedReviewList.get(i).getReview_no()%>&hospital_no=<%=hospital.getHospital_no()%>"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="bi bi-pencil-square " viewBox="0 0 16 16">
+					              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+					              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+					            	</svg>
+					            </a>
 											&nbsp;
-											<a href="/review/delete?review_no=<%=selectedReviewList.get(i).getReview_no()%>"><svg xmlns="http://www.w3.org/2000/svg" style="width:12px;" viewBox="0 0 448 512"><path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg></a>
+											<a href="javascript:void(0);" onclick="confirmDelete(<%=selectedReviewList.get(i).getReview_no()%>, <%=hospital.getHospital_no() %>)">
+											    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="bi bi-trash delete" viewBox="0 0 16 16">
+											        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+											        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+											    </svg>
+											</a>
 										</div>
 									<%} %>
 								</td>
@@ -521,53 +536,18 @@
 	<script src="../../resources/js/common/jquery.slicknav.js"></script>
 	<script src="../../resources/js/common/owl.carousel.min.js"></script>
 	<script src="../../resources/js/common/main.js"></script>
-	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4f36ed28a98f155fac9a64b707114d9c"></script>
-	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services"></script>
+	
+	
+	
 
 	<script>
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-	    mapOption = {
-	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-	        level: 3 // 지도의 확대 레벨
-	    };  
-	
-		// 지도를 생성합니다    
-		var map = new kakao.maps.Map(mapContainer, mapOption); 
-		
-		// 주소-좌표 변환 객체를 생성합니다
-		var geocoder = new kakao.maps.services.Geocoder();
-		
-		var addr = document.getElementById("addr").innerText;
-		console.log(addr);
-		
-		// 주소로 좌표를 검색합니다
-		geocoder.addressSearch("서울특별시 관악구 관악로 1" , function(result, status) {
-		
-		    // 정상적으로 검색이 완료됐으면 
-		     if (status === kakao.maps.services.Status.OK) {
-		
-		        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-		
-		        // 결과값으로 받은 위치를 마커로 표시합니다
-		        var marker = new kakao.maps.Marker({
-		            map: map,
-		            position: coords
-		        });
-		
-		        // 인포윈도우로 장소에 대한 설명을 표시합니다
-		        var infowindow = new kakao.maps.InfoWindow({
-		            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
-		        });
-		        infowindow.open(map, marker);
-		
-		        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-		        map.setCenter(coords);
-		    } 
-		});    
+		function confirmDelete(review_no, hospital_no) {
+        if (confirm("정말로 이 리뷰를 삭제하시겠습니까?")) {
+            window.location.href = "/review/delete?review_no=" + review_no + "&hospital_no=" + hospital_no;
+        }
+    }
 	</script>
-
+		    
 	<script>
 		window.onload = function() {
 	        var alertMessage = "<%=(String) request.getAttribute("alertMessage")%>

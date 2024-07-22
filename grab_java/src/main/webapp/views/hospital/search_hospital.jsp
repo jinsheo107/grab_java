@@ -38,6 +38,30 @@
 	href="../../resources/css/common/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="../../resources/css/common/style.css"
 	type="text/css">
+	
+	<style>
+		<style>
+	    table {
+	        width: 80%;
+	        margin: 0px 100px;
+	        text-align: center;
+	        border-spacing: 0 10px; /* 행 간격 설정 */
+	    }
+	
+	    th, td {
+	        padding: 10px 20px;
+	        font-size: 20px;
+	        background-color: #f9f9f9; /* 아주 연한 회색 배경 */
+	    }
+	
+	    tbody tr {
+	        background-color: #f9f9f9; /* 아주 연한 회색 배경 */
+	    }
+	
+	    tbody tr:hover {
+	        background-color: #f0f0f0; /* 행에 마우스 오버 시 더 진한 회색 */
+	    }
+	</style>
 </head>
 <body>
 	<%@ include file="../include/hospital_nav.jsp"%>
@@ -78,11 +102,10 @@
 							<th style="padding: 10px 20px; font-size: 20px;">조회수</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody class="searchTbody">
 						<%@ page import="com.grab.hospital.vo.Hospital, java.util.*" %>
 						<%@ page import="com.grab.hospital.vo.Review" %>
-						<% for(int i = 0 ; i < searchList.size(); i++) { 
-								if(searchList.get(i).getHospital_whether().equals("Y")) {%>
+						<% for(int i = 0 ; i < searchList.size(); i++) { %>
 								<tr onclick="navigateTo('/hospital/hospital_detail?hospital_no=<%= searchList.get(i).getHospital_no() %>')">
 									<td><%=searchList.get(i).getHospital_name()%></td>
 									<td>5</td>
@@ -91,7 +114,6 @@
 									<td><%=searchList.get(i).getHospital_view()%></td>
 								</tr>
 							<%} %>
-						<%} %>
 								
 					</tbody>
 					<tfoot>

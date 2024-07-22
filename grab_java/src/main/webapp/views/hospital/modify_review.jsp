@@ -92,7 +92,8 @@
 </head>
 <body>
 	<%@ include file="../include/hospital_nav.jsp"%>
-	<% int hospital_no = (int)request.getAttribute("hospital_no");%>
+	<%@ page import="com.grab.hospital.vo.Review" %>
+	<% Review review = (Review)request.getAttribute("writenReview"); %>
 
 	<section class="feature-section about__spad"
 		style="background-color: white; margin-top: 50px;">
@@ -102,12 +103,11 @@
 					<div class="essentail__div">
 						<h3>리뷰작성</h3>
 						<!-- <hr> -->
-						<form action="/hospital/create_review_end" name="create_review" method="post" enctype="multipart/form-data">
+						<form action="/review/modifyEnd" name="modify_review" method="post" enctype="multipart/form-data">
 							<div class="request__btn">
-								<input type="hidden" name="selectedKeywords" id="selectedKeywords">
-								<input type="hidden" name="hospital_no" value="<%= hospital_no%>">
-								<input type="button" value="제출하기" class="searchBtn" onclick="createReview();"> 
-								<input type="reset" value="다시쓰기" class="searchBtn">
+								<input type="hidden" name="review_no" value="<%= review.getReview_no()%>">
+								<input type="hidden" name="hospital_no" value="<%= review.getHospital_no()%>">
+								<input type="button" value="제출하기" class="searchBtn" onclick="modifyReview();"> 
 							</div>
 							<div class="request__element">
 								<div class="row">
@@ -117,14 +117,17 @@
 											<hr>
 										</div>
 										<div class="star_radio">
-											<input type="radio" name="reviewStar" value="5" id="rate1"><label
-												for="rate1">★</label> <input type="radio" name="reviewStar"
-												value="4" id="rate2"><label for="rate2">★</label> <input
-												type="radio" name="reviewStar" value="3" id="rate3"><label
-												for="rate3">★</label> <input type="radio" name="reviewStar"
-												value="2" id="rate4"><label for="rate4">★</label> <input
-												type="radio" name="reviewStar" value="1" id="rate5"><label
-												for="rate5">★</label>
+											<input type="hidden" name="checkedStar" value="<%= review.getReview_score()%>">
+											<input type="radio" name="reviewStar" value="5" id="rate1">
+											<label for="rate1">★</label> 
+											<input type="radio" name="reviewStar" value="4" id="rate2">
+											<label for="rate2">★</label> 
+											<input type="radio" name="reviewStar" value="3" id="rate3">
+											<label for="rate3">★</label> 
+											<input type="radio" name="reviewStar" value="2" id="rate4">
+											<label for="rate4">★</label> 
+											<input type="radio" name="reviewStar" value="1" id="rate5">
+											<label for="rate5">★</label>
 										</div>
 									</div>
 									<div class="col-lg-6">
@@ -147,11 +150,11 @@
 								</div>
 								<div class="keywords">
 									<input type="hidden" name="selectedKeywords" id="selectedKeywords"> 
-									<label class="checkLabel"><input type="checkbox" onclick="changeLabelColor(this)" value="1" name="keyword_1">친절</label>
-									<label class="checkLabel"><input type="checkbox" onclick="changeLabelColor(this)" value="2" name="keyword_2">위생</label>
-									<label class="checkLabel"><input type="checkbox" onclick="changeLabelColor(this)" value="3" name="keyword_3">시설</label>
-									<label class="checkLabel"><input type="checkbox" onclick="changeLabelColor(this)" value="4" name="keyword_4">꼼꼼함</label>
-									<label class="checkLabel"><input type="checkbox" onclick="changeLabelColor(this)" value="5" name="keyword_5">대기시간</label>
+									<label class="checkLabel"><input type="checkbox" onclick="changeLabelColor(this)" value="1" name="review_keyword">친절</label>
+									<label class="checkLabel"><input type="checkbox" onclick="changeLabelColor(this)" value="2" name="review_keyword">위생</label>
+									<label class="checkLabel"><input type="checkbox" onclick="changeLabelColor(this)" value="3" name="review_keyword">시설</label>
+									<label class="checkLabel"><input type="checkbox" onclick="changeLabelColor(this)" value="4" name="review_keyword">꼼꼼함</label>
+									<label class="checkLabel"><input type="checkbox" onclick="changeLabelColor(this)" value="5" name="review_keyword">대기시간</label>
 								</div>
 							</div>
 							<div class="request__element">
@@ -160,8 +163,7 @@
 									<hr>
 								</div>
 								<div>
-									<textarea name="review_content" class="review_content"
-										placeholder="1 ~ 100자 이내의 리뷰를 작성해주세요!"></textarea>
+									<textarea name="review_content" class="review_content" placeholder="수정 시 영수증 인증 뱃지는 제거됩니다."></textarea>
 								</div>
 							</div>
 
@@ -189,11 +191,11 @@
 		        document.querySelector('.form__span--file').textContent = fileName; // 텍스트로 파일 이름 설정
 		    });
 
-		    window.createReview = function() {
-		        const form = document.create_review;
+		    window.modifyReview = function() {
+		        const form = document.modify_review;
 		        const star = document.querySelector('input[name=reviewStar]:checked');
 		        const reviewContent = document.querySelector('.review_content');
-
+		        
 		        if (!star) {
 		            alert("별점을 입력하세요!");
 		        } else if (!reviewContent.value) {

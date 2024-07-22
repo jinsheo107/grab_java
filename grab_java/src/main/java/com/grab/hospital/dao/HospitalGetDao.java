@@ -224,7 +224,8 @@ public class HospitalGetDao {
 			
 			if(keyword != "") {
 				sql = "SELECT COUNT(DISTINCT h.hospital_no) cnt FROM `hospital_department` de JOIN `hospital_type` ty ON de.type_no = ty.type_no JOIN `hospital` h ON h.hospital_no = de.hospital_no" 
-						+" WHERE h.hospital_name LIKE CONCAT('%', '"+ keyword +"', '%') OR ty.type_content LIKE CONCAT('%', '"+ keyword +"', '%')";
+						+" WHERE (h.hospital_name LIKE CONCAT('%', '"+ keyword +"', '%') OR ty.type_content LIKE CONCAT('%', '"+ keyword +"', '%')) "
+						+" AND h.hospital_whether = 'Y'";
 			}
 			
 			pstmt = conn.prepareStatement(sql);

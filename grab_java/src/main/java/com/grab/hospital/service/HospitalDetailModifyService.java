@@ -8,13 +8,17 @@ import com.grab.hospital.dao.HospitalDetailModifyDao;
 import com.grab.hospital.vo.Hospital;
 import com.grab.hospital.vo.HospitalModifyRequest;
 
+import static com.grab.common.sql.JDBCTemplate.close;
+
 public class HospitalDetailModifyService {
-	/*
-	 * public int essentail_modify(HospitalModifyRequest modifyRequest) {
-	 * 
-	 * Connection conn = getConnection(); int result = new
-	 * HospitalDetailModifyDao().essentail_modify(modifyRequest, conn);
-	 * 
-	 * return result; }
-	 */
+
+	public int detailModify(int hospital_no, String hospital_time, String hospital_lunch_time, int doctor_num, String hospital_phone, String[] selectedTypes) {
+		Connection conn = getConnection(); 
+		int result = new HospitalDetailModifyDao().detailModify(hospital_no, hospital_time, hospital_lunch_time, doctor_num, hospital_phone, selectedTypes, conn);
+		
+		close(conn);
+	
+		return result; 
+	}
+	 
 }

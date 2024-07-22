@@ -45,7 +45,7 @@ public class HospitalDetailServlet extends HttpServlet {
 		request.setAttribute("hospital", hospital);
 
 		// 리뷰 리스트
-		List<Review> reviewList = new ReviewService().getReview(hospital_no);
+		List<Review> reviewList = new ReviewService().getReviewList(hospital_no);
 		request.setAttribute("reviewList", reviewList);
 
 		List<Member> review_member_list = new HospitalGetService().getMemberList(reviewList);

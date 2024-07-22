@@ -27,6 +27,7 @@ public class HospitalDetailModifyServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Member member = (Member)session.getAttribute("member");
+		
 		int hospital_no = member.getMember_no();
 		
 		Hospital hospital = new HospitalGetService().getHospital(hospital_no);
