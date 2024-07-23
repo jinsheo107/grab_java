@@ -2,116 +2,81 @@ package com.grab.member.service;
 
 import java.sql.Connection;
 
-import static com.grab.common.sql.JDBCTemplate.getConnection;
-import static com.grab.common.sql.JDBCTemplate.close;
+import  static com.grab.common.sql.JDBCTemplate.close;
+import  static com.grab.common.sql.JDBCTemplate.getConnection;
 
 import com.grab.common.sql.JDBCTemplate;
 import com.grab.member.dao.MemberDao;
 import com.grab.member.vo.Member;
 
 public class MemberService {
-	public Member loginUser(Member m) {
+
+	// 로그인
+	public Member loginMember(String id, String pw) {
+		Member m = new Member();
+		m.setMember_id(id);
+		m.setMember_pw(pw);
+
 		Connection conn = getConnection();
-        Member member = new MemberDao().login(m, conn);
-        close(conn);
-        return member;
+
+		Member result = new MemberDao().loginMember(m, conn);
+		return result;
+	}
+
+
+	// 회원가입
+	public int createMember(Member m) {
+		Connection conn = getConnection();
+		int result = new MemberDao().createMember(m,conn);
+		close(conn);
+		return result;
+
+	}
+
+	// (회원가입) 아이디 중복 확인
+	public Member selectById(String id) {
+		Connection conn = getConnection();
+		Member u = new MemberDao().selectById(id,conn);
+		close(conn);
+		return u;
+	}
+
+	// 아이디 찾기
+	public Member searchId(String email) {
+
+		Connection conn = getConnection();
+		MemberDao dao = new MemberDao();
+		Member m = dao.searchId(conn, email);
+		close(conn);
+
+		System.out.println("m : " + m);
+		return m;
 	}
 	
-	
-//	public Member loginMember(String id, String pw) {
-//		Connection conn = getConnection();
-//		
-//		Member result = new MemberDao().loginMember(id, pw, conn);
-//		close(conn);
-//		
-//		return result;
-//	}
-//	
-//	public int hospitalIdSearch(Member m) {
-//		
-//	}
-	
-	
-	/////////////////////////////////////
-	// 병원 사용자
-	// 아이디 중복값
-//	    public int checkDuplicateId(String member_id) {
-//	        Connection conn = JDBCTemplate.getConnection();
-//	        int result = new MemberDao().isUsernameTaken(member_id, conn);
-//	        JDBCTemplate.close(conn);
-//	        return result;
-//	    }
-	
-	// 비밀번호 변경
-	       public int changePassword(Member m) {
-	           Connection conn = JDBCTemplate.getConnection();
-	           int result = new MemberDao().changePassword(m, conn);
-	           if (result > 0) {
-	               JDBCTemplate.commit(conn);
-	           } else {
-	               JDBCTemplate.rollback(conn);
-	           }
-	           JDBCTemplate.close(conn);
-	           return result;
-	       }
-	        public Member getMemberById(String memberId) {
-	            Connection conn = JDBCTemplate.getConnection();
-	            Member member = new MemberDao().getMemberById(memberId, conn);
-	            JDBCTemplate.close(conn);
-	            return member;
-	       }
-	    
-	    
-	    
-	    
-	// 아이디 찾기
-	    public String hospitalIdSearch(String email) {
-	        Connection conn = JDBCTemplate.getConnection();
-	        String result = new MemberDao().hospitalIdSearch(email, conn);
-	        JDBCTemplate.close(conn);
-	        return result;
-	    }
-	// 비밀번호 찾기
-	        public Member findMemberByNameAndEmail(String name, String email) {
-	            Connection conn = getConnection();
-	            Member member = new MemberDao().findMemberByNameAndEmail(name, email, conn);
-	            close(conn);
-	            return member;
-	        }
-	
-	// 로그인
-	        public Member login(String userId, String userPw) {
-	            Connection conn = getConnection();
-	            Member member = new MemberDao().login(userId, userPw, conn);
-	            close(conn);
-	            return member;
-	        }
-	// 회원 탈퇴
-	        public int deleteHospitalMember(Member m) {
-	            Connection conn = JDBCTemplate.getConnection();
-	            int result = new MemberDao().deleteHospitalMember(m, conn);
-	            if (result > 0) {
-	                JDBCTemplate.commit(conn);
-	            } else {
-	                JDBCTemplate.rollback(conn);
-	            }
-	            JDBCTemplate.close(conn);
-	            return result;
-	        }
-	       
-	        // 아이디 중복
-	       
-	        public Member checkDuplicateUserId(String userId) {
-	            Connection conn = getConnection();
-	            Member result = new MemberDao().checkDuplicateUserId(userId, conn);
-	            close(conn);
-	            return result;
-	        }
+	//비밀번호 찾기
+		public Member searchPw(String id, String email) {
+			Connection conn = getConnection();
+			MemberDao dao = new MemberDao();
+			Member m = dao.searchPw(conn, id, email);
+			close(conn);
 			
+
+			System.out.println("service : " + m);
+			return m;
 		}
-			
-	
 		
 
+	// 비번변경
+	public int editUser(int memberNo, String pw) {
+		Member m = new Member();
+		m.setMember_no(memberNo);
+		m.setMember_pw(pw);
+
+		Connection conn = getConnection();
+		int result = new MemberDao().editMember(m, conn);
+		close(conn);return result;
+
+	}
 
 
+}

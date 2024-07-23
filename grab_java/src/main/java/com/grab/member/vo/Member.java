@@ -19,7 +19,7 @@ public class Member {
 		super();
 		this.member_no = member_no;
 		this.member_id = member_id;
-		this.member_pw = member_pw; 
+		this.member_pw = member_pw;
 		this.member_email = member_email;
 		this.member_type = member_type;
 		this.member_login_time = member_login_time;
@@ -79,7 +79,6 @@ public class Member {
 				+ ", member_email=" + member_email + ", member_type=" + member_type + ", member_login_time="
 				+ member_login_time + "]";
 	}
-	
 	
 	
 }
