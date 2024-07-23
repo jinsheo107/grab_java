@@ -1,4 +1,4 @@
-package com.grab.anotice.service;
+package com.grab.admin.aNotice.service;
 
 import static com.grab.common.JDBCTemplate.close;
 import static com.grab.common.JDBCTemplate.getConnection;
@@ -6,8 +6,8 @@ import static com.grab.common.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.List;
 
-import com.grab.anotice.dao.NoticeDao;
-import com.grab.anotice.vo.Notice;
+import com.grab.admin.aNotice.dao.NoticeDao;
+import com.grab.admin.aNotice.vo.Notice;
 
 public class NoticeService {
 	

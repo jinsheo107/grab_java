@@ -1,6 +1,4 @@
-package com.grab.adminLogin.vo;
-
-import java.time.LocalDateTime;
+package com.grab.admin.aLogin.vo;
 
 public class Member {
 	String member_id;

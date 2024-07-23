@@ -1,4 +1,4 @@
-package com.grab.ainfo.dao;
+package com.grab.admin.aInfo.dao;
 
 import static com.grab.common.JDBCTemplate.close;
 
@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.grab.ainfo.vo.HospiInfo;
+import com.grab.admin.aInfo.vo.HospiInfo;
 
 public class HospiInfoDao {
 	

@@ -1,4 +1,4 @@
-package com.grab.aReview.dao;
+package com.grab.admin.aReview.dao;
 
 import static com.grab.common.JDBCTemplate.close;
 
@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.grab.aReview.vo.Review;
+import com.grab.admin.aReview.vo.Review;
 
 public class ReviewDao {
 	public int selectReviewCount(Review option, Connection conn) {

@@ -1,4 +1,4 @@
-package com.grab.adminLogin.controller;
+package com.grab.admin.aLogin.controller;
 
 import java.io.IOException;
 
@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.grab.adminLogin.service.MemberService;
-import com.grab.adminLogin.vo.Member;
+import com.grab.admin.aLogin.service.MemberService;
+import com.grab.admin.aLogin.vo.Member;
 
 
 @WebServlet(name="memberLoginEnd", urlPatterns = "/member/loginEnd")

@@ -1,4 +1,4 @@
-package com.grab.ainfo.service;
+package com.grab.admin.aInfo.service;
 
 import static com.grab.common.JDBCTemplate.close;
 import static com.grab.common.JDBCTemplate.getConnection;
@@ -6,8 +6,8 @@ import static com.grab.common.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.List;
 
-import com.grab.ainfo.dao.HospiInfoDao;
-import com.grab.ainfo.vo.HospiInfo;
+import com.grab.admin.aInfo.dao.HospiInfoDao;
+import com.grab.admin.aInfo.vo.HospiInfo;
 
 
 public class HospiInfoService {

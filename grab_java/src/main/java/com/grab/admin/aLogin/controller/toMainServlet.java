@@ -1,4 +1,4 @@
-package com.grab.adminLogin.controller;
+package com.grab.admin.aLogin.controller;
 
 import java.io.IOException;
 

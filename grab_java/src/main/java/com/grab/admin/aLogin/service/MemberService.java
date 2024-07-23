@@ -1,12 +1,12 @@
-package com.grab.adminLogin.service;
+package com.grab.admin.aLogin.service;
 
 import static com.grab.common.JDBCTemplate.close;
 import static com.grab.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 
-import com.grab.adminLogin.dao.MemberDao;
-import com.grab.adminLogin.vo.Member;
+import com.grab.admin.aLogin.dao.MemberDao;
+import com.grab.admin.aLogin.vo.Member;
 
 public class MemberService {
 	public Member loginMember(String id, String pw) {

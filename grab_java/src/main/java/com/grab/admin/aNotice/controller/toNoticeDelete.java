@@ -1,4 +1,4 @@
-package com.grab.anotice.controller;
+package com.grab.admin.aNotice.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.grab.anotice.service.NoticeService;
-import com.grab.anotice.vo.Notice;
+import com.grab.admin.aNotice.service.NoticeService;
+import com.grab.admin.aNotice.vo.Notice;
 
 @WebServlet("/member/toNoticeDelete")
 public class toNoticeDelete extends HttpServlet {

@@ -1,4 +1,4 @@
-package com.grab.ainfo.controller;
+package com.grab.admin.aInfo.controller;
 
 import java.io.IOException;
 

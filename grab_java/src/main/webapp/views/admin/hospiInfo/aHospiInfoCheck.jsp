@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.grab.ainfo.dao.HospiInfoDao"%>
-<%@ page import="com.grab.ainfo.vo.HospiInfo"%>
+<%@ page import="com.grab.admin.aInfo.dao.HospiInfoDao"%>
+<%@ page import="com.grab.admin.aInfo.vo.HospiInfo"%>
 <%@ page import="java.text.SimpleDateFormat, java.util.Date"%>
 <%@ page
 	import="java.time.LocalDateTime, java.time.format.DateTimeFormatter"%>

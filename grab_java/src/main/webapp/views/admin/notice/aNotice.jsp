@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.grab.anotice.vo.Notice, java.util.*" %>
+<%@ page import="com.grab.admin.aNotice.vo.Notice, java.util.*" %>
 <%@ page import="java.text.SimpleDateFormat, java.util.Date" %>
 <%@ page import="java.time.LocalDateTime, java.time.format.DateTimeFormatter" %>
 <!DOCTYPE html>

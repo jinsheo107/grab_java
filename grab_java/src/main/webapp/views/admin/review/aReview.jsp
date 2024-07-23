@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.grab.aReview.vo.Review, java.util.*" %>
+<%@ page import="com.grab.admin.aReview.vo.Review, java.util.*" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>

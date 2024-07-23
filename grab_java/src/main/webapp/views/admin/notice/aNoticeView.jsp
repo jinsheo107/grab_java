@@ -195,8 +195,8 @@
                   <div class="card-body">
              		<%@ page import="java.text.SimpleDateFormat, java.util.Date" %>
                    	<%@ page import="java.time.LocalDateTime, java.time.format.DateTimeFormatter" %>
-                  	<%@ page import="com.grab.anotice.vo.Notice"%>
-                  	<%@ page import="com.grab.anotice.dao.NoticeDao"%>
+                  	<%@ page import="com.grab.admin.aNotice.vo.Notice"%>
+                  	<%@ page import="com.grab.admin.aNotice.dao.NoticeDao"%>
 				
 					<table>
 						<thead>

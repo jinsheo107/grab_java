@@ -1,4 +1,4 @@
-package com.grab.ainfo.controller;
+package com.grab.admin.aInfo.controller;
 
 import java.io.IOException;
 
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.grab.ainfo.service.HospiInfoService;
+import com.grab.admin.aInfo.service.HospiInfoService;
 
 @WebServlet("/member/infoCheckEnd")
 public class infoCheckEndServlet extends HttpServlet {

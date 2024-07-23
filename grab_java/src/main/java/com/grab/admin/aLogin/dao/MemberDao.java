@@ -1,4 +1,4 @@
-package com.grab.adminLogin.dao;
+package com.grab.admin.aLogin.dao;
 
 import static com.grab.common.JDBCTemplate.close;
 
@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import com.grab.adminLogin.vo.Member;
+import com.grab.admin.aLogin.vo.Member;
 
 public class MemberDao {
 	public Member loginMember(String id, String pw, Connection conn) {

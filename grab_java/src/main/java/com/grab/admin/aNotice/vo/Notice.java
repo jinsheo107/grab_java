@@ -1,4 +1,4 @@
-package com.grab.anotice.vo;
+package com.grab.admin.aNotice.vo;
 
 import java.time.LocalDateTime;
 

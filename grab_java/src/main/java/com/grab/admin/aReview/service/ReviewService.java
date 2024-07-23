@@ -1,4 +1,4 @@
-package com.grab.aReview.service;
+package com.grab.admin.aReview.service;
 
 import static com.grab.common.JDBCTemplate.close;
 import static com.grab.common.JDBCTemplate.getConnection;
@@ -6,8 +6,8 @@ import static com.grab.common.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.List;
 
-import com.grab.aReview.dao.ReviewDao;
-import com.grab.aReview.vo.Review;
+import com.grab.admin.aReview.dao.ReviewDao;
+import com.grab.admin.aReview.vo.Review;
 
 public class ReviewService {
 	public int selectReviewCount(Review option) {

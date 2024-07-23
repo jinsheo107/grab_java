@@ -1,4 +1,4 @@
-package com.grab.anotice.dao;
+package com.grab.admin.aNotice.dao;
 
 import static com.grab.common.JDBCTemplate.close;
 
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.grab.anotice.vo.Notice;
+import com.grab.admin.aNotice.vo.Notice;
 
 public class NoticeDao {
 

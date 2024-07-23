@@ -1,4 +1,4 @@
-package com.grab.aReview.vo;
+package com.grab.admin.aReview.vo;
 
 import java.time.LocalDateTime;
 
