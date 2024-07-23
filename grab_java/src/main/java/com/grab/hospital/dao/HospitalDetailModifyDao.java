@@ -57,7 +57,7 @@ public class HospitalDetailModifyDao {
 						}
 					} else if(rs.getInt("cnt") == 0) {
 						for(int i = 0; i < selectedTypes.length; i++) {
-							String createTypeSql = "INSERT INTO hospital_department (type_no, hospital_no) VALUES (?, ?)";
+							String createTypeSql = "INSERT INTO hospital_department (type_no, hospital_no) VALUES (?, ?) ";
 							pstmt = conn.prepareStatement(createTypeSql);
 							pstmt.setInt(1, Integer.parseInt(selectedTypes[i]));
 							pstmt.setInt(2, hospital_no);
