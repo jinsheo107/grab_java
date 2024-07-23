@@ -1,6 +1,6 @@
 package com.grab.community.dao;
 
-import java.sql.Connection;
+import java.sql.Connection; 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
@@ -104,9 +104,6 @@ public class BoardDao {
 				String sql = "UPDATE `board_comment` SET `comment` = ? , `comment_mod_date` = ? WHERE `comment_no` = ?;";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, comment);
-//				LocalDateTime ldt = LocalDateTime.now(); // 입력 시간 작성
-//				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-//				String today = dtf.format(ldt);
 				pstmt.setTimestamp(2, new java.sql.Timestamp(System.currentTimeMillis()).valueOf("yyyy-MM-dd HH:mm"));
 				pstmt.setInt(3, commentNo);
 				result = pstmt.executeUpdate();
@@ -167,21 +164,6 @@ public class BoardDao {
 		}
 		return comment;
 	}
-//	public int boardCount(int boardNo, Connection conn) {
-//		PreparedStatement pstmt = null;
-//		int result = 0;
-//		try {
-//			String sql1 = "UPDATE `board` SET `hits` = hits+1 WHERE `board_no` = ?;";
-//			pstmt = conn.prepareStatement(sql1);
-//			pstmt.setInt(1, boardNo);
-//			result = pstmt.executeUpdate();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			close(pstmt);
-//		}
-//		return result;
-//	}
 	
 	// 게시글 상세 출력
 	public Board BoardContent(int boardNo, Connection conn) {

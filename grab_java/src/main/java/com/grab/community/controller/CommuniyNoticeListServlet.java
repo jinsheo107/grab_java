@@ -21,46 +21,42 @@ import com.grab.community.vo.Board;
 @WebServlet("/community_board/list")
 public class CommuniyNoticeListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-    public CommuniyNoticeListServlet() {
-        super();
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public CommuniyNoticeListServlet() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		Connection conn = getConnection();
-		
-//		System.out.println("CommuniyNoticeListServlet확인");
-		
-		
+
 		Board b = new Board();
 		String nowPage = request.getParameter("now_page");
-		System.out.println("현재페이지"+nowPage);
 		int boardType = 1;
-		if(nowPage != null) {
+		if (nowPage != null) {
 			b.setNowPage(Integer.parseInt(nowPage));
 		}
 		b.setTotalContent(new BoardService().boardCount(b));
 		List<Board> list = new ArrayList<Board>();
-		if(request.getParameter("boardList")==null) {
+		if (request.getParameter("boardList") == null) {
 			list = new BoardService().boardList(boardType, b);
-		} else {
-//			list = request.getParameter("boardList");
 		}
+
 		request.setAttribute("paging", b);
 		request.setAttribute("boardList", list);
-		System.out.println("LimitPage : "+b.getLimitPage()+"TotalContent : "+b.getTotalContent());
-		HttpSession session=request.getSession();
-		if(session==null) {
+		request.setAttribute("boardType", boardType);
+		HttpSession session = request.getSession();
+		if (session == null) {
 			RequestDispatcher view = request.getRequestDispatcher("index.jsp");
 			view.forward(request, response);
 		} else {
-			System.out.println("정렬 확인");
 			RequestDispatcher view = request.getRequestDispatcher("/views/community/community_notice.jsp");
-			view.forward(request, response);	
+			view.forward(request, response);
 		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

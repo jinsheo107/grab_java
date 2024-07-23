@@ -24,7 +24,6 @@
         <div class="row">
             <div class="col-lg-3 col-md-3 navBox">
                 <div class="header__logo">
-                    <!-- <a href="./index.html"><img src="img/logo.png" alt=""></a> -->
                     <a href="#" class="logo">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="33" height="33" fill="#f8dd11"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM336 152V256 360c0 13.3-10.7 24-24 24s-24-10.7-24-24V280H160l0 80c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-208c0-13.3 10.7-24 24-24s24 10.7 24 24v80H288V152c0-13.3 10.7-24 24-24s24 10.7 24 24z"/></svg>
                     </a>
@@ -48,11 +47,7 @@
         </div>
     </div>
 </header>
-<form action="/create/board" method="post" enctype="multipart/form-data">
-<% 
-	int boardType = Integer.parseInt(request.getParameter("boardType"));
-	session.setAttribute("boardType", boardType); 
-	%>
+<form action="/create/board?boardType=<%=request.getParameter("boardType")%>" method="post" enctype="multipart/form-data">
   <section class="board_align">
     <!-- 게시판 네비 -->
     <div class="board_select">
@@ -81,7 +76,6 @@
 <section class="create_board_align">
     <!-- 게시글 제목 -->
     <div class="create_board">
-    
       <textarea name="boardContent" id="" class="notoSansRegular" placeholder="글 내용을 입력해 주세요.
 비방 글이나 욕설 사용시 게시글이 삭제될 수 있습니다."></textarea>
       <div class="create_board_file">

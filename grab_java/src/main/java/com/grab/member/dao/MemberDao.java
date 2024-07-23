@@ -19,12 +19,11 @@ public class MemberDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pw);
-			
+
 			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				result = new Member(rs.getInt("member_no"),
-						rs.getString("member_id"), rs.getString("member_pw"),
+
+			if (rs.next()) {
+				result = new Member(rs.getInt("member_no"), rs.getString("member_id"), rs.getString("member_pw"),
 						rs.getString("member_email"), rs.getInt("member_type"));
 			}
 		} catch (Exception e) {

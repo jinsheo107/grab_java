@@ -1,6 +1,6 @@
 package com.grab.community.controller;
 
-import java.io.IOException; 
+import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
 
@@ -21,34 +21,27 @@ import static com.grab.common.sql.JDBCTemplate.getConnection;
 @WebServlet("/board/content")
 public class BoardContentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-    public BoardContentServlet() {
-        super();
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public BoardContentServlet() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		Connection conn = getConnection();
 		int boardNo = (Integer.parseInt(request.getParameter("boardNo")));
-//		System.out.println(boardNo);
-		// 조회수 카운팅
-//		int hits = new BoardService().boardCount(boardNo);
-		// 게시글 내용 출력
 		Board b = new BoardService().BoardContent(boardNo);
 		// 게시글 댓글 리스트 및 내용 출력
 		List<BoardComment> comment = new BoardService().Boardcomment(boardNo);
 		// 데이터 보내기
 		request.setAttribute("boardContent", b);
 		request.setAttribute("comment", comment);
-//		System.out.println(comment);
-		HttpSession session=request.getSession();
-//		if((int)session.getAttribute("member_type")==3) {
-//			
-//		}
-		if(b.getBoard_type()==1) {
+		HttpSession session = request.getSession();
+		if (b.getBoard_type() == 1) {
 			RequestDispatcher view = request.getRequestDispatcher("/views/community/community_notice_board.jsp");
 			view.forward(request, response);
-		} else if(b.getBoard_type()==2) {
+		} else if (b.getBoard_type() == 2) {
 			RequestDispatcher view = request.getRequestDispatcher("/views/community/Q&A_board.jsp");
 			view.forward(request, response);
 		} else {
@@ -57,7 +50,8 @@ public class BoardContentServlet extends HttpServlet {
 		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

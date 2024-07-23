@@ -28,12 +28,8 @@ public class QnaListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Connection conn = getConnection();
 		
-//		System.out.println("CommuniyNoticeListServlet확인");
-		
-		
 		Board b = new Board();
 		String nowPage = request.getParameter("now_page");
-		System.out.println("현재페이지"+nowPage);
 		int boardType = 2;
 		if(nowPage != null) {
 			b.setNowPage(Integer.parseInt(nowPage));
@@ -43,7 +39,6 @@ public class QnaListServlet extends HttpServlet {
 		
 		request.setAttribute("paging", b);
 		request.setAttribute("boardList", list);
-		System.out.println("LimitPage : "+b.getLimitPage()+"TotalContent : "+b.getTotalContent());
 		HttpSession session=request.getSession();
 		if(session==null) {
 			RequestDispatcher view = request.getRequestDispatcher("index.jsp");

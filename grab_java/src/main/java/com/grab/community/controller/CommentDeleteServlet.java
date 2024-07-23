@@ -1,6 +1,6 @@
 package com.grab.community.controller;
 
-import java.io.IOException;
+import java.io.IOException; 
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,15 +22,12 @@ public class CommentDeleteServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
 		int commentNo = Integer.parseInt(request.getParameter("commentNo"));
-//		int commentNo = (int) session.getAttribute("commentNo");
 		int result = new BoardService().deleteComment(commentNo);
 		
 		request.setAttribute("delete_comment", result);
 		RequestDispatcher view = request.getRequestDispatcher("/community_board/list");
 		view.forward(request, response);
-//		response.sendRedirect("/");
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

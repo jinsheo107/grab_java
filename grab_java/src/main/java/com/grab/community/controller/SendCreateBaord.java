@@ -12,19 +12,21 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/send/create/board")
 public class SendCreateBaord extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-    public SendCreateBaord() {
-        super();
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public SendCreateBaord() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		int boardType = Integer.parseInt(request.getParameter("boardType"));
 		request.setAttribute("boardType", boardType);
 		RequestDispatcher view = request.getRequestDispatcher("/views/community/create_board.jsp");
 		view.forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

@@ -20,41 +20,39 @@ import com.grab.community.vo.Board;
 @WebServlet("/information_share/list")
 public class InformationShareListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-    public InformationShareListServlet() {
-        super();
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public InformationShareListServlet() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		Connection conn = getConnection();
-		
-//		System.out.println("CommuniyNoticeListServlet확인");
-		
-		
+
 		Board b = new Board();
 		String nowPage = request.getParameter("now_page");
-		System.out.println("현재페이지"+nowPage);
+		System.out.println("현재페이지" + nowPage);
 		int boardType = 3;
-		if(nowPage != null) {
+		if (nowPage != null) {
 			b.setNowPage(Integer.parseInt(nowPage));
 		}
 		b.setTotalContent(new BoardService().boardCount(b));
 		List<Board> list = new BoardService().boardList(boardType, b);
-		
+
 		request.setAttribute("paging", b);
 		request.setAttribute("boardList", list);
-		System.out.println("LimitPage : "+b.getLimitPage()+"TotalContent : "+b.getTotalContent());
-		HttpSession session=request.getSession();
-		if(session==null) {
+		HttpSession session = request.getSession();
+		if (session == null) {
 			RequestDispatcher view = request.getRequestDispatcher("index.jsp");
 			view.forward(request, response);
 		} else {
 			RequestDispatcher view = request.getRequestDispatcher("/views/community/information_share.jsp");
-			view.forward(request, response);	
+			view.forward(request, response);
 		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

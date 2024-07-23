@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko"> 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,14 +16,12 @@
 
 </head>
 <body>
-<% session.setAttribute("boardType", 1); %>
     <!-- 네비게이션 바 -->
     <header class="header-section navTop">
         <div class="container ">
             <div class="row">
                 <div class="col-lg-3 col-md-3 navBox">
                     <div class="header__logo">
-                        <!-- <a href="./index.html"><img src="img/logo.png" alt=""></a> -->
                         <a href="#" class="logo">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="33" height="33" fill="#f8dd11"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM336 152V256 360c0 13.3-10.7 24-24 24s-24-10.7-24-24V280H160l0 80c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-208c0-13.3 10.7-24 24-24s24 10.7 24 24v80H288V152c0-13.3 10.7-24 24-24s24 10.7 24 24z"/></svg>
                         </a>
@@ -68,10 +66,8 @@
             const align=()=>{
             	
             	const aaa = document.getElementsByClassName('list_align')[0].value;
-                alert(aaa);
 				const xhr = new XMLHttpRequest();
 				xhr.open("post","/align/board?align="+aaa,true);
-				console.log(aaa);
 				xhr.onreadystatechange = function() {
 					if(xhr.readyState == 4 && xhr.status == 200){ // 200: 정상적으로 작동한다는 뜻
 						console.log('정상작동');
@@ -79,7 +75,6 @@
 				}
 				xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8");
 				xhr.send();
-				console.log(aaa);
             }
             </script>
             <div class="communityHeader notoSansMedium">
@@ -93,10 +88,8 @@
             <div class="communityList notoSansRegular list-group">
             <%@page import="com.grab.community.vo.Board, java.util.*" %>
             <% List<Board> list = (List<Board>)request.getAttribute("boardList");%>
-            <% System.out.println(list+"확인"); %>
             <%for(int i = 0; i<list.size(); i++){%>
                 <a href="/board/content?boardNo=<%=list.get(i).getBoard_no()%>" class="list-group-item-action active tab">
-                    <% System.out.println(list.get(i)); %>
                     <ul>
                         <li class="number2"><%=list.get(i).getBoard_no()%></li>
                         <li class="title2">
@@ -123,14 +116,13 @@
             <%}%>
                 
             </div>
-            <% if((int)session.getAttribute("member_type")==1){ %>
+            
             <button type="button" class="btn btn-light board_create">
                 <a href="/send/create/board?boardType=1" class="notoSansMedium">
                     글 작성 
                     <svg xmlns="http://www.w3.org/2000/svg" fill="#616161" width="14" height="14" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"/></svg>
                 </a>
             </button>
-            <% } %>
             <!-- 페이징 -->
             <% Board paging = (Board)request.getAttribute("paging"); %>
 			<% if(paging !=null){ %>
@@ -198,7 +190,6 @@
     </footer>
 
 
-    <!-- <script type="text/javascript" src="../../resources/js/게시글 리스트.js"></script> -->
     <script type="text/javascript" src="../../resources/js/jquery-3.7.1.js"></script>
     <script type="text/javascript" src="../../resources/js/popper.min.js"></script>
     <script type="text/javascript" src="../../resources/js/bootstrap.min.js"></script>

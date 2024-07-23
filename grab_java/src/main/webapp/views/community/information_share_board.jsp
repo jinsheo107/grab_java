@@ -24,7 +24,6 @@
         <div class="row">
             <div class="col-lg-3 col-md-3 navBox">
                 <div class="header__logo">
-                    <!-- <a href="./index.html"><img src="img/logo.png" alt=""></a> -->
                     <a href="#" class="logo">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="33" height="33" fill="#f8dd11"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM336 152V256 360c0 13.3-10.7 24-24 24s-24-10.7-24-24V280H160l0 80c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-208c0-13.3 10.7-24 24-24s24 10.7 24 24v80H288V152c0-13.3 10.7-24 24-24s24 10.7 24 24z"/></svg>
                     </a>
@@ -60,6 +59,7 @@
     <!-- 게시글 제목 -->
     <%@page import="com.grab.community.vo.Board,com.grab.community.vo.BoardComment, java.util.*" %>
     <% Board boardContent = (Board)request.getAttribute("boardContent"); %>
+    <%-- <% Member m = session.getAttribute("member"); %> --%>
     <% List<BoardComment> list = (List<BoardComment>)request.getAttribute("comment");%>
     <div class="board_title">
     <!-- 게시글 제목 -->
@@ -75,7 +75,8 @@
         </div>
         <p class="board_reg_date notoSansRegular">
         <!-- 수정 날짜 -->
-        <%-- <span class="boardNo"><%=boardContent.getBoard_no()%>&nbsp;</span> --%>
+        <%=boardContent.getBoard_no()%>
+        <% int boardNo = boardContent.getBoard_no();%>
           <%=boardContent.getBoard_mod_date()%>
         </p>
         <ul>
@@ -104,6 +105,7 @@
         
         <div class="update">
           <!-- 토글 -->
+          <!-- if(m.getMember_id().equals(boardContent.getMember_name())) { -->
           <% if(session.getAttribute("member_id").equals(boardContent.getMember_name())) {%>
           <button type="button" class="modify" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="게시글 수정">
             <a href="/send/create/board?boardType=3">
@@ -196,7 +198,7 @@
         <p class="ggg" style="white-space: pre-line;">
           <%=list.get(i).getUser_comment()%>
         </p>
-            
+        <!-- if(m.getMember_no()==boardContent.getMember_no()) { -->
         <% if((int)session.getAttribute("member_no")==boardContent.getMember_no()) {%>
         <div class="update">
         <!-- 댓글 수정 -->
@@ -209,16 +211,12 @@
           <!-- 댓글 삭제 -->
             <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
             </div>
-            <!-- <a href="#" onclick="commentDelete(this);"> -->
-            <button type="button" class="modify" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="게시글 삭제" onclick="commentDelete(this);">
-              
+            <button type="button" id="commentDeleteNo<%=list.get(i).getComment_no()%>" class="modify" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="게시글 삭제" onclick="commentDelete(this);">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="bi bi-trash delete" viewBox="0 0 16 16">
                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
                 <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
               </svg>
-              
             </button>
-            <!-- </a> -->
         <%} %>
       </div>
     </div>
@@ -227,8 +225,7 @@
   <script>
      const modify=()=>{
         document.getElementsByClassName('board_comment_align')[0].innerHTML = '<div class="create_board_comment">'
-        	+'<form action="/modify/comment" method="post">'
-        	<% session.setAttribute("commentNo", list.get(i).getComment_no()); %>
+        	+'<form action="/modify/comment?boardNo=<%=boardNo%>&&commentNo=<%=list.get(i).getComment_no()%>" method="post">'
   				+'<textarea name="comment" id="" class="notoSansRegular" placeholder="글 내용을 입력해 주세요.'
 					+'\n비방 글이나 욕설 사용시 게시글이 삭제될 수 있습니다." wrap="soft"></textarea>'
   				+'<div class="comment">'
@@ -238,36 +235,33 @@
  			+'</form>'
 		+'</div>'
        }
-     const commentDelete=(this)=>{
-    	 console.log(this);
+     const commentDelete=(ele)=>{
+    	 console.log(ele.id);
+    		 console.log(ele.id.substring(15,17));
     	 if(confirm('댓글을 삭제하시겠습니까?')){
-    		 const commentNo = document.getElementsByClassName("board_comment")[0].className.substring(23,25)
+    		 const commentNo = ele.id.substring(15,17);
     				const xhr = new XMLHttpRequest();
-    				console.log('test');
-    				console.log(commentNo);
     				xhr.open("post","/comment/delete?commentNo="+commentNo,true);
-    				console.log(commentNo);
     				xhr.onreadystatechange = function() {
     					if(xhr.readyState == 4 && xhr.status == 200){ // 200: 정상적으로 작동한다는 뜻
     						console.log('정상작동');
+    						location.reload(true);
     					}
     				}
     				xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8");
     				xhr.send();
-    				console.log(commentNo);
-    		 console.log('test');
         }
      }
    </script>
  	<% } %>
   <!-- 답글 작성 -->
+  <!-- if(m.getMember_type() != 3) { -->
   <% 
   if((int)session.getAttribute("member_type") != 3){ 
   %>
   <section class="create_board_comment_align">
     <div class="create_board_comment">
-    	<form action="/create/comment" method="post">
-    	<% session.setAttribute("boardNo", boardContent.getBoard_no()); %>
+    	<form action="/create/comment?boardNo=<%=boardNo%>" method="post">
       		<textarea name="comment" id="" class="notoSansRegular" placeholder="글 내용을 입력해 주세요.
 비방 글이나 욕설 사용시 게시글이 삭제될 수 있습니다." wrap="soft"></textarea>
       		<div class="comment">

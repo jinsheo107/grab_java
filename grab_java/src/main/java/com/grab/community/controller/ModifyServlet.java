@@ -15,25 +15,25 @@ import com.grab.community.service.BoardService;
 @WebServlet("/modify/comment")
 public class ModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-    public ModifyServlet() {
-        super();
-    }
-    
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
+
+	public ModifyServlet() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		int commentNo = (int) session.getAttribute("commentNo");
+		int commentNo = Integer.parseInt(request.getParameter("commentNo"));
 		String content = request.getParameter("comment");
-//		File img = request.getParameter("file");
-		int result = new BoardService().modifyComment(content,commentNo);
-		
+		int result = new BoardService().modifyComment(content, commentNo);
+
 		request.setAttribute("comment_upload", result);
 		RequestDispatcher view = request.getRequestDispatcher("/index.jsp");
 		view.forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

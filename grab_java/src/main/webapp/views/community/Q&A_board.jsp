@@ -81,7 +81,8 @@
         </div>
         <p class="board_reg_date notoSansRegular">
         <!-- 수정 날짜 -->
-        <%-- <span class="boardNo"><%=boardContent.getBoard_no()%>&nbsp;</span> --%>
+        <%=boardContent.getBoard_no()%>
+        <% int boardNo = boardContent.getBoard_no();%>
           <%=boardContent.getBoard_mod_date()%>
         </p>
         <ul>
@@ -112,6 +113,7 @@
         <% } %>
         <div class="update">
           <!-- 토글 -->
+          <!-- if(m.getMember_id().equals(boardContent.getMember_name())) { -->
           <% if(session.getAttribute("member_id").equals(boardContent.getMember_name())) {%>
           <button type="button" class="modify" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="게시글 수정">
             <a href="/send/create/board?boardType=2">
@@ -197,7 +199,6 @@
         	name2 = name2.concat("*");
         } %>
           <%=name2%>
-          <%-- <%=list.get(i).getMember_name()%> --%>
         </div>
         <p class="board_comment_reg_date notoSansRegular">
         	<span class="commentNo"><%=list.get(i).getComment_no()%>&nbsp;</span>
@@ -209,7 +210,7 @@
         <p class="ggg" style="white-space: pre-line;">
           <%=list.get(i).getUser_comment()%>
         </p>
-            
+        <!-- if(m.getMember_no()==boardContent.getMember_no()) { -->
         <% if((int)session.getAttribute("member_no")==boardContent.getMember_no()) {%>
         <div class="update">
         <!-- 댓글 수정 -->
@@ -223,7 +224,7 @@
             <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
             </div>
             <!-- <a href="#" onclick="commentDelete(this);"> -->
-            <button type="button" class="modify" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="게시글 삭제" onclick="commentDelete(this);">
+            <button type="button" id="commentDeleteNo<%=list.get(i).getComment_no()%>" class="modify" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="게시글 삭제" onclick="commentDelete(this);">
               
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="bi bi-trash delete" viewBox="0 0 16 16">
                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
@@ -240,8 +241,7 @@
   <script>
      const modify=()=>{
         document.getElementsByClassName('board_comment_align')[0].innerHTML = '<div class="create_board_comment">'
-        	+'<form action="/modify/comment" method="post">'
-        	<% session.setAttribute("commentNo", list.get(i).getComment_no()); %>
+        	+'<form action="/modify/comment?commentNo=<%=list.get(i).getComment_no()%>" method="post">'
   				+'<textarea name="comment" id="" class="notoSansRegular" placeholder="글 내용을 입력해 주세요.'
 					+'\n비방 글이나 욕설 사용시 게시글이 삭제될 수 있습니다." wrap="soft"></textarea>'
   				+'<div class="comment">'
@@ -251,36 +251,33 @@
  			+'</form>'
 		+'</div>'
        }
-     const commentDelete=(this)=>{
-    	 console.log(this);
+     const commentDelete=(ele)=>{
+    	 console.log(ele.id);
+    		 console.log(ele.id.substring(15,17));
     	 if(confirm('댓글을 삭제하시겠습니까?')){
-    		 const commentNo = document.getElementsByClassName("board_comment")[0].className.substring(23,25)
+    		 const commentNo = ele.id.substring(15,17);
     				const xhr = new XMLHttpRequest();
-    				console.log('test');
-    				console.log(commentNo);
     				xhr.open("post","/comment/delete?commentNo="+commentNo,true);
-    				console.log(commentNo);
     				xhr.onreadystatechange = function() {
     					if(xhr.readyState == 4 && xhr.status == 200){ // 200: 정상적으로 작동한다는 뜻
     						console.log('정상작동');
+    						location.reload(true);
     					}
     				}
     				xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8");
     				xhr.send();
-    				console.log(commentNo);
-    		 console.log('test');
         }
      }
    </script>
  	<% } %>
   <!-- 답글 작성 -->
+  <!-- if(m.getMember_type() != 3) { -->
   <% 
   if((int)session.getAttribute("member_type") != 3){ 
   %>
   <section class="create_board_comment_align">
     <div class="create_board_comment">
-    	<form action="/create/comment" method="post">
-    	<% session.setAttribute("boardNo", boardContent.getBoard_no()); %>
+    	<form action="/create/comment?boardNo=<%=boardNo%>" method="post">
       		<textarea name="comment" id="" class="notoSansRegular" placeholder="글 내용을 입력해 주세요.
 비방 글이나 욕설 사용시 게시글이 삭제될 수 있습니다." wrap="soft"></textarea>
       		<div class="comment">
