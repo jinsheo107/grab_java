@@ -58,10 +58,14 @@ public class HospitalGetDao {
 		try {
             String sql = "SELECT * FROM member WHERE member_no = ?";
             pstmt = conn.prepareStatement(sql);
+            
+            System.out.println("size: " + reviewList.size());
 
             for (Review review : reviewList) {
                 pstmt.setInt(1, review.getMember_no());
                 rs = pstmt.executeQuery();
+                
+                System.out.println(review.getMember_no());
 
                 if (rs.next()) {
                     Member member = new Member(

@@ -27,11 +27,11 @@ public class MemberLoginEndServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String id = request.getParameter("member_id");
 		String pw = request.getParameter("member_pw");
+		
 
 		Member m = new MemberService().loginMember(id, pw);
 
 		if (m != null) {
-
 			if (m.getMember_type() == 3) {
 				HttpSession session = request.getSession(true);
 				if (session.isNew() || session.getAttribute("member") == null) {

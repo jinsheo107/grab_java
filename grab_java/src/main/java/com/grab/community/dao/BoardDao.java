@@ -63,7 +63,6 @@ public class BoardDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		try {
-			System.out.println("DELETE"+result);
 			String sql = "DELETE FROM `board` WHERE `board_no` = ?;";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, boardNo);
@@ -78,13 +77,10 @@ public class BoardDao {
 	
 	// 댓글 삭제
 	public int deleteComment(int commentNo, Connection conn) {
-		System.out.println("dao확인");
 		int result = 0;
 		PreparedStatement pstmt = null;
-		System.out.println("deleteComment확인2"+commentNo);
 		try {
 			String sql = "DELETE FROM `board_comment` WHERE `comment_no` = ?;";
-			System.out.println("댓글 넘버"+commentNo);
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, commentNo);
 			result = pstmt.executeUpdate();

@@ -12,7 +12,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 
-@WebFilter(servletNames= {"hospitalDetailModifyEnd", "hospitalRequestEnd", "HospitalCreateReviewEnd", "userCreateEnd", "userLoginEnd", "userEditEnd"})
+@WebFilter(servletNames= {"hospitalDetailModifyEnd", "hospitalRequestEnd", "hospitalLoginEnd", "HospitalCreateReviewEnd", "userCreateEnd", "userLoginEnd", "userEditEnd"})
 public class EncryptFilter extends HttpFilter implements Filter {
 
 	public EncryptFilter() {

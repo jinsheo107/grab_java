@@ -48,8 +48,7 @@ public class HospitalDetailServlet extends HttpServlet {
 		List<Review> reviewList = new ReviewService().getReviewList(hospital_no);
 		request.setAttribute("reviewList", reviewList);
 
-		List<Member> review_member_list = new HospitalGetService().getMemberList(reviewList);
-		request.setAttribute("reviewMemberList", review_member_list);
+		
 		
 		// 리뷰의 총 키워드
 		if(!reviewList.isEmpty()) {
@@ -71,6 +70,9 @@ public class HospitalDetailServlet extends HttpServlet {
 		reveiwOption.setTotalData(reviewList.size());
 
 		List<Review> selectedReviewList = new ReviewService().selectReviewList(reveiwOption);
+		
+		List<Member> review_member_list = new HospitalGetService().getMemberList(selectedReviewList);
+		request.setAttribute("reviewMemberList", review_member_list);
 
 		request.setAttribute("reviewPaging", reveiwOption);
 		request.setAttribute("selectedReviewList", selectedReviewList);

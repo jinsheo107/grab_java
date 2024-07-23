@@ -32,6 +32,7 @@ public class MemberDao {
 				result = new Member(rs.getInt("member_no"),
 						rs.getString("member_id"), rs.getString("member_pw"),
 						rs.getString("member_email"), rs.getInt("member_type"));
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

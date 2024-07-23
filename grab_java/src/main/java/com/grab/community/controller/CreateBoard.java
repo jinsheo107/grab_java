@@ -35,7 +35,6 @@ public class CreateBoard extends HttpServlet {
 		
 		
 		int boardType = Integer.parseInt(request.getParameter("boardType"));
-		System.out.println(boardType + "CreateBoard 확인");
 		
 		Member member = (Member) session.getAttribute("member");
 		

@@ -50,10 +50,10 @@
             <a href="<%=request.getContextPath()%>/views/member/memberLogin/member_create.jsp">회원가입</a>
         </div>
 
-				<a href="../../hospital_login/hospital_login_page.jsp" style="background-color: lightgray; text-align: center; color:black; text-decoration: none; margin-top: 100px; width: 85%" type="button" name="login-button" class="login-button">병원사용자 로그인으로 이동</a>
+				<a href="../../hospital_login/hospital_login.jsp" style="background-color: lightgray; text-align: center; color:black; text-decoration: none; margin-top: 100px; width: 85%" type="button" name="login-button" class="login-button">병원사용자 로그인으로 이동</a>
         <div class="footer">
             서비스 이용약관 | 개인정보 처리방침 |
-            <a href="#">관리자 로그인</a> <br>
+            <a href="/views/adminLogin.jsp">관리자 로그인</a> <br>
             전화: 123-456-789 <br>
             이메일: support@example.com <br>
             Copyright © GDacademy
