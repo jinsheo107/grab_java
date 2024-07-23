@@ -18,47 +18,39 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
     <!-- Css Styles -->
     <link rel="stylesheet" href="../../../resources/css/common/bootstrap.min.css" type="text/css">
-    <!--  <link rel="stylesheet" href="../../resources/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/flaticon.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/slicknav.min.css" type="text/css"> -->
     <link rel="stylesheet" href="../../../resources/member/memberLogin/login.css" type="text/css">
     </head>
 
-<body>
-      <!--  <%@ include file="../../include/hospital_nav.jsp" %>-->
+	<body>
     <div class="container">
-
         <div class="login-title">로그인</div>
+				<div class="login-title-underline"></div>
 
-
-            <div class="login-title-underline"></div>
-
-           
-          <div class="tab-content">
-    <form action="/member/loginEnd" name="login_form" method="post">
-        <div id="user-login" class="container tab-pane active">
-            <div class="login-idpw">
-                <div class="form-group">
-                    <label for="member-id">아이디</label>
-                    <input type="text" name="member_id" class="form-control large-input" id="member-id">
-                </div>
-                <div class="form-group">
-                    <label for="member-password">비밀번호</label>
-                    <input type="password" name="member_pw" class="form-control large-input" id="member-password">
-                </div>
-            </div>
-            <input type="button" name="login-button" class="login-button" value="로그인" onclick="loginForm(); LoginEndServlet();">
-        </div>
-    </form>
-</div>
-          <div class="login-links">
+				<div class="tab-content">
+			    <form action="/member/loginEnd" name="login_form" method="post">
+			        <div id="user-login" class="container tab-pane active">
+			            <div class="login-idpw">
+			                <div class="form-group">
+			                    <label for="member-id">아이디</label>
+			                    <input type="text" name="member_id" class="form-control large-input" id="member-id">
+			                </div>
+			                <div class="form-group">
+			                    <label for="member-password">비밀번호</label>
+			                    <input type="password" name="member_pw" class="form-control large-input" id="member-password">
+			                </div>
+			            </div>
+			            <input type="button" name="login-button" class="login-button" value="로그인" onclick="loginForm();">
+			        </div>
+			    </form>
+				</div>
+				
+        <div class="login-links">
             <a href="<%=request.getContextPath()%>/views/member/memberFind/find_id_1.jsp">아이디 찾기</a> |
             <a href="<%=request.getContextPath()%>/views/member/memberFind/find_pw_1.jsp">비밀번호 찾기</a> |
             <a href="<%=request.getContextPath()%>/views/member/memberLogin/member_create.jsp">회원가입</a>
         </div>
-  
+
+				<a href="../../hospital_login/hospital_login_page.jsp" style="background-color: lightgray; text-align: center; color:black; text-decoration: none; margin-top: 100px; width: 85%" type="button" name="login-button" class="login-button">병원사용자 로그인으로 이동</a>
         <div class="footer">
             서비스 이용약관 | 개인정보 처리방침 |
             <a href="#">관리자 로그인</a> <br>
@@ -86,10 +78,6 @@
         } else {
             form.submit();
         }
-    }
-    
-    function LoginEndServlet() {
-    	
     }
 		
 		function enterkey(){

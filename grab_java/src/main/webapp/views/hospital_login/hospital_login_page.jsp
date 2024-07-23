@@ -18,11 +18,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
     <!-- Css Styles -->
     <link rel="stylesheet" href="../../resources/css/bootstrap.min.css" type="text/css">
-   <!--  <link rel="stylesheet" href="../../resources/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/flaticon.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/slicknav.min.css" type="text/css"> -->
     <link rel="stylesheet" href="../../resources/css/common/hospital_login.css" type="text/css">
 </head>
 <body>
@@ -32,7 +27,7 @@
         <div class="login-title-underline"></div>
         <div class="tab-content">
             <div id="admin-login" class="container tab-pane fade"><br>
-                <form action="/member/loginEnd">
+                <form action="/hospital/loginEnd" name="hospital_login_form" method="post">
                     <div class="form-group">
                         <label for="admin-id">아이디</label>
                         <input type="text" name="member_id" class="form-control" id="admin-id">
@@ -41,15 +36,15 @@
                         <label for="admin-password">비밀번호</label>
                         <input type="password" name="member_pw" class="form-control" id="admin-password">
                     </div>
-                    <button type="submit" class="login-button" onclick="loginform()">로그인</button>
+                    <input type="button" name="login-button" class="login-button" value="로그인" onclick="loginForm();">
                 <br>
                 </form>
             </div>
         </div>
         <div class="login-links">
-            <a href="http://localhost:8087/views/idSearch/hospital_id_search1.jsp">아이디 찾기</a> |
-            <a href="http://localhost:8087/views/pwSearch/hospital_pw_search1.jsp">비밀번호 찾기</a> |
-            <a href="http://localhost:8087/views/membership/hospital_membership1.jsp">회원가입</a>
+            <a href="http://localhost:8090/views/idSearch/hospital_id_search1.jsp">아이디 찾기</a> |
+            <a href="http://localhost:8090/views/pwSearch/hospital_pw_search1.jsp">비밀번호 찾기</a> |
+            <a href="http://localhost:8090/views/membership/hospital_membership1.jsp">회원가입</a>
         </div>
         <div class="footer">
             서비스 이용약관 | 개인정보 처리방침 |
@@ -80,13 +75,13 @@
     	    document.querySelector('.login-tab[onclick="showForm(\'' + formId + '\')"]').classList.add('active');
      }
     function loginForm() {
-		let form = document.login_form;
-		if (form.user_id.value == '') {
+		let form = document.hospital_login_form;
+		if (form.member_id.value == '') {
 			alert('아이디를 입력하세요.');
-			form.user_id.focus();	
-		} else if (form.user_pw.value == '') {
+			form.member_id.focus();	
+		} else if (form.member_pw.value == '') {
 			alert('비밀번호를 입력하세요.');
-			form.user_pw.focus();
+			form.member_pw.focus();
 		} else {
 			form.submit();
 		}

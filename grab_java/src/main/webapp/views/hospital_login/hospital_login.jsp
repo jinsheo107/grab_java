@@ -18,11 +18,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
     <!-- Css Styles -->
     <link rel="stylesheet" href="../../resources/css/bootstrap.min.css" type="text/css">
-   <!--  <link rel="stylesheet" href="../../resources/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/flaticon.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/slicknav.min.css" type="text/css"> -->
     <link rel="stylesheet" href="../../resources/css/common/hospital_login.css" type="text/css">
 </head>
 <body>

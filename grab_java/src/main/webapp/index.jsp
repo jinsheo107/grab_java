@@ -154,16 +154,52 @@
             </div>
           </div>
         </div>
+        
+        <%if(m == null) {%>
         <div class="col-lg-3">
           <div class="row">
             <div class="col-lg-12 col-md-3 col-sm-6">
+            <a href="views/member/memberLogin/login.jsp">
               <div class="log__item">
-                <h5>로그인</h5>
-                <a href=""></a>
+                <h5>로그인</h5>       
+              </div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <%} else if(m.getMember_type() == 2) {%>
+        	<div class="col-lg-3">
+          <div class="row">
+            <div class="col-lg-12 col-md-3 col-sm-6">
+              <div class="log__item">
+                <h5><%=m.getMember_id() %>님 환영합니다!</h5>
               </div>
             </div>
           </div>
         </div>
+        <%} else if(m.getMember_type() == 3) {%>
+        <%@ page import="com.grab.hospital_detail.vo.Hospital" %>
+        <% Hospital hospital = (Hospital)session.getAttribute("hospital"); %>
+        <div class="col-lg-3">
+          <div class="row">
+            <div class="col-lg-12 col-md-3 col-sm-6">
+              <div class="log__item">
+                <h5><%=hospital.getHospital_name() %>님 환영합니다!</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%} else {%>
+        <div class="col-lg-3">
+          <div class="row">
+            <div class="col-lg-12 col-md-3 col-sm-6">
+              <div class="log__item">
+                <h5>관리자님 환영합니다!</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%} %>
       </div>
     </div>
   </section>
