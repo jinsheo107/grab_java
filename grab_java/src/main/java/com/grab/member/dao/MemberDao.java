@@ -145,8 +145,11 @@ public class MemberDao {
 		try {
 			String sql = "SELECT * FROM `member` WHERE member_id= ?";
 			pstmt = conn.prepareStatement(sql);
+			
 			pstmt.setString(1, id);
+
 			rs = pstmt.executeQuery();
+
 			if(rs.next()) {
 				m = new Member(rs.getInt("member_no")
 						,rs.getString("member_id")

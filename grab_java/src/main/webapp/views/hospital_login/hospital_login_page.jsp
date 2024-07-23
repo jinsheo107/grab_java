@@ -26,8 +26,8 @@
     <link rel="stylesheet" href="../../resources/css/common/hospital_login.css" type="text/css">
 </head>
 <body>
+        <%-- <%@ include file="../include/hospital_nav.jsp"%> --%>
     <div class="container">
-        <%@ include file="../include/hospital_nav.jsp"%>
         <div class="login-title">병원 로그인</div>
         <div class="login-title-underline"></div>
         <div class="tab-content">

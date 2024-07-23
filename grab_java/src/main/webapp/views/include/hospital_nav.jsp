@@ -22,23 +22,32 @@
 			<div>
 				<nav class="header__menu notoSansMedium">
 					<ul>
+
 						<%
 							Member m = (Member)session.getAttribute("member");
+
+							/* 비로그인 */
 							if(m == null) {
 						%>
-						<li><a href="#">커뮤니티</a></li>
+						<li><a href="/community_board/list">커뮤니티</a></li>
 						<!-- <li><a href="/member/login">로그인</a></li> -->
 						<li><a href="views/hospital_login/hospital_login_page.jsp">로그인</a></li>
+						
+						<!-- 일반회원 로그인 -->
 						<%} else if(m.getMember_type() == 2) {%>
-						<li><a href="#">커뮤니티</a></li>
+						<li><a href="/community_board/list">커뮤니티</a></li>
 						<li><a href="#">마이페이지</a></li>
+						
+						<!-- 병원회원 로그인 -->
 						<%} else if(m.getMember_type() == 3) {%>
-						<li><a href="#">커뮤니티</a></li>
+						<li><a href="/community_board/list">커뮤니티</a></li>
 						<li><a href="/hospital/hospital_detail?hospital_no=<%= m.getMember_no() %>">병원상세정보</a></li>
 						<li><a href="/hospital/hospital_detail_modify?hospital_no=<%= m.getMember_no() %>">병원정보수정</a></li>
 						<li><a href="#">마이페이지</a></li>
+						
+						<!-- 관리자 로그인 -->
 						<%} else {%>
-						<li><a href="#">커뮤니티</a></li>
+						<li><a href="/community_board/list">커뮤니티</a></li>
 						<%} %>
 					</ul>
 				</nav>
