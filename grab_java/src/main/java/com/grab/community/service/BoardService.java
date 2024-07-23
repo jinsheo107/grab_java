@@ -77,8 +77,24 @@ public class BoardService {
 		return b;
 	}
 
+	//******* 공지사항 상세 내용 출력 *********
+	public Board noticeBoardContent(int boardNo) {
+		Connection conn = getConnection();
+		Board b = new BoardDao().noticeBoardContent(boardNo, conn);
+		close(conn);
+		return b;
+	}
+
 	// 게시글 리스트 출력
 	public List<Board> boardList(int boardType, Board b) {
+		Connection conn = getConnection();
+		List<Board> result = new BoardDao().boardList(boardType, b, conn);
+		close(conn);
+		return result;
+	}
+
+	//********** 공지사항 리스트 출력 **********
+	public List<Board> boardList(int boardType, Board b){
 		Connection conn = getConnection();
 		List<Board> result = new BoardDao().boardList(boardType, b, conn);
 		close(conn);
