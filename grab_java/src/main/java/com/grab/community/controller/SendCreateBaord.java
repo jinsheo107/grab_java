@@ -1,4 +1,4 @@
-package com.grab.common;
+package com.grab.community.controller;
 
 import java.io.IOException;
 
@@ -9,16 +9,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/index")
-public class IndexServlet extends HttpServlet {
+@WebServlet("/send/create/board")
+public class SendCreateBaord extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-    public IndexServlet() {
+    
+    public SendCreateBaord() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+		int boardType = Integer.parseInt(request.getParameter("boardType"));
+		request.setAttribute("boardType", boardType);
+		RequestDispatcher view = request.getRequestDispatcher("/views/community/create_board.jsp");
 		view.forward(request, response);
 	}
 

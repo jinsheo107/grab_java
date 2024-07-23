@@ -21,7 +21,7 @@
 			<div>
 				<nav class="header__menu notoSansMedium">
 					<ul>
-						<li><a href="#">커뮤니티</a></li>
+						<li><a href="/community_board/list">커뮤니티</a></li>
 						<li><a href="/hospital/hospital_detail">병원상세정보</a></li>
 						<li><a href="/hospital/hospital_detail_modify">병원정보수정</a></li>
 						<li><a href="#">마이페이지</a></li>

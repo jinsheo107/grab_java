@@ -21,7 +21,7 @@ public class JDBCTemplate {
 			String url = prop.getProperty("url");
 			String user = prop.getProperty("username");
 			String pw = prop.getProperty("userpw");
-			
+			System.out.println(url);
 			conn = DriverManager.getConnection(url, user, pw);
 		} catch(Exception e) {
 			e.printStackTrace();
