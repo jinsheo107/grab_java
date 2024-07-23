@@ -205,6 +205,47 @@ public class BoardDao {
 		}
 		return b;
 	}
+
+	//********** 공지사항 상세 출력 **********
+	public Board noticeBoardContent(int boardNo, Connection conn) {
+		Board b = new Board();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		try {
+			String sql1 = "UPDATE `admin_notice` SET `notice_view` = notice_view+1 WHERE `notice_no` = ?;";
+			pstmt = conn.prepareStatement(sql1);
+			pstmt.setInt(1, boardNo);
+			result = pstmt.executeUpdate();
+			String sql = "SELECT * FROM `admin_notice` b JOIN `member` m ON b.admin_no = m.member_no WHERE `notice_no` = ? ;";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				Board list = new Board(
+						rs.getInt("notice_no"),
+						rs.getInt("member_no"),
+						rs.getInt("notice_view"),
+						rs.getString("notice_title"),
+						rs.getString("notice_content"),
+						rs.getTimestamp("notice_reg_date").toLocalDateTime(),
+						rs.getTimestamp("notice_mod_date").toLocalDateTime(),
+						rs.getInt("member_type"),
+						rs.getString("member_id"),
+						rs.getInt(1),
+						rs.getString(1)
+						);
+				b = list;
+			}
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return b;
+	}
 	
 	// 게시글 리스트 출력
 	public List<Board> boardList(int boardType, Board b, Connection conn){
@@ -241,7 +282,43 @@ public class BoardDao {
 		}
 		return result;
 	}
-	
+
+	//********** 공지사항 리스트 출력 **********
+	public List<Board> noticeBoardList(int boardType, Board b, Connection conn){
+		List<Board> result = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int count = 0;
+		try {
+			String sql = "SELECT * FROM `admin_notice` b JOIN `member` m ON b.admin_no = m.member_no ORDER BY `notice_reg_date` DESC LIMIT "+b.getLimitPage()+", "+b.getBoardList();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardType);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Board list = new Board(
+						rs.getInt("notice_no"),
+						rs.getInt("member_no"),
+						rs.getInt("notice_view"),
+						rs.getString("notice_title"),
+						rs.getString("notice_content"),
+						rs.getTimestamp("notice_reg_date").toLocalDateTime(),
+						rs.getTimestamp("notice_mod_date").toLocalDateTime(),
+						rs.getInt("member_type"),
+						rs.getString("member_id"),
+						rs.getInt(1),
+						rs.getString(1)
+						);
+				result.add(list);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+
 	public int boardCount(Connection conn) {
 		int result = 0;
 		PreparedStatement pstmt = null;
