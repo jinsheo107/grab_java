@@ -15,7 +15,7 @@ import com.grab.hospital_detail.vo.Hospital;
 import com.grab.member_detail.service.MemberService;
 import com.grab.member_detail.vo.Member;
 
-@WebServlet(name="memberLoginEnd", urlPatterns="/member/loginEnd")
+@WebServlet(name="memberLoginEnd", urlPatterns="/member/loginEnd2")
 public class MemberLoginEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -20,34 +20,24 @@ import com.grab.hospital.dao.HospitalDepartmentDao;
 public class HospitalService {
 
 	// 회원 가입
-	public int createHospitalUser(Hospital h, Member m) {
-        Connection conn = getConnection();
-        MemberDao memberDao = new MemberDao();
-        HospitalDao hospitalDao = new HospitalDao();
-        HospitalDepartmentDao departmentDao = new HospitalDepartmentDao();
-
-        int result1 = memberDao.insertMember(m, conn);
-        if (result1 > 0) {
-            int memberNo = memberDao.getLastInsertId(conn);
-            h.setHospital_no(memberNo);
-            hospital_department department = new hospital_department();
-            department.setHospital_no(memberNo);
-
-            int result2 = hospitalDao.insertHospital(h, conn);
-            int result3 = departmentDao.insertHospitalDepartment(department, conn);
-
-            if (result2 > 0 && result3 > 0) {
-                JDBCTemplate.commit(conn);
-                return 1;
-            } else {
-            	JDBCTemplate.rollback(conn);
-                return 0;
-            }
-        } else {
-        	JDBCTemplate.rollback(conn);
-            return 0;
-        }
-    }
+	/*
+	 * public int createHospitalUser(Hospital h, Member m) { Connection conn =
+	 * getConnection(); MemberDao memberDao = new MemberDao(); HospitalDao
+	 * hospitalDao = new HospitalDao(); HospitalDepartmentDao departmentDao = new
+	 * HospitalDepartmentDao();
+	 * 
+	 * int result1 = memberDao.insertMember(m, conn); if (result1 > 0) { int
+	 * memberNo = memberDao.getLastInsertId(conn); h.setHospital_no(memberNo);
+	 * hospital_department department = new hospital_department();
+	 * department.setHospital_no(memberNo);
+	 * 
+	 * int result2 = hospitalDao.insertHospital(h, conn); int result3 =
+	 * departmentDao.insertHospitalDepartment(department, conn);
+	 * 
+	 * if (result2 > 0 && result3 > 0) { JDBCTemplate.commit(conn); return 1; } else
+	 * { JDBCTemplate.rollback(conn); return 0; } } else {
+	 * JDBCTemplate.rollback(conn); return 0; } }
+	 */
 
 	// 기존 가입 회원 검사
 	   public boolean isExistingMember(String memberId, String memberEmail) {

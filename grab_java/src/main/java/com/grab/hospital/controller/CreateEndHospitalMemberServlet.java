@@ -50,11 +50,11 @@ public class CreateEndHospitalMemberServlet extends HttpServlet {
             departments[i].setType_no(Integer.parseInt(specialties[i]));
             departments[i].setHospital_no(hospital.getHospital_no());
         }
-        int result = new HospitalService().createHospitalUser(hospital, member);
+		/* int result = new HospitalService().createHospitalUser(hospital, member); */
         RequestDispatcher view = request.getRequestDispatcher("/views/membership/membership.jsp");
-        if(result > 0) {
-            view = request.getRequestDispatcher("/views/index.jsp"); 
-        }
+//        if(result > 0) {
+//            view = request.getRequestDispatcher("/views/index.jsp"); 
+//        }
         view.forward(request,response);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
