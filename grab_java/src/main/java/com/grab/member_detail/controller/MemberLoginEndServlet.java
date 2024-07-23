@@ -24,8 +24,8 @@ public class MemberLoginEndServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("user_id");
-		String pw = request.getParameter("user_pw");
+		String id = request.getParameter("member_id");
+		String pw = request.getParameter("member_pw");
 		
 		Member m = new MemberService().loginMember(id, pw);
 		

@@ -27,7 +27,8 @@
 							if(m == null) {
 						%>
 						<li><a href="#">커뮤니티</a></li>
-						<li><a href="/member/login">로그인</a></li>
+						<!-- <li><a href="/member/login">로그인</a></li> -->
+						<li><a href="views/hospital_login/hospital_login_page.jsp">로그인</a></li>
 						<%} else if(m.getMember_type() == 2) {%>
 						<li><a href="#">커뮤니티</a></li>
 						<li><a href="#">마이페이지</a></li>
