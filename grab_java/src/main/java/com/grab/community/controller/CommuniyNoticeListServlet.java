@@ -39,7 +39,7 @@ public class CommuniyNoticeListServlet extends HttpServlet {
 		b.setTotalContent(new BoardService().boardCount(b));
 		List<Board> list = new ArrayList<Board>();
 		if (request.getParameter("boardList") == null) {
-			list = new BoardService().boardList(boardType, b);
+			list = new BoardService().noticeBoardList(boardType, b);
 		}
 
 		request.setAttribute("paging", b);
