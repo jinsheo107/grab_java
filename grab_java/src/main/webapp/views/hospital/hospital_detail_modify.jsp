@@ -84,8 +84,8 @@
 </head>
 <body>
 	<%@ include file="../include/hospital_nav.jsp"%>
-	<%@ page import="com.grab.hospital.vo.HospitalType, java.util.*"%>
-	<%@ page import="com.grab.hospital.vo.Hospital" %>
+	<%@ page import="com.grab.hospital_detail.vo.HospitalType,java.util.*"%>
+	<%@ page import="com.grab.hospital_detail.vo.Hospital" %>
 	<% Hospital hospital = (Hospital)request.getAttribute("hospital"); %>
 	
 	<% List<HospitalType> hospitalTypeList = (List<HospitalType>)request.getAttribute("hospitalTypeList");%>

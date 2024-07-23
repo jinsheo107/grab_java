@@ -92,7 +92,7 @@
 </head>
 <body>
 	<%@ include file="../include/hospital_nav.jsp"%>
-	<%@ page import="com.grab.hospital.vo.Review" %>
+	<%@ page import="com.grab.hospital_detail.vo.Review" %>
 	<% Review review = (Review)request.getAttribute("writenReview"); %>
 
 	<section class="feature-section about__spad"

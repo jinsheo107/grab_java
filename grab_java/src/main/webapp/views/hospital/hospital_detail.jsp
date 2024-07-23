@@ -155,9 +155,9 @@
 	
 		<%@ include file="../include/hospital_nav.jsp"%>
 	
-		<%@ page import="com.grab.hospital.vo.Hospital"%>
-		<%@ page import="com.grab.hospital.vo.Review"%>
-		<%@ page import="com.grab.hospital.vo.HospitalNotice"%>
+		<%@ page import="com.grab.hospital_detail.vo.Hospital"%>
+		<%@ page import="com.grab.hospital_detail.vo.Review"%>
+		<%@ page import="com.grab.hospital_detail.vo.HospitalNotice"%>
 	
 	
 		<%
@@ -191,7 +191,7 @@
 					<div class="col-lg-10">
 						<div class="about__wrapper">
 							<h3><%=hospital.getHospital_name()%></h3>
-							<%@ page import="com.grab.hospital.vo.Department, java.util.*"%>
+							<%@ page import="com.grab.hospital_detail.vo.Department, java.util.*"%>
 							<%
 							for (int i = 0; i < list.size(); i++) {
 							%>

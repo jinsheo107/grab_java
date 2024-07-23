@@ -9,7 +9,7 @@
 <body>
 	<%@ page contentType="text/html; charset=UTF-8" language="java"%>
 	<%@ page import="java.util.List"%>
-	<%@ page import="com.grab.hospital.vo.Review"%>
+	<%@ page import="com.grab.hospital_detail.vo.Review"%>
 	<%
 	Review paging = (Review) request.getAttribute("paging");
 	%>
