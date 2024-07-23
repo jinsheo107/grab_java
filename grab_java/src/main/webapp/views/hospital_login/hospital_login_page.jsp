@@ -42,25 +42,21 @@
                 <a href="#">마이페이지</a>
             </div>
         </div>
-        <div class="login-title">로그인</div>
+        <div class="login-title">병원 로그인</div>
         <div class="login-title-underline"></div>
         <div class="tab-content">
-            <div id="user-login" class="container tab-pane active"><br>
-                <form action="/views/hospital_login/index.jsp">
+            <div id="admin-login" class="container tab-pane fade"><br>
+                <form action="/../index.jsp">
                     <div class="form-group">
-                        <label for="user-id">아이디</label>
-                        <input type="text" class="form-control" id="user-id">
+                        <label for="admin-id">아이디</label>
+                        <input type="text" class="form-control" id="admin-id">
                     </div>
                     <div class="form-group">
-                        <label for="user-password">비밀번호</label>
-                        <input type="password" class="form-control" id="user-password">
+                        <label for="admin-password">비밀번호</label>
+                        <input type="password" class="form-control" id="admin-password">
                     </div>
-                    <button type="submit" class="login-button" onclick="loginForm()">로그인</button>
-                </form>
-            </div>
-            <div>
-                <form action="/views/hospital_login/hospital_login_page.jsp">
-                    <button type="submit" class="login-button2" style="display: inline-block;">병원 로그인</button>
+                    <button type="submit" class="login-button" onclick="loginform()">로그인</button>
+                <br>
                 </form>
             </div>
         </div>

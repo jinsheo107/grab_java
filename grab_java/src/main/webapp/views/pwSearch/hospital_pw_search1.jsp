@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="../../resources/css/flaticon.css" type="text/css">
     <link rel="stylesheet" href="../../resources/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="../../resources/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/hospital_pw_search1.css" type="text/css">
+    <link rel="stylesheet" href="../../resources/css/common/hospital_pw_search1.css" type="text/css">
 </head>
 <body>
     <div class="container">
@@ -40,15 +40,12 @@
             <div class="nav-links">
                 <a href="#">병원상세</a>
                 <a href="#">병원수정</a>
-                <a href="#">마이페이지</a>
+                <a href="/views/mypage/hospital_mypage.jsp">마이페이지</a>
             </div>
         </div>
        <form id="myForm" action="hospital_pw_search2.jsp">
         <div class="signup-title">비밀번호 찾기</div>
         <div class="signup-title-underline"></div>
-        <div>
-            <p><strong>회원정보에 등록한 본인확인 이메일 주소와 입력한 이메일 주소가 같아야, 인증번호를 받을 수 있습니다.</strong></p>
-        </div>
         <div class="signup-content">
             <div class="form-group">
                 <label for="name">이름</label>
@@ -57,18 +54,17 @@
             <div class="form-group">
                 <label for="email">이메일</label>
                 <input type="email" class="form-control" id="email">
-                <button type="button" class="btn btn-outline-secondary" id="send-code-button">인증번호 받기</button>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="auth-code">인증번호</label>
                 <input type="text" class="form-control" id="auth-code" placeholder="인증번호 6자리 숫자 입력">
-            </div>
-            <div class="description">
+            </div> -->
+            <!-- <div class="description">
                 <a href="#" id="show-description">인증번호가 오지 않았나요? [?]</a>
-            </div>
-            <div class="description-box" id="description-box">
+            </div> -->
+            <!-- <div class="description-box" id="description-box">
                 <p>‘여기아파’가 발송한 메일이 스팸 메일로 분류된 것은 아닌지 확인해 주세요. 스팸 메일함에서 메일이 없다면, 다시 한 번 ‘인증번호 받기’를 눌러주세요.</p>
-            </div>
+            </div> -->
             <button type="button" class="signup-button" onclick="checkAgreement">다음</button>
         </div>
         <div class="footer">
@@ -86,17 +82,7 @@
     <script src="../../resources/js/owl.carousel.min.js"></script>
     <script src="../../resources/js/main.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('show-description').addEventListener('click', function (e) {
-                e.preventDefault();
-                document.getElementById('description-box').style.display = 'block';
-            });
-
-            document.getElementById('send-code-button').addEventListener('click', function () {
-                alert('인증번호가 발송되었습니다.');
-                // 실제로는 서버와 통신하여 인증번호를 발송하는 코드를 작성해야 합니다.
-            });
-        });
+        
         
         function checkAgreement(){
         	document.getElementById('myForm').submit();

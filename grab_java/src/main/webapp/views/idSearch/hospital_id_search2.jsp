@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="../../resourcescss/flaticon.css" type="text/css">
     <link rel="stylesheet" href="../../resourcescss/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="../../resourcescss/slicknav.min.css" type="text/css">  -->
-    <link rel="stylesheet" href="../../resources/css/hospital_id_search2.css" type="text/css">
+    <link rel="stylesheet" href="../../resources/css/common/hospital_id_search2.css" type="text/css">
 </head>
 <body>
     <div class="container">
@@ -39,7 +39,7 @@
             <div class="nav-links">
                 <a href="#">병원상세</a>
                 <a href="#">병원수정</a>
-                <a href="#">마이페이지</a>
+                <a href="/views/mypage/hospital_mypage.jsp">마이페이지</a>
             </div>
         </div>
         <div class="signup-title">아이디 찾기</div>
@@ -49,8 +49,7 @@
         </div>
         <div class="signup-content">
             <div class="info-box">
-                <span>○○병원</span>
-                <span class="date">가입 : 2024.07.06</span>
+                <span><%= request.getAttribute("member_id") %>></span>
             </div>
             <div class="form-buttons">
                 <button type="button" class="signup-button">로그인하기</button>

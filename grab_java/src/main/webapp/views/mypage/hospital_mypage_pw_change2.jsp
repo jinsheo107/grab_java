@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="../../resources/css/flaticon.css" type="text/css">
     <link rel="stylesheet" href="../../resources/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="../../resources/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/hospital_mypage_pw_change2.css" type="text/css">
+    <link rel="stylesheet" href="../../resources/css/common/hospital_mypage_pw_change2.css" type="text/css">
     
 </head>
 <body>
@@ -35,19 +35,19 @@
         <div class="nav-links">
             <a href="#">병원상세</a>
             <a href="#">병원수정</a>
-            <a href="#">마이페이지</a>
+            <a href="hospital_mypage.jsp">마이페이지</a>
         </div>
     </div>
-    <form id="myForm" action="index.jsp">
+    <form id="myForm" action="hospital_mypage.jsp">
     <div class="container2">
         <div class="sidebar2">
             <div>
-                <a href="#" class="nav-link active">비밀번호 변경</a>
+                <a href="hospital_mypage_change1.jsp" class="nav-link active">비밀번호 변경</a>
                 <hr>
-                <a href="#" class="nav-link">답글 내역</a>
+                <a href="hospital_mypage_comment.jsp" class="nav-link">답글 내역</a>
                 <hr>
             </div>
-            <a href="#" class="nav-link last">회원탈퇴 ></a>
+            <a href="hospital_membershipwithdrawal.jsp" class="nav-link last">회원탈퇴 ></a>
         </div>
         <div class="main-content2">
             <h2>마이페이지</h2>

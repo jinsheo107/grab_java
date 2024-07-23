@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="../../resources/css/flaticon.css" type="text/css">
     <link rel="stylesheet" href="../../resources/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="../../resources/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/hospital_pw_search2.css" type="text/css">
+    <link rel="stylesheet" href="../../resources/css/common/hospital_pw_search2.css" type="text/css">
 </head>
 <body>
 	<form id="myForm" action="index.jsp">
@@ -41,7 +41,7 @@
             <div class="nav-links">
                 <a href="#">병원상세</a>
                 <a href="#">병원수정</a>
-                <a href="#">마이페이지</a>
+                <a href="/views/mypage/hospital_mypage.jsp">마이페이지</a>
             </div>
         </div>
         <div class="signup-title">비밀번호 찾기</div>

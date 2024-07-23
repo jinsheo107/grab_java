@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="com.grab.member.vo.Member" %>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>병원 회원 마이페이지</title>
-
     <meta charset="UTF-8">
     <meta name="description" content="Deerhost Template">
     <meta name="keywords" content="Deerhost, unica, creative, html">
@@ -25,7 +26,7 @@
     <link rel="stylesheet" href="../../resources/css/flaticon.css" type="text/css">
     <link rel="stylesheet" href="../../resources/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="../../resources/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/hospital_mypage.css" type="text/css">
+    <link rel="stylesheet" href="../../resources/css/common/hospital_mypage.css" type="text/css">
 </head>
 <body>
     <div class="header">
@@ -34,30 +35,28 @@
         <div class="nav-links">
             <a href="#">병원상세</a>
             <a href="#">병원수정</a>
-            <a href="#">마이페이지</a>
+            <a href="hospital_mypage.jsp">마이페이지</a>
         </div>
     </div>
     <div class="container2">
         <div class="sidebar2">
             <div>
-                <a href="#" class="nav-link active">비밀번호 변경</a>
+                <a href="hospital_mypage_change1.jsp" class="nav-link active">비밀번호 변경</a>
                 <hr>
-                <a href="#" class="nav-link">답글 내역</a>
+                <a href="hospital_mypage_comment.jsp" class="nav-link">답글 내역</a>
                 <hr>
             </div>
-            <a href="#" class="nav-link last">회원탈퇴 ></a>
+            <a href="hospital_membershipwithdrawal.jsp" class="nav-link last">회원탈퇴 ></a>
         </div>
         <div class="main-content2">
             <h2>마이페이지</h2>
             <hr>
             <h3>회원정보</h3>
-            <div class="profile" style="margin-top: 50px;"> 
+            <div class="profile" style="margin-top: 50px;">
                 <img src="../세미 프로젝트/img/404.png" alt="프로필 이미지">
                 <div class="profile-info">
-                    <h2>○○병원</h2>
-                    <p>리뷰 6 | 로그인 횟수 4</p>
-                    <p>아이디: heo33swim</p>
-                    <p>이메일: swimming@gmail.com</p>
+                    <h2><%= ((Member)session.getAttribute("loggedInMember")).getMember_id() %></h2>
+                    <p>이메일: <%= ((Member)session.getAttribute("loggedInMember")).getMember_email() %></p>
                 </div>
             </div>
         </div>
@@ -68,8 +67,8 @@
         이메일: support@example.com <br>
         Copyright © GDacademy
     </div>
-     <!-- Js Plugins -->
-   <script src="../../resources/js/jquery-3.7.1.js"></script>
+    <!-- Js Plugins -->
+    <script src="../../resources/js/jquery-3.7.1.js"></script>
     <script src="../../resources/js/bootstrap.min.js"></script>
     <script src="../../resources/js/jquery.slicknav.js"></script>
     <script src="../../resources/js/owl.carousel.min.js"></script>

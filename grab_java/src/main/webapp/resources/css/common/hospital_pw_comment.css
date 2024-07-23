@@ -1,0 +1,25 @@
+@charset "UTF-8";
+ .form-group2 {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .form-group2 table {
+            width: 100%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        .form-group2 th, .form-group2 td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        .form-group2 th {
+            background-color: #f2f2f2;
+        }
+        .form-group2 .paging {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .form-group2 input, .form-group2 button {
+            margin: 10px 5px;
+        }
