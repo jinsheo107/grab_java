@@ -28,6 +28,7 @@
 		href="../../resources/css/common/slicknav.min.css" type="text/css">
 	<link rel="stylesheet" href="../../resources/css/common/style.css"
 		type="text/css">
+		<link rel="stylesheet" href="../../resources/css/community/게시글 리스트.css" type="text/css">
 	
 	<style>
 	.pagination {
@@ -482,7 +483,7 @@
 								<%
 								if (paging != null && selectedReviewList != null && !selectedReviewList.isEmpty() && reviewMemberList != null
 										&& !reviewMemberList.isEmpty()) {
-									for (int i = 0; i < Math.min(selectedReviewList.size(), reviewMemberList.size()); i++) {
+									for (int i = 0; i < selectedReviewList.size(); i++) {
 								%>
 								<tr style="background-color: #f0f0f0;">
 									<td style="padding: 10px; width: 10%;"><%=reviewMemberList.get(i).getMember_id().substring(0, 3) + "***"%>

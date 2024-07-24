@@ -35,7 +35,8 @@ public class HospitalDetailServlet extends HttpServlet {
 		
 		String hospital_no_par = (String)request.getParameter("hospital_no");
 		
-		int hospital_no = Integer.parseInt(hospital_no_par);		
+		int hospital_no = Integer.parseInt(hospital_no_par);
+		
 		
 		Hospital hospital = new HospitalGetService().getHospital(hospital_no);
 		
@@ -45,11 +46,10 @@ public class HospitalDetailServlet extends HttpServlet {
 		request.setAttribute("hospital", hospital);
 
 		// 리뷰 리스트
+		
 		List<Review> reviewList = new ReviewService().getReviewList(hospital_no);
 		request.setAttribute("reviewList", reviewList);
 
-		
-		
 		// 리뷰의 총 키워드
 		if(!reviewList.isEmpty()) {
 			Map<String, Integer> reviewKeywordListMap = new HospitalGetService().getKeyword(reviewList);
@@ -69,7 +69,8 @@ public class HospitalDetailServlet extends HttpServlet {
 
 		reveiwOption.setTotalData(reviewList.size());
 
-		List<Review> selectedReviewList = new ReviewService().selectReviewList(reveiwOption);
+		List<Review> selectedReviewList = new ReviewService().selectReviewList(hospital_no, reveiwOption);
+		
 		
 		List<Member> review_member_list = new HospitalGetService().getMemberList(selectedReviewList);
 		request.setAttribute("reviewMemberList", review_member_list);

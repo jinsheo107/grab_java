@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="javax.servlet.http.HttpSession" %>
-<%@ page import="com.grab.member.vo.Member" %>
+<%@ page import="com.grab.member_detail.vo.Member" %>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -27,19 +27,133 @@
     <link rel="stylesheet" href="../../resources/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="../../resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="../../resources/css/common/hospital_mypage.css" type="text/css">
+    
+    <style>
+    @charset "UTF-8";
+body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #f9f9f9;
+            border-bottom: 1px solid #ddd;
+        }
+        .header img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+        .header a {
+            font-size: 24px;
+            font-weight: bold;
+            color: #000;
+            text-decoration: none;
+        }
+        .nav-links {
+            margin-left: auto;
+            display: flex;
+            gap: 20px;
+        }
+        .nav-links a {
+            color: #000;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+        .container3 {
+            display: flex;
+            flex: 1;
+            margin-top: 20px;
+        }
+        .sidebar3 {
+            display : flex;
+            border-right: 1px solid #b8860b;
+            padding-right: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width : 30%;
+        }
+        .sidebar3 .nav-link {
+            display: block;
+            padding: 10px;
+            margin-bottom: 10px;
+            color: #000;
+            background-color: white;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .sidebar3 .nav-link.active {
+            background-color: white; 
+        }
+        .sidebar3 .nav-link:hover {
+            background-color: white; 
+        }
+        .sidebar3 .nav-link.last {
+            font-size: 12px; 
+            background-color: #ede8e8; 
+            padding: 5px; 
+            margin-bottom: 20px; 
+        }
+        .main-content3 {
+            diplay : flex;
+            width : 70%;
+            padding-left: 20px;
+        }
+        .profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-direction: column; 
+            justify-content: center; 
+        }
+        .profile img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 20px; 
+        }
+        .profile-info {
+            text-align: center;
+        }
+        .profile-info h2 {
+            margin: 0;
+            font-size: 24px;
+            color: #b8860b;
+        }
+        .profile-info p {
+            margin: 5px 0;
+            color: #666;
+        }
+        .footer2 {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            padding: 10px 20px;
+            border-top: 1px solid #ddd;
+            background-color: #f9f9f9;
+            position: relative;
+        }
+        .footer2 a {
+            color: #666;
+        }
+    
+    </style>
 </head>
 <body>
-    <div class="header">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="33" height="33" fill="currentColor"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM336 152V256 360c0 13.3-10.7 24-24 24s-24-10.7-24-24V280H160l0 80c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-208c0-13.3 10.7-24 24-24s24 10.7 24 24v80H288V152c0-13.3 10.7-24 24-24s24 10.7 24 24z"/></svg>
-        <a href="#">여기아파</a>
-        <div class="nav-links">
-            <a href="#">병원상세</a>
-            <a href="#">병원수정</a>
-            <a href="hospital_mypage.jsp">마이페이지</a>
-        </div>
-    </div>
-    <div class="container2">
-        <div class="sidebar2">
+    <%@ include file="../include/hospital_nav.jsp"%>
+    <div class="container3">
+        <div class="sidebar3">
             <div>
                 <a href="hospital_mypage_change1.jsp" class="nav-link active">비밀번호 변경</a>
                 <hr>
@@ -48,15 +162,15 @@
             </div>
             <a href="hospital_membershipwithdrawal.jsp" class="nav-link last">회원탈퇴 ></a>
         </div>
-        <div class="main-content2">
+        <div class="main-content3">
             <h2>마이페이지</h2>
             <hr>
             <h3>회원정보</h3>
             <div class="profile" style="margin-top: 50px;">
                 <img src="../세미 프로젝트/img/404.png" alt="프로필 이미지">
                 <div class="profile-info">
-                    <h2><%= ((Member)session.getAttribute("loggedInMember")).getMember_id() %></h2>
-                    <p>이메일: <%= ((Member)session.getAttribute("loggedInMember")).getMember_email() %></p>
+                    <h2>아이디: <%= m.getMember_id() %></h2>
+                    <p>이메일: <%= m.getMember_email() %></p>
                 </div>
             </div>
         </div>

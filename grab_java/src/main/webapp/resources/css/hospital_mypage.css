@@ -38,12 +38,12 @@ body {
         .nav-links a:hover {
             text-decoration: underline;
         }
-        .container {
+        .container3 {
             display: flex;
             flex: 1;
             margin-top: 20px;
         }
-        .sidebar {
+        .sidebar3 {
             flex: 1;
             border-right: 1px solid #b8860b;
             padding-right: 20px;
@@ -51,7 +51,7 @@ body {
             flex-direction: column;
             justify-content: space-between;
         }
-        .sidebar .nav-link {
+        .sidebar3 .nav-link {
             display: block;
             padding: 10px;
             margin-bottom: 10px;
@@ -61,13 +61,13 @@ body {
             text-align: center;
             border-radius: 5px;
         }
-        .sidebar .nav-link.active {
+        .sidebar3 .nav-link.active {
             background-color: white; 
         }
-        .sidebar .nav-link:hover {
+        .sidebar3 .nav-link:hover {
             background-color: white; 
         }
-        .sidebar .nav-link.last {
+        .sidebar3 .nav-link.last {
             font-size: 12px; 
             background-color: #ede8e8; 
             padding: 5px; 
@@ -102,7 +102,7 @@ body {
             margin: 5px 0;
             color: #666;
         }
-        .footer {
+        .footer2 {
             font-size: 12px;
             color: #666;
             text-align: center;
@@ -111,6 +111,6 @@ body {
             background-color: #f9f9f9;
             position: relative;
         }
-        .footer a {
+        .footer2 a {
             color: #666;
         }

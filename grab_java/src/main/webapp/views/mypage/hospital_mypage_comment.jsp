@@ -1,6 +1,6 @@
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
-<%@ page import="com.grab.review.vo.Review" %>
+<%@ page import="com.grab.hospital_detail.vo.Review" %>
 <%
     List<Review> reviewList = (List<Review>) request.getAttribute("reviewList");
 %>
@@ -15,7 +15,7 @@
     <meta name="keywords" content="Deerhost, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>DEERHOST | Template</title>
+    <title>여기아파</title>
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,6 +29,123 @@
     <link rel="stylesheet" href="../../resources/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="../../resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="../../resources/css/common/hospital_mypage.css" type="text/css">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #F5F5F5;
+        }
+        .header-section {
+            width: 100%;
+        }
+        .main-content { /* 추가: 전체 콘텐츠를 감싸는 컨테이너 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        .container2 {
+            width: 80%;
+            max-width: 1200px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            display: flex;
+            overflow: hidden;
+            margin: 20px auto;
+            margin-top: 10%;
+        }
+        .section-title {
+            display: inline-block;
+            position: relative;
+            text-align: left;
+            left: 10%;
+            margin-bottom: 20px;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 800%;
+            height: 3px;
+            background-color: rgb(173, 152, 80);
+            position: absolute;
+            bottom: -5px;
+            left: 400%;
+            transform: translateX(-50%);
+        }
+        .sidebar {
+            width: 250px;
+            border-right: 1px solid #ddd;
+            background-color: #F8F8F8;
+            padding: 20px;
+        }
+        .sidebar h3 {
+            margin-top: 0;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #000;
+            display: block;
+        }
+        .sidebar ul li a.active {
+            color: blue;
+            font-weight: 600;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .content h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .content p {
+            margin: 10px 0;
+        }
+        .footer {
+            background-color: #F1F1F1;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 14px;
+            color: #666;
+            width: 100%;
+            margin-top: auto;
+        }
+        .footer a {
+            color: #666;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .footer_text {
+            margin: 5px 0;
+            text-align: left;
+            padding-left: 2%;
+        }
+    </style>
 </head>
 <body>
     <div class="header">
@@ -67,22 +184,22 @@
                                     <th>작성 시간</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <%-- <tbody>
                                 <%
                                     int index = 1;
                                     if (reviewList != null) {
                                         for (Review review : reviewList) {
                                 %>
                                 <tr>
-                                    <td><%= index++ %></td>
-                                    <td><%= review.getReviewContent() %></td>
+                                    <td><%= ++index %></td>
+                                    <td><%= review. %></td>
                                     <td><%= review.getRegDate() %></td>
                                 </tr>
                                 <%
                                         }
                                     }
                                 %>
-                            </tbody>
+                            </tbody> --%>
                         </table>
                         <div class="paging3">
                             <span>&lt; 1 &gt;</span>
@@ -104,4 +221,4 @@
     <script src="../../resources/js/jquery.slicknav.js"></script>
     <script src="../../resources/js/owl.carousel.min.js"></script>
     <script src="../../resources/js/main.js"></script>
-    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> --%>
+    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>

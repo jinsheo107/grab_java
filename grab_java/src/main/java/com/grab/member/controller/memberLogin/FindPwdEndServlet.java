@@ -34,7 +34,6 @@ public class FindPwdEndServlet extends HttpServlet {
 		MemberService service = new MemberService();
 		Member m = service.searchPw(id,email);
 		
-		System.out.println("sevlet : " + m);
 		if(m != null) {
 			RequestDispatcher rd = request.getRequestDispatcher("/views/member/memberFind/find_pw_2.jsp");
 			request.setAttribute("member", m);

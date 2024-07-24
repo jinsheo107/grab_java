@@ -20,7 +20,6 @@ public class CreateEndHospitalMemberServlet extends HttpServlet {
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("create_id");
-        System.out.println("id: " + id);
         String pw = request.getParameter("create_pw");
         String email = request.getParameter("create_email");
         String name = request.getParameter("hospital_name");

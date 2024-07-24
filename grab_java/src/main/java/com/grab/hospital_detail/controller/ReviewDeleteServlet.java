@@ -26,14 +26,7 @@ public class ReviewDeleteServlet extends HttpServlet {
 		int hospital_no = Integer.parseInt(hospital_no_par);
 		
 		int result = new ReviewService().deleteReview(review_no);
-		
-		if(result > 0) {
-			System.out.println("delete review success");
-		} else if (result == -1){ 
-		} else {
-			System.out.println("delete review fail");
-		}
-		
+
 		request.setAttribute("hospital_no", hospital_no);
 		
 		RequestDispatcher view = request.getRequestDispatcher("/hospital/hospital_detail");

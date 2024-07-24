@@ -203,7 +203,7 @@
       </div>
     </div>
   </section>
-  
+  <link rel="stylesheet" href="../../resources/css/community/게시글 리스트.css" type="text/css">
   <footer>
     <div class="footer_align">
       <div class="footer_content">

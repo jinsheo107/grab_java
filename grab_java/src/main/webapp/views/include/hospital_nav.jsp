@@ -28,21 +28,21 @@
 							/* 비로그인 */
 							if(m == null) {
 						%>
-						<li><a href="/community_board/list">커뮤니티</a></li>
+						<!-- <li><a href="/community_board/list">커뮤니티</a></li> -->
 						<!-- <li><a href="/member/login">로그인</a></li> -->
-						<li><a href="views/member/memberLogin/login.jsp">로그인</a></li>
+						<li><a href="/views/member/memberLogin/login.jsp">로그인</a></li>
 						
 						<!-- 일반회원 로그인 -->
 						<%} else if(m.getMember_type() == 2) {%>
 						<li><a href="/community_board/list">커뮤니티</a></li>
-						<li><a href="#">마이페이지</a></li>
+						<li><a href="/views/member/memberPage/mypage_main.jsp">마이페이지</a></li>
 						<li><a href="/member/logout">로그아웃</a></li>
 						<!-- 병원회원 로그인 -->
 						<%} else if(m.getMember_type() == 3) {%>
 						<li><a href="/community_board/list">커뮤니티</a></li>
 						<li><a href="/hospital/hospital_detail?hospital_no=<%= m.getMember_no() %>">병원상세정보</a></li>
 						<li><a href="/hospital/hospital_detail_modify?hospital_no=<%= m.getMember_no() %>">병원정보수정</a></li>
-						<li><a href="#">마이페이지</a></li>
+						<li><a href="/views/mypage/hospital_mypage.jsp">마이페이지</a></li>
 						<li><a href="/member/logout">로그아웃</a></li>
 						<!-- 관리자 로그인 -->
 						<%} else {%>

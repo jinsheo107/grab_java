@@ -56,10 +56,8 @@ public class CreateEndServlet extends HttpServlet {
 		//		= request.getRequestDispatcher("/views/memberLoginPage/memberLogin/member_create_fail.jsp");
 
 		if(result > 0) {
-			System.out.println("회원가입 성공");
 			response.sendRedirect("/");
 		}else {
-			System.out.println("회원가입 실패");
 			out.println("<html><body>");
 			out.println("<script>alert('회원가입에 실패하였습니다.')</script>");
 			out.println("</body></html>");

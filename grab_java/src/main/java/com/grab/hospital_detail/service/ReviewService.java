@@ -29,10 +29,10 @@ public class ReviewService {
 		return result;
 	}
 	
-	public List<Review> selectReviewList (Review option) {
+	public List<Review> selectReviewList (int hospital_no, Review option) {
 		Connection conn = getConnection();
 		
-		List<Review> result = new ReviewDao().selectedReviewList(option, conn);
+		List<Review> result = new ReviewDao().selectedReviewList(hospital_no, option, conn);
 		
 		close(conn);
 		

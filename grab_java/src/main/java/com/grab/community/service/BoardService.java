@@ -38,7 +38,6 @@ public class BoardService {
 
 	// 댓글 삭제
 	public int deleteComment(int commentNo) {
-		System.out.println("서블릿 확인");
 		Connection conn = getConnection();
 		int result = new BoardDao().deleteComment(commentNo, conn);
 		close(conn);
@@ -76,6 +75,14 @@ public class BoardService {
 		close(conn);
 		return b;
 	}
+	
+	// 공지사항 상세 내용 출력
+		public Board noticeBoardContent(int boardNo) {
+			Connection conn = getConnection();
+			Board b = new BoardDao().noticeBoardContent(boardNo, conn);
+			close(conn);
+			return b;
+		}
 
 	// 게시글 리스트 출력
 	public List<Board> boardList(int boardType, Board b) {
@@ -84,6 +91,14 @@ public class BoardService {
 		close(conn);
 		return result;
 	}
+	
+	// 공지사항 리스트 출력
+		public List<Board> noticeBoardList(int boardType, Board b) {
+			Connection conn = getConnection();
+			List<Board> result = new BoardDao().noticeBoardList(boardType, b, conn);
+			close(conn);
+			return result;
+		}
 
 	// 페이징 바 세팅
 	public int boardCount() {

@@ -36,10 +36,8 @@ public class HospitalDetailModifyEndServlet extends HttpServlet {
 		int updateDetail = new HospitalDetailModifyService().detailModify(hospital_no, hospital_time, hospital_lunch_time, doctor_num, hospital_phone, selectedTypes);
 		
         if(updateDetail > 0) {
-        	System.out.println("success");
         	request.setAttribute("alertMessage", "정보 변경에 성공했습니다.");
         } else {
-        	System.out.println("fail");
         	request.setAttribute("alertMessage", "정보 변경에 실패했습니다.");
         }
         

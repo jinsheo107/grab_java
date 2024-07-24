@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="../../resources/css/common/owl.carousel.min.css" type="text/css">
   <link rel="stylesheet" href="../../resources/css/common/slicknav.min.css" type="text/css">
   <link rel="stylesheet" href="../../resources/css/common/style.css" type="text/css">
+  <link rel="stylesheet" href="../../resources/css/community/게시글 리스트.css" type="text/css">
 </head>
 <body>
 	<%@ include file="../include/hospital_nav.jsp" %>

@@ -107,7 +107,7 @@ public class HospitalGetService {
 	
 	public Map<String, Object> getStarType(int hospital_no) {
 		Connection conn = getConnection();
-		
+				
 		Map<String, Object> result = new HashMap<String, Object>();
 		
 		List<Department> departmentResult = new HospitalGetDao().getDepartment(hospital_no, conn);

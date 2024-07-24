@@ -32,7 +32,6 @@
     <!-- 게시글 제목 -->
     <%@page import="com.grab.community.vo.Board,com.grab.community.vo.BoardComment, java.util.*" %>
     <% Board boardContent = (Board)request.getAttribute("boardContent"); %>
-    <% List<BoardComment> list = (List<BoardComment>)request.getAttribute("comment");%>
     <div class="board_title">
     <!-- 게시글 제목 -->
       <p class="notoSansMedium">
@@ -43,7 +42,8 @@
       <div class="board_header">
         <div class="board_writer notoSansMedium">
         <!-- 작성자명 -->
-          <%=boardContent.getMember_name()%>
+          <%-- <%=boardContent.getMember_name()%> --%>
+          관리자
         </div>
         <p class="board_reg_date notoSansRegular">
         <!-- 수정 날짜 -->
@@ -59,13 +59,6 @@
             </svg>
             <!-- 조회수 -->
             &nbsp;<%=boardContent.getHits()%>
-          </li>
-          <li>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#79747E" class="bi bi-chat-left" viewBox="0 0 16 16">
-              <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
-            </svg>
-            <!-- 댓글수 -->
-            &nbsp;<%=list.size()%>
           </li>
         </ul>
       </div>

@@ -12,7 +12,7 @@
     <meta name="keywords" content="Deerhost, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>DEERHOST | Template</title>
+
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -76,7 +76,7 @@
                         </div>
                         <div class="checkbox-group">
                             <input type="checkbox" id="agree-location" name="agreement">
-                            <label for="agree-location">위치 기반 서비스 이용</label>
+                            <label for="agree-location">(선택) 위치 기반 서비스 이용</label>
                         </div>
                         <div class="description-text">
                             위치기반 서비스 이용약관에 동의하시면, 위치를 활용한 광고 정보 수신 등을 포함하는 여기어때 위치기반 서비스를 이용할 수 있습니다.
@@ -86,7 +86,7 @@
     <label for="create_id">아이디(필수)</label>
     <div id="idCheckMessage"></div>
     <input type="text" id="create_id" name="member_id" class="form-control" placeholder="아이디를 입력하세요">
-    <input type="button" class="form-control" onclick="checkIdServlet()" value="아이디 중복확인">
+    <input type="button" class="form-control" onclick="checkIdServlet()" value="아이디 중복확인" style="width: 30%; font-size: 12px;">
 </div>
 <div class="form-group">
     <label for="user-password">비밀번호(필수)</label>

@@ -63,7 +63,7 @@
             <%@page import="com.grab.community.vo.Board, java.util.*" %>
             <% List<Board> list = (List<Board>)request.getAttribute("boardList");%>
             <%for(int i = 0; i<list.size(); i++){%>
-                <a href="/board/content?boardNo=<%=list.get(i).getBoard_no()%>" class="list-group-item-action active tab">
+                <a href="/board/notice/content?boardNo=<%=list.get(i).getBoard_no()%>" class="list-group-item-action active tab">
                     <ul>
                         <li class="number2"><%=list.get(i).getBoard_no()%></li>
                         <li class="title2">
@@ -115,7 +115,6 @@
                 <%} %>
                     <ul class="notoSansBold">
                 		<% for(int i = paging.getPagingBarStart(); i <= paging.getPagingBarEnd(); i++){ %>
-                		<% System.out.println(i+"정렬넘버"); %>
                         <li>
 	                        <a href="/community_board/list?nowPage=<%=i%>"<%=paging.getNowPage() == i ? "class='nowPage active'" : "" %>>
 	                        <%=i %>

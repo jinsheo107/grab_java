@@ -58,14 +58,12 @@ public class HospitalGetDao {
 		try {
             String sql = "SELECT * FROM member WHERE member_no = ?";
             pstmt = conn.prepareStatement(sql);
-            
-            System.out.println("size: " + reviewList.size());
+          
 
             for (Review review : reviewList) {
                 pstmt.setInt(1, review.getMember_no());
                 rs = pstmt.executeQuery();
-                
-                System.out.println(review.getMember_no());
+               
 
                 if (rs.next()) {
                     Member member = new Member(
@@ -122,10 +120,11 @@ public class HospitalGetDao {
 		ResultSet rs = null;
 
 		try {
-			String departmetSql = "SELECT h.hospital_no, h.hospital_name, ty.type_content FROM `hospital_department` de JOIN `hospital_type` ty ON de.type_no = ty.type_no JOIN `hospital` h ON h.hospital_no = de.hospital_no WHERE h.hospital_no = ?";
+			String departmetSql = "SELECT h.hospital_no, h.hospital_name, ty.type_content FROM `hospital_department` de JOIN `hospital_type` ty ON de.type_no = ty.type_no JOIN `hospital` h ON h.hospital_no = de.hospital_no WHERE h.hospital_no = ? AND h.hospital_whether = ?";
 
 			pstmt = conn.prepareStatement(departmetSql);
 			pstmt.setInt(1, hospital_no);
+			pstmt.setString(2, "Y");
 
 			rs = pstmt.executeQuery();
 
@@ -258,7 +257,7 @@ public class HospitalGetDao {
 			String sql = "SELECT * FROM hospital";
 			if(keyword != null) {
 				sql = "SELECT h.*  FROM `hospital_department` de JOIN `hospital_type` ty ON de.type_no = ty.type_no JOIN `hospital` h ON h.hospital_no = de.hospital_no"
-						+ " WHERE h.hospital_name LIKE CONCAT('%', '" + keyword + "', '%') OR ty.type_content LIKE CONCAT('%', '" + keyword + "', '%') GROUP BY de.hospital_no";
+						+ " WHERE (h.hospital_name LIKE CONCAT('%', '" + keyword + "', '%') OR ty.type_content LIKE CONCAT('%', '" + keyword + "', '%')) AND h.hospital_whether = 'Y' GROUP BY de.hospital_no";
 			}
 			
 			sql += " LIMIT " + option.getLimitPageNo() + ", " + option.getNumPerPage();

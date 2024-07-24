@@ -106,16 +106,19 @@ public class ReviewDao {
 		return result;
 	}
 
-	public List<Review> selectedReviewList(Review option, Connection conn) {
+	public List<Review> selectedReviewList(int hospital_no, Review option, Connection conn) {
 		List<Review> result = new ArrayList<Review>();
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
-			String sql = "SELECT * FROM `review` LIMIT " + option.getLimitPageNo() + ", " + option.getNumPerPage();
+			String sql = "SELECT * FROM `review` WHERE hospital_no = ? LIMIT " + option.getLimitPageNo() + ", " + option.getNumPerPage();
 
 			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, hospital_no);
+			
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -240,7 +243,7 @@ public class ReviewDao {
 			}
 
 			if (re > 0) {
-				String findReviewMapSql = "SELECT COUNT(*) cnt FROM review_keyword_mapping = ?";
+				String findReviewMapSql = "SELECT COUNT(*) cnt FROM review_keyword_mapping WHERE review_no = ?;";
 
 				pstmt = conn.prepareStatement(findReviewMapSql);
 				pstmt.setInt(1, review_no);
@@ -248,15 +251,12 @@ public class ReviewDao {
 				rs = pstmt.executeQuery();
 
 				if (rs.next() && rs.getInt("cnt") > 0) {
-					String deleteMappingSql = "DELETE FROM review_keyword_mapping WHERE review_no = ?";
+					String deleteMappingSql = "DELETE FROM review_keyword_mapping WHERE review_no = ?;";
 					pstmt = conn.prepareStatement(deleteMappingSql);
 					pstmt.setInt(1, review_no);
-
-					
+					re = pstmt.executeUpdate();
 				}
 				
-				re = pstmt.executeUpdate();
-
 				String insertMappingSql = "INSERT INTO `review_keyword_mapping` (keyword_no, review_no) VALUES (?, ?)";
 
 				pstmt = conn.prepareStatement(insertMappingSql);

@@ -33,7 +33,6 @@ public class FindIdEndServlet extends HttpServlet {
 				MemberService service = new MemberService();
 				Member m = service.searchId(email);
 				
-				System.out.println("member : " + m);
 
 				if(m != null) {
 					RequestDispatcher rd = request.getRequestDispatcher("/views/member/memberFind/find_id_2.jsp");

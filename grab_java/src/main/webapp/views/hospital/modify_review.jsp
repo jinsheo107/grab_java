@@ -28,6 +28,7 @@
 	href="../../resources/css/common/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="../../resources/css/common/style.css"
 	type="text/css">
+	<link rel="stylesheet" href="../../resources/css/community/게시글 리스트.css" type="text/css">
 
 <style>
 .rasting__star .star_radio {

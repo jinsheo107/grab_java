@@ -28,8 +28,6 @@ public class CommuniyNoticeListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Connection conn = getConnection();
-
 		Board b = new Board();
 		String nowPage = request.getParameter("now_page");
 		int boardType = 1;
@@ -39,7 +37,7 @@ public class CommuniyNoticeListServlet extends HttpServlet {
 		b.setTotalContent(new BoardService().boardCount(b));
 		List<Board> list = new ArrayList<Board>();
 		if (request.getParameter("boardList") == null) {
-			list = new BoardService().boardList(boardType, b);
+			list = new BoardService().noticeBoardList(boardType, b);
 		}
 
 		request.setAttribute("paging", b);

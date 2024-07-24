@@ -49,7 +49,6 @@ public class MemberService {
 		Member m = dao.searchId(conn, email);
 		close(conn);
 
-		System.out.println("m : " + m);
 		return m;
 	}
 	
@@ -61,7 +60,6 @@ public class MemberService {
 			close(conn);
 			
 
-			System.out.println("service : " + m);
 			return m;
 		}
 		

@@ -28,7 +28,6 @@ public class HospitalDao {
 	            rs = pstmt.executeQuery();
 	            if (rs.next()) {
 	               
-	             System.out.println(rs);
 	            }
 	        } finally {
 	            JDBCTemplate.close(rs);
