@@ -33,6 +33,10 @@
 /*----------------------------------------*/
 * {
   font-family: "notoSansBold";
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none
 }
 
 html,
@@ -1319,6 +1323,27 @@ div.register__text div.searchComment {
   display: inline-block;
 }
 
+/* -------------------------------------- */
+/* 진서형 */
+/* detail */
+/* -------------------------------------- */
+.detail__price {
+  display: flex;
+  background: #ffffff;
+  -webkit-box-shadow: 0px 0px 10px rgba(18, 8, 81, 0.15);
+  box-shadow: 0px 0px 10px rgba(18, 8, 81, 0.15);
+  padding: 10px;
+  text-align: center;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+  width: 40%;
+  /* height: 80px; */
+  align-items: center;
+  justify-content: center;
+}
+
+
 /*----------------------------------------*/
 /* 진서형 */
 /* modify
@@ -1433,18 +1458,16 @@ input[type='file'] {
   display: flex;
 }
 .form__label--file {
-  width: 100px;
-  height: 40px;
-  line-height:30px;
+  display: inline-block;
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 6px 15px 6px;
   background: #f8dd11;
-  border-radius: 3px;
-  color: #000000;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border-radius: 20px;
+  border: none;
+  border-radius: 50px;
 }
 .form__span--file {
   padding: 3px 5px 0 15px;
@@ -1503,23 +1526,30 @@ input[type='file'] {
 .about__table {
   display: flex;
   justify-content: center;
-  background-color: #f8dd114d;
+  background-color: #f5f5f5;
   border-radius: 20px;
   padding: 20px 0px;
 }
 
-.about__table progress {
-  width: 35em;
-  margin: 2px;
-  /* height: 2em; */
+/* .review__table {
+  display: inline-table;
+  justify-content: center;
+  background-color: #f5f5f5;
+  border-radius: 20px;
+  padding: 20px 0px;
 }
+
+.review__table table {
+  width: 100%;
+  margin: 2px;
+  background-color: blue;
+} */
 
 .about__table td {
   display: flex;
 }
 
 .about__table th {
-  /* text-align: center; */
   justify-content: center;
 }
 
@@ -1531,17 +1561,18 @@ input[type='file'] {
 progress {
   width: 200px;
   height: 30px;
-  -webkit-appearance: none;
-  appearance: none;
+  -webkit-appearance: none;  
 }
 
 progress::-webkit-progress-bar {
+	border: 2px solid #e7e7e7;
   background-color: rgb(255, 255, 255);
   border-radius: 20px;
 }
 
 progress::-webkit-progress-value {
   border-radius: 20px;
+  background-color: #f8dd11;
 }
 
 .notice__title a {
@@ -1593,10 +1624,9 @@ progress::-webkit-progress-value {
   font-weight: 700;
   border-radius: 50px;
   text-decoration: none;
-  float: right;
   position: relative;
-  bottom: 60px;
-  right: 200px;
+  float: inline-end;
+  bottom: 20px;
 }
 
 .create__review a {

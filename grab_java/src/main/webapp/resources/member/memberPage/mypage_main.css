@@ -1,0 +1,339 @@
+@charset "UTF-8";
+    *{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+            background-color: #f5f5f5;
+        }
+
+/* mypage_section */
+.mypage_profile {
+            text-align: center;
+            font-size: 24px;
+            position: relative;
+            top: -9%;
+            width: 70%;
+        }
+
+        .content-section {
+            display: flex;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        /* 메뉴 대장 */
+        body {
+            background-color: #f5f5f5;
+        }
+
+        /* mypage_header */
+        .mypage_title {
+            display: inline-block;
+            position: relative;
+            text-align: left;
+            left: 21%;
+
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        .mypage {
+            position: relative;
+            margin-top: 130px;
+            margin-bottom: 20px;
+        }
+
+        .mypage::after {
+            content: '';
+            display: block;
+            width: 65%;
+            height: 3px;
+            background-color: rgb(173, 152, 80);
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(62% - 60px);
+        }
+
+        /* mypage_menu */
+        .mypage_main {
+            display: flex;
+            margin-top: 50px;
+            position: relative;
+            height: 500px;
+        }
+
+        .mypage_menu {
+            width: 30%;
+            text-align: center;
+            font-size: 24px;
+            position: relative;
+            top: -9%
+        }
+
+        .menu_box {
+            width: 250px;
+            padding: 0;
+            position: relative;
+            left: 52%;
+            top: 7%;
+        }
+
+        .menu_box ul {
+            list-style-type: none;
+            padding: 0;
+            position: relative;
+        }
+
+        .menu_box ul li {
+            padding: 10px;
+            border-bottom: 1px solid rgb(201, 201, 201);
+            width: calc(89% - 60px);
+            margin: 0 auto;
+            position: relative;
+            left: 18%;
+        }
+
+        .menu_box ul li a {
+            text-decoration: none;
+            color: #000;
+            display: block;
+            font-size: 20px;
+        }
+
+        .menu_box p {
+            position: relative;
+            bottom: -190px;
+            text-align: right;
+            right: 10px;
+        }
+
+        /* div1과 div2의 경계선 */
+        .line {
+            width: 4px;
+            background-color: rgb(173, 152, 80);
+            position: absolute;
+            top: -9%;
+            bottom: 0;
+            left: 30%;
+        }
+
+        /* mypage_section */
+        .mypage_profile {
+            text-align: center;
+            font-size: 24px;
+            position: relative;
+            top: -9%;
+            width: 70%;
+        }
+
+        .content-section {
+            display: flex;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        /* 메뉴 대장 */
+        .content {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 67%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 8px auto;
+            margin-left: 2%;
+            margin-top: 2%;
+            height: 100%;
+            display: flex;
+            background-color: #fff;
+            display: flex;
+        }
+
+        /* 회원 정보 */
+        .user-info {
+            margin-bottom: 20px;
+        }
+
+        .profile-picture {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            border: 2px solid #000000;
+            margin-bottom: 10px;
+        }
+
+        .user-profile {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            color: #333;
+            position: relative;
+            left: 90%;
+            top: 20%;
+        }
+
+        .user-info h3 {
+            margin: 10px 0;
+            color: #000000;
+        }
+
+        .user-info p {
+            color: #666;
+        }
+
+        .user-info a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .user-info a.clicked {
+            color: blue;
+        }
+
+        .user-details ul {
+            list-style-type: none;
+            text-align: left;
+            padding: 0;
+        }
+
+        .user-details ul li {
+            margin-bottom: 5px;
+            font-size: 20px;
+        }
+
+        .user-details span {
+            color: #333;
+            font-weight: 550;
+        }
+
+        /* footer */
+        .footer {
+            display: flex;
+        }
+
+        .footer_align {
+            height: 300px;
+            background-color: #555;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .footer_content {
+            width: 1150px;
+            height: 150px;
+            border-bottom: 1px solid #ffffff8c;
+            position: absolute;
+            top: 30px;
+            display: flex;
+        }
+
+        .footer_content ul {
+            width: 1150px;
+            /* background-color: rgb(47, 98, 81); */
+            list-style-type: none;
+            display: flex;
+            justify-content: space-between;
+            font-family: "Noto Sans KR", sans-serif;
+            font-weight: 400;
+            color: #333;
+        }
+
+        .footer_content ul li {
+            display: inline-block;
+            color: #fff;
+            font-size: 13px;
+        }
+
+        .footer_content p {
+            display: flex;
+            position: absolute;
+            top: 50px;
+            color: #fff;
+            font-size: 13px;
+            font-family: "Noto Sans KR", sans-serif;
+            font-weight: 300;
+        }
+
+        .copyright {
+            position: absolute;
+            top: 180px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .copyright p {
+            color: #fff;
+            font-size: 13px;
+            font-family: "Noto Sans KR", sans-serif;
+            font-weight: 300;
+        }
+
+        ul,
+        ol {
+            padding: 0;
+            margin: 0;
+        }
+
+        #password {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        text-align: center;
+                        height: 100%;
+                    }
+
+                    #header_pwd {
+                        font-size: 40px;
+                        color: #030303;
+                        position: relative;
+                        left: -40%;
+                    }
+
+                    #password p {
+                        font-size: 14px;
+                        color: #666;
+                        margin-bottom: 20px;
+                        position: relative;
+                        text-align: center;
+
+                    }
+
+                    #password label {
+                        font-size: 14px;
+                        color: #333;
+                        margin-bottom: 10px;
+                        display: block;
+                    }
+
+                    #password input[type="password"] {
+                        padding: 10px;
+                        width: 200px;
+                        margin-bottom: 20px;
+                        border: 1px solid #ccc;
+                        border-radius: 4px;
+                    }
+
+                    #password button {
+                        padding: 10px 20px;
+                        border: 1px solid #ccc;
+                        background-color: #fff;
+                        color: #333;
+                        cursor: pointer;
+                        border-radius: 4px;
+                        transition: background-color 0.3s;
+                    }
+
+                    #password button:hover {
+                        background-color: #f0f0f0;
+                    }
