@@ -3,9 +3,9 @@ package com.grab.hospital_detail.vo;
 public class HospitalType {
 	private int type_no;
 	private String type_content;
+	
 	public HospitalType() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public HospitalType(int type_no, String type_content) {
 		super();

@@ -22,9 +22,7 @@
 </head>
 <body>
 	<%@ include file="views/include/hospital_nav.jsp" %>
-<%-- 	<% session.setAttribute("member_type", 1); %>
-	<% session.setAttribute("member_no", 1); %>
-	<% session.setAttribute("member_id", "admin"); %> --%>
+	
 	<section class="register-domain spad">
     <div class="container">
       <div class="row d-flex justify-content-center">
